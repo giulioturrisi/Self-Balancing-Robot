@@ -1,10 +1,11 @@
 %x, x_dot, theta, theta_dot, phi, phi_dot
-state = [1 0 0.1 1 0.2 1];
+state = [1 0 1 0.1 1. 0.5];
 %control time, initial and final time
 dt = 0.010;
 t = 0;
 t_f = 15;
-k_lqr = [0.7087    0.7497    0.7071    4.5129; 0.7087    0.7497   -0.7071   -4.5129]
+%k_lqr = [0.7087    0.7497    0.7071    4.5129; 0.7087    0.7497   -0.7071   -4.5129]
+k_lqr = [0.7169    0.7502    0.7071    4.5129; 0.7169    0.7502    -0.7071    4.5129]
 
 state_array = state';
 while t < t_f

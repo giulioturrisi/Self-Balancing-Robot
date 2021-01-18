@@ -1,4 +1,4 @@
-function [A,B] = linearization_fun(u_l,u_r,theta,theta_dot,phi,phi_dot)
+function [A,B] = linearization_discretization_fun(u_l,u_r,theta,theta_dot,phi,phi_dot)
 %LINEARIZATION_FUN Summary of this function goes here
 %   Detailed explanation goes here
 M = 1.426971; %kg
@@ -13,14 +13,18 @@ g = 9.8;
 l =0.8;
 
 %theta_ddot = (M + 2*M_w + 2*J_w/r^2)*(M*g*l*sin(theta)) - M*l*cos(theta)*(u_l + u_r)/R)/((J)*(M + 2*M_w + 2*J_w/r^2) - M^2*l^2*cos(theta));
-%phi_ddot = (d/2)*((u_l - u_r)/r)/(J_phi + ((d^2)/(2*(J_w/R^2) + M_w)));
+%phi_ddot = (d/2)*((u_l - u_r)/r)/(J_phi + ((d^2)/(2*(J_w/R^2) + M_w)));aaa
 %x_ddot = ((u_l + u_r)/R - M*l*cos(theta)*(M*g*l*sin(theta))/J_theta)/(M + 2*M_w + 2*J_w/r^2 - (M^2*l^2*cos(theta)^2)/J_theta);
 
 
-%linearization with state theta, theta_dot, phi, phi_dot
+%linearization with state theta, theta_dot, phi, phi_dot - to do other lin. point
 a = M + 2*M_w + 2*J_w/r^2;
 b = (d/2)*r/(J_phi + (d^2/r)*((J_w/r^2)+M_w));
 A = [0 1 0 0; a^2*M*g*l*J_theta 0 0 0; 0 0 0 1; 0 0 0 0];
 B = [0 0; M*l/r M*l/r; 0 0; b -b];
+
+%discretize
+A = A +eye(4)*0.01;
+B = B*0.01
 end
 
