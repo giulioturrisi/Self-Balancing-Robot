@@ -26,7 +26,7 @@ l =0.8;
 a = M + 2*M_w + 2*J_w/r^2;
 num = a*M*g*l*sin(theta) - M*l*cos(theta)*(u_l + u_r)/r
 den = (J_theta*a - M^2*l^2*cos(theta)^2);
-theta_dot = (a*M*g*l*cos(theta) + M*l*sin(theta)*(u_l + u_r)/r)*den - M^2*l^2*sin(2*theta)*num
+theta_dot = (a*M*g*l*cos(theta) + M*l*sin(theta)*(u_l + u_r)/r)*den - M^2*l^2*sin(2*theta)*num;
 
 
 
@@ -37,10 +37,17 @@ A = vertcat(A_1,A_2);
 
 
 b = (d/2)*r/(J_phi + (d^2/r)*((J_w/r^2)+M_w));
-B = [0 0; -(M*l*cos(theta)/(r*den))*(1 + u_r) -(M*l*cos(theta)/(r*den))*(1 + u_l); 0 0; b*(1 - u_r) , -b*(u_l - 1)]
+B = [0 0; -(M*l*cos(theta)/(r*den))*(1 + u_r), -(M*l*cos(theta)/(r*den))*(1 + u_l); 0 0; b*(1 - u_r) , b*(u_l - 1)];
+
+
+
 
 %discretize
-A = A + eye(4)*0.01;
-B = B*0.01
+%A = A*0.0001 + eye(4);
+%B = B*0.0001;
+
+B = pinv(eye(4) - A*0.01/2.)*B*sqrt(0.01);
+A = (eye(4) + A*0.01/2.)*pinv(eye(4) - A*0.01/2.);
+
 end
 

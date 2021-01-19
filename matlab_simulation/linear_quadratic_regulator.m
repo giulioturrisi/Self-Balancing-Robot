@@ -39,3 +39,11 @@ B = [0 0; -M*l/(r*den) -M*l/(r*den); 0 0; b -b];
 Q = eye(4);
 R = eye(2);
 [K,s,e] = lqr(A,B,Q,R,0)
+
+%A = A*0.0001 + eye(4);
+%B = B*0.0001;
+
+B = pinv(eye(4) - A*0.01/2.)*B*sqrt(0.01);
+A = (eye(4) + A*0.01/2.)*pinv(eye(4) - A*0.01/2.);
+
+[K,s,e] = dlqr(A,B,Q,R,0)
