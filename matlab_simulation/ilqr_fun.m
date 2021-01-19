@@ -1,7 +1,7 @@
 function [u_l,u_r] = ilqr_fun(state)
 %ILQR Summary of this function goes here
 %   Detailed explanation goes here
-num_iter_opt = 5;
+num_iter_opt = 1;
 horizon = 10;
 u_l = zeros(1,horizon);
 u_r = zeros(1,horizon);
@@ -11,10 +11,10 @@ state_vec = zeros(6,horizon);
 state_vec(:,1) = state';
 
 Q = eye(4);
-R = eye(2)*0.01;
+R = eye(2)*100;
 P_vec = zeros(4,4*(horizon+1));
-%P_vec(:,4*(horizon+1) - 3:4*(horizon+1)) = Q;
-P_vec(:,4*(horizon+1) - 3:4*(horizon+1)) = [1.0610    0.0628    0.0000    0.0000;0.0628    0.0657   -0.0000    0.0000;0.0000   -0.0000    6.3822   19.8665;0.0000    0.0000   19.8665  126.7931];
+P_vec(:,4*(horizon+1) - 3:4*(horizon+1)) = Q;
+%P_vec(:,4*(horizon+1) - 3:4*(horizon+1)) = [1.0610    0.0628    0.0000    0.0000;0.0628    0.0657   -0.0000    0.0000;0.0000   -0.0000    6.3822   19.8665;0.0000    0.0000   19.8665  126.7931];
 A_vec = [];
 B_vec = [];
 for iter = 1:num_iter_opt

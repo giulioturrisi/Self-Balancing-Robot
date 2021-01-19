@@ -12,7 +12,7 @@
 %J_theta inertia chassis along phi
 
 M = 1.426971; %kg
-com_pos = [0 0 10.007] %mm
+com_pos = [0 0 10.007]; %mm
 M_w = 0.1;
 J_theta = 0.005928; %kg m^2
 J_w = 0.001;
@@ -31,8 +31,11 @@ l =0.8;
 a = M + 2*M_w + 2*J_w/r^2;
 b = (d/2)*r/(J_phi + (d^2/r)*((J_w/r^2)+M_w));
 den = (J_theta*a - M^2*l^2*cos(0)^2);
-A = [0 1 0 0; a^2*M*g*l*J_theta 0 0 0; 0 0 0 1; 0 0 0 0];
+A = [0 1 0 0; a*M*g*l*(J_theta*a - M^2*l^2)/den^2 0 0 0; 0 0 0 1; 0 0 0 0];
+
+
 B = [0 0; -M*l/(r*den) -M*l/(r*den); 0 0; b -b];
+
 Q = eye(4);
 R = eye(2);
-lqr(A,B,Q,R,0)
+[K,s,e] = lqr(A,B,Q,R,0)
