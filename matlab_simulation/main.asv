@@ -1,16 +1,19 @@
 %x, x_dot, theta, theta_dot, phi, phi_dot
-state = [1 0 1 1 0.1 0.5];
+state = [1 0 1 1 0.2 4.0];
 %control time, initial and final time
-dt = 0.00;
+dt = 0.01;
 t = 0;
-t_f = 15;
+t_f = 10;
 %k_lqr = [0.7087    0.7497    0.7071    4.5129; 0.7087    0.7497   -0.7071   -4.5129]
-k_lqr = [0.2456    0.7265    0.7071    4.5129; 0.2456    0.7265   -0.7071   -4.5129]
-
+k_lqr = [0.3040    0.3952    0.7031    1.5716; 0.3040    0.3952   -0.7031   -1.5716]
+cost = [];
 state_array = state';
 while t < t_f
     %calculate ILQR 
     [u_l,u_r] = ilqr_fun(state);
+    Q = eye(4);
+    R = eye(2);
+    cost = [cost,state(3:end)'*Q*state(3:end)'
     
     %calculate LQR
     %u = -k_lqr*state(3:end)'
@@ -29,4 +32,4 @@ while t < t_f
     
 end
 
-plot(state_array(1,:))
+%plot(state_array(1,:))

@@ -1,14 +1,19 @@
 function [u_l,u_r] = ilqr_fun(state)
 %ILQR Summary of this function goes here
 %   Detailed explanation goes here
-num_iter_opt = 10;
-horizon = 10;
+num_iter_opt = 1;
+horizon = 20;
 u_l = zeros(1,horizon);
 u_r = zeros(1,horizon);
 
 state_vec = zeros(6,horizon);
 %state_vec(:,1) = state(3:end)';
 state_vec(:,1) = state';
+state_d = state(3:end)';
+state_d(1) = 0.;
+state_d(2) = 0.;
+state_d(3) = 0.;
+state_d(4) = 0.;
 
 Q = eye(4);
 R = eye(2);
@@ -35,7 +40,7 @@ for iter = 1:num_iter_opt
     %forward
     for step = 1:horizon
        %calculate input
-       u_update = (pinv(R+B_vec(:,step*2-1:step*2)'*P_vec(:,step*4 - 3:step*4)*B_vec(:,step*2-1:step*2)))*B_vec(:,step*2-1:step*2)'*P_vec(:,step*4 - 3:step*4)*A_vec(:,step*4-3:step*4)*state_vec(3:end,step);
+       u_update = (pinv(R+B_vec(:,step*2-1:step*2)'*P_vec(:,step*4 - 3:step*4)*B_vec(:,step*2-1:step*2)))*B_vec(:,step*2-1:step*2)'*P_vec(:,step*4 - 3:step*4)*A_vec(:,step*4-3:step*4)*(state_vec(3:end,step) - state_d);
        u_l(1,step) = u_l(1,step) - u_update(1);
        u_r(1,step) = u_r(1,step) - u_update(2);
        %forward dynamic
