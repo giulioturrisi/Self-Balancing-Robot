@@ -28,10 +28,11 @@ l =0.8;
 
 
 %linearization with state theta, theta_dot, phi, phi_dot
-a = M + 2*M_w + 2*J_w/r^2
-b = (d/2)*r/(J_phi + (d^2/r)*((J_w/r^2)+M_w))
+a = M + 2*M_w + 2*J_w/r^2;
+b = (d/2)*r/(J_phi + (d^2/r)*((J_w/r^2)+M_w));
+den = (J_theta*a - M^2*l^2*cos(0)^2);
 A = [0 1 0 0; a^2*M*g*l*J_theta 0 0 0; 0 0 0 1; 0 0 0 0];
-B = [0 0; M*l/r M*l/r; 0 0; b -b];
+B = [0 0; -M*l/(r*den) -M*l/(r*den); 0 0; b -b];
 Q = eye(4);
 R = eye(2);
 lqr(A,B,Q,R,0)

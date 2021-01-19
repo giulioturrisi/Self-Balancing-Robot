@@ -1,7 +1,7 @@
 function [u_l,u_r] = ilqr_fun(state)
 %ILQR Summary of this function goes here
 %   Detailed explanation goes here
-num_iter_opt = 5;
+num_iter_opt = 1;
 horizon = 10;
 u_l = zeros(1,horizon);
 u_r = zeros(1,horizon);
@@ -23,7 +23,7 @@ for iter = 1:num_iter_opt
     for step = 1:horizon
        %lineariza
        state_actual = state_vec(:,horizon);
-       [A_step,B_step] = linearization_discretization_fun(u_l(:,horizon),u_r(:,horizon),state_actual(1),state_actual(2),state_actual(3),state_actual(4));
+       [A_step,B_step] = linearization_discretization_fun(u_l(),u_r,state_actual(1),state_actual(2),state_actual(3),state_actual(4));
        A_vec = [A_vec,A_step];
        B_vec = [B_vec,B_step];
        %calculate P_step
