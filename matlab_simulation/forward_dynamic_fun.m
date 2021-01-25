@@ -19,8 +19,8 @@ thet_dot = state(4);
 phi = state(5);
 phi_dot = state(6);
 
-theta_ddot = ((M + 2*M_w + 2*J_w/r^2)*(M*g*l*sin(theta)) - M*l*cos(theta)*(u_l + u_r)/r)/((J_phi)*(M + 2*M_w + 2*J_w/r^2) - M^2*l^2*cos(theta));
-phi_ddot = (d/2)*((u_l - u_r)/r)/(J_phi + ((d^2)/(2*(J_w/r^2) + M_w)));
+theta_ddot = ((M + 2*M_w + 2*J_w/r^2)*(M*g*l*sin(theta)) - M*l*cos(theta)*(u_l + u_r)/r)/((J_phi)*(M + 2*M_w + 2*J_w/r^2) - M^2*l^2*cos(theta)*cos(theta));
+phi_ddot = (d/2)*((u_l - u_r)/r)/(J_phi + ((d^2)/(2*(J_w/r^2 + M_w))));
 x_ddot = ((u_l + u_r)/r - M*l*cos(theta)*(M*g*l*sin(theta))/J_theta)/(M + 2*M_w + 2*J_w/r^2 - (M^2*l^2*cos(theta)^2)/J_theta);       
 end
 

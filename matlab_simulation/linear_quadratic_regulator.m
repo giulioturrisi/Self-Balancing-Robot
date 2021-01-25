@@ -28,22 +28,66 @@ l =0.8;
 
 
 %linearization with state theta, theta_dot, phi, phi_dot
-a = M + 2*M_w + 2*J_w/r^2;
-b = (d/2)*r/(J_phi + (d^2/r)*((J_w/r^2)+M_w));
-den = (J_theta*a - M^2*l^2*cos(0)^2);
-A = [0 1 0 0; a*M*g*l*(J_theta*a - M^2*l^2)/den^2 0 0 0; 0 0 0 1; 0 0 0 0];
-
-
-B = [0 0; -M*l/(r*den) -M*l/(r*den); 0 0; b -b];
-
-Q = eye(4);
-R = eye(2);
-[K,s,e] = lqr(A,B,Q,R,0)
+% a = M + 2*M_w + 2*J_w/r^2;
+% b = (d/2)*r/(J_phi + (d^2/r)*((J_w/r^2)+M_w));
+% den = (J_theta*a - M^2*l^2*cos(0)^2);
+% A = [0 1 0 0; a*M*g*l*(J_theta*a - M^2*l^2)/den^2 0 0 0; 0 0 0 1; 0 0 0 0];
+% 
+% 
+% B = [0 0; -M*l/(r*den) -M*l/(r*den); 0 0; b -b];
+% 
+% Q = eye(4);
+% R = eye(2);
+% [K,s,e] = lqr(A,B,Q,R,0)
 
 %A = A*0.0001 + eye(4);
 %B = B*0.0001;
 
-B = pinv(eye(4) - A*0.01/2.)*B*sqrt(0.01);
-A = (eye(4) + A*0.01/2.)*pinv(eye(4) - A*0.01/2.);
+% B = pinv(eye(4) - A*0.01/2.)*B*sqrt(0.01);
+% A = (eye(4) + A*0.01/2.)*pinv(eye(4) - A*0.01/2.);
+% 
+% [K,s,e] = dlqr(A,B,Q,R,0)
 
-[K,s,e] = dlqr(A,B,Q,R,0)
+
+
+% %lin around forced eq
+a = M + 2*M_w + 2*J_w/r^2;
+
+theta=1.0;
+theta_dot=0;
+phi=3.0;
+phi_dot=0;
+
+cos_theta = cos(theta);
+sin_theta = sin(theta);
+sin_2theta = sin(2*theta);
+
+
+
+u_l = (r/2)*(a*M*g*l*sin(theta))/(M*l*cos(theta))
+%u_l = 0;
+u_r=u_l;
+u_ff = u_r;
+
+
+num = a*M*g*l*sin(theta) - M*l*cos(theta)*(u_l + u_r)/r
+den = (J_theta*a - M^2*l^2*cos(theta)^2);
+
+theta_ddot = (a*M*g*l*cos(theta) + M*l*sin(theta)*(u_l + u_r)/r)*den - M^2*l^2*sin(2*theta)*num;
+
+A_1 = [0 1 0 0; theta_ddot/den^2 0 0 0];
+A_2 = [0 0 0 1; 0 0 0 0];
+
+A = vertcat(A_1,A_2);
+b = (d/2)*r/(J_phi + d^2/(2*(J_w/r^2+M_w)));
+B = [0 0; -(M*l*cos(theta)/(r*den))*(1), -(M*l*cos(theta)/(r*den))*(1); 0 0; b*(1) , b*(- 1)];
+
+Q = eye(4)*2;
+R = eye(2)*0.1;
+%[K,s,e] = lqr(A,B,Q,R,0)
+
+
+B_eq = pinv(eye(4) - A*0.01/2.)*B*sqrt(0.01);
+A_eq = (eye(4) + A*0.01/2.)*pinv(eye(4) - A*0.01/2.);
+
+[k_lqr,P_f,e] = dlqr(A_eq,B_eq,Q,R,0);
