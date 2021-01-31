@@ -53,9 +53,9 @@ l =0.8;
 % %lin around forced eq
 a = M + 2*M_w + 2*J_w/r^2;
 
-theta=1.0;
+theta=-0.0;
 theta_dot=0;
-phi=3.0;
+phi=0.0;
 phi_dot=0;
 
 cos_theta = cos(theta);

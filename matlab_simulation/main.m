@@ -1,6 +1,6 @@
 linear_quadratic_regulator;
 %x, x_dot, theta, theta_dot, phi, phi_dot
-state = [0 0 -1. 0. 2.0 1];
+state = [0 0 1.2 0. 2.0 1];
 %control time, initial and final time
 dt = 0.01;
 t = 0;
@@ -19,7 +19,7 @@ state_array = state';
 control_input = [0 0]';
 
 state_d = state(3:end);
-state_d(1) = 1.0;
+state_d(1) = -1.0;
 state_d(2) = 0.;
 state_d(3) = 3;
 state_d(4) = 0.;

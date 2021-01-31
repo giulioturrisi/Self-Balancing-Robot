@@ -1,8 +1,8 @@
 function [u_l,u_r] = ilqr_fun(state,state_d,P_f,u_ff)
 %ILQR Summary of this function goes here
 %   Detailed explanation goes here
-num_iter_opt = 100;
-horizon = 3000;
+num_iter_opt = 1000;
+horizon = 5000;
 u_l = zeros(1,horizon);
 u_r = zeros(1,horizon);
 
@@ -11,7 +11,8 @@ u_r = zeros(1,horizon);
 %state_vec(:,1) = state';
 state_vec = repmat(state',1,horizon);
 
-Q = eye(4)*20;
+Q = eye(4)*1;
+Q(1,1) = 5;
 R = eye(2)*0.1;
 P_vec = zeros(4,4*(horizon+1));
 %P_vec(:,4*(horizon+1) - 3:4*(horizon+1)) = 100*Q;
@@ -27,7 +28,8 @@ u_update_v = [0 0]';
 u_update_r = [0 0]';
 u_update_x = [0 0]';
 
-cost = [0]
+cost = [0];
+
 
 for iter = 1:num_iter_opt
 P_vec(:,4*(horizon+1) - 3:4*(horizon+1)) = P_f;
@@ -123,7 +125,7 @@ u_update_r = [0 0]';
        %cost
        cost_temp = cost_temp + error'*Q*error + [u_l(1,step);u_r(1,step)]'*R*[u_l(1,step);u_r(1,step)];
     end
-    %cost = [cost cost_temp]
+    cost = [cost cost_temp];
     figure(1);
     plot(state_vec(3,:)); 
     %figure(2);
@@ -135,7 +137,9 @@ u_update_r = [0 0]';
     %figure(5);
     %plot(u_update_x(1,:))
     %figure(6);
-    cost_temp
+    if(abs(cost_temp - cost(iter)) < 0.01)
+        break
+    end
     %plot(cost)
 end
 
