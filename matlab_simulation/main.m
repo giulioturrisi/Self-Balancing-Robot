@@ -10,6 +10,7 @@ cost = [];
 x_acc = 0;
 total = 0;
 state_array = state';
+state_array_filtered = state(3:end)';
 control_input = [0 0]';
 
 % state_d = state(3:end);
@@ -25,6 +26,7 @@ state_d(4) = 0.;
 state_d(5) = 1.;
 state_d(6) = 0.;
 
+P_old = eye(4);
 while t < t_f
     %calculate ILQR 
     %[u_l,u_r] = ilqr_fun(state,state_d,P_f,u_ff);
@@ -49,28 +51,30 @@ while t < t_f
     [theta_ddot,phi_ddot,x_ddot] = forward_dynamic_fun(u_l,u_r,state);
     x_acc = [x_acc,x_ddot];
     %integration
+    last_state = state
     state = euler_integration_fun(theta_ddot,phi_ddot,x_ddot,state,dt);
+    %add nois
+    state_w_noise = state(3:end)' + rand(4,1)*0.01;
+    state(3:end) = state_w_noise'
+    %filter
+    [state_filtered, P_old] = extended_kalman(state,last_state,u_l,u_r,P_old,dt);
+    state(3:end) = state_filtered;
     %next step
     t = t + dt;
     
     state_array = [state_array, state'];
-
-%      figure(1);
-%      plot(state_array(1,:))
-%      figure(2);
-%      plot(state_array(5,:))
-%     figure(3);
-%     plot(control_input(1,:))
-%     hold on;
-%     plot(control_input(2,:))
-
+    state_array_filtered = [state_array_filtered, state_filtered'];
 
     
 end
- figure(1);
+ figure();
  plot(state_array(3,:))
- figure(2);
+ hold on;
  plot(state_array(5,:))
+ figure();
+ plot(state_array_filtered(1,:))
+ hold on;
+ plot(state_array_filtered(3,:))
 % figure(3);
 % plot(control_input(1,:))
 % hold on;
