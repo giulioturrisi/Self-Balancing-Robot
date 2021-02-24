@@ -28,7 +28,7 @@ state_d(4) = 0.;
 state_d(5) = 1.;
 state_d(6) = 0.;
 
-%initializationcovariance matric Kalman
+%initialization covariance matrix Kalman
 P_old = eye(4);
 
 while t < t_f
