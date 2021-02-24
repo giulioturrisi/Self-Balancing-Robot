@@ -1,6 +1,7 @@
 function [theta_ddot,phi_ddot,x_ddot] = forward_dynamic_fun(u_l,u_r,state)
-%UNTITLED Summary of this function goes here
-%   Detailed explanation goes here
+%forward dynamics
+
+%robot parameters
 M = 1.426971; %kg
 com_pos = [0 0 10.007]; %mm
 M_w = 0.1;

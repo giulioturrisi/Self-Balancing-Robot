@@ -1,8 +1,10 @@
 function [u_l,u_r] = ilqr_fun(state,state_d,P_f,u_ff)
-%ILQR Summary of this function goes here
-%   Detailed explanation goes here
+%Iterative LQR
+
+%hyperparameters of the controller
 num_iter_opt = 1000;
 horizon = 5000;
+
 u_l = zeros(1,horizon);
 u_r = zeros(1,horizon);
 
