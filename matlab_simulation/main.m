@@ -35,10 +35,10 @@ state_d(6) = 0.;
 P_old = eye(4);
 
 while t < t_f
-    %calculate ILQR 
+    %calculate ILQR - the feedforward term (it it exist) is calculated
+    %inside the function
     %[u_l,u_r] = ilqr_fun(state,state_d,P_f,u_ff);
-    %u_l = u_l;
-    %u_r = u_r;
+
     
     %calculate LQR without pos
     %u = -k_lqr*(state(3:end)' - state_d');
@@ -54,7 +54,7 @@ while t < t_f
     last_state = state
     state = euler_integration_fun(theta_ddot,phi_ddot,x_ddot,state,dt);
     %add measurement noise
-    state_w_noise = state(3:end)' + rand(4,1)*0.01;
+    state_w_noise = state(3:end)' + rand(4,1)*0.02;
     state(3:end) = state_w_noise'
     
     %filter using Kalman

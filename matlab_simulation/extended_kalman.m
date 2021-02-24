@@ -2,7 +2,7 @@ function [state_new, P_new] = extended_kalman(state_measure,state_old,u_l,u_r,P_
 %kalman filter for noise removal
 
 %process noise
-V = eye(4)*1;
+V = eye(4)*0.1;
 %measurement noise
 W = eye(4)*500;
 
