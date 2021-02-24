@@ -3,7 +3,7 @@ function [state_new, P_new] = extended_kalman(state_measure,state_old,u_l,u_r,P_
 %   Detailed explanation goes here
 
 V = eye(4)*1;
-W = eye(4)*5;
+W = eye(4)*500;
 
 [theta_ddot,phi_ddot,x_ddot] = forward_dynamic_fun(u_l,u_r,state_old);
 %integration

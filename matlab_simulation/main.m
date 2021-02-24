@@ -10,7 +10,7 @@ cost = [];
 x_acc = 0;
 total = 0;
 state_array = state';
-state_array_filtered = state(3:end)';
+state_array_noise = state(3:end)';
 control_input = [0 0]';
 
 % state_d = state(3:end);
@@ -63,7 +63,7 @@ while t < t_f
     t = t + dt;
     
     state_array = [state_array, state'];
-    state_array_filtered = [state_array_filtered, state_filtered'];
+    state_array_noise = [state_array_noise, state_w_noise];
 
     
 end
@@ -72,9 +72,9 @@ end
  hold on;
  plot(state_array(5,:))
  figure();
- plot(state_array_filtered(1,:))
+ plot(state_array_noise(1,:))
  hold on;
- plot(state_array_filtered(3,:))
+ plot(state_array_noise(3,:))
 % figure(3);
 % plot(control_input(1,:))
 % hold on;
