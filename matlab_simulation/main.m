@@ -5,14 +5,7 @@ state = [0 0 0.349 0. .0 0];
 dt = 0.01;
 t = 0;
 t_f = 50;
-%eq
-%k_lqr = [0.2456    0.7265    0.7071    5.0315; 0.2456    0.7265   -0.7071   -5.0315];
-%not eq, but u = 0
-%k_lqr = [0.0464    0.7091    0.7071    5.0315; 0.0464    0.7091   -0.7071   -5.0315];
-%not eq, u = u_eq
-%k_lqr = [0.1822    0.7103   -0.7071   -7.9656; 0.1822    0.7103    0.7071    7.9656];
 
-%k_lqr = [0.0805    0.7105    0.7071    5.0315; 0.0805    0.7105   -0.7071   -5.0315];
 cost = [];
 x_acc = 0;
 total = 0;
@@ -71,12 +64,13 @@ while t < t_f
 %     hold on;
 %     plot(control_input(2,:))
 
+
     
 end
-% figure(1);
-% plot(state_array(3,:))
-% figure(2);
-% plot(state_array(5,:))
+ figure(1);
+ plot(state_array(3,:))
+ figure(2);
+ plot(state_array(5,:))
 % figure(3);
 % plot(control_input(1,:))
 % hold on;
