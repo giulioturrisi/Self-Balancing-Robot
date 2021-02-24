@@ -27,50 +27,28 @@ d = 0.2; %mm
 g = 9.8;
 l =0.8;
 
+%dynamic model
 %theta_ddot = (M + 2*M_w + 2*J_w/r^2)*(M*g*l*sin(theta)) - M*l*cos(theta)*(u_l + u_r)/R)/((J)*(M + 2*M_w + 2*J_w/r^2) - M^2*l^2*cos(theta));
 %phi_ddot = (d/2)*((u_l - u_r)/r)/(J_phi + ((d^2)/(2*(J_w/R^2) + M_w)));
 %x_ddot = ((u_l + u_r)/R - M*l*cos(theta)*(M*g*l*sin(theta))/J_theta)/(M + 2*M_w + 2*J_w/r^2 - (M^2*l^2*cos(theta)^2)/J_theta);
 
 
-%linearization with state theta, theta_dot, phi, phi_dot
-% a = M + 2*M_w + 2*J_w/r^2;
-% b = (d/2)*r/(J_phi + (d^2/r)*((J_w/r^2)+M_w));
-% den = (J_theta*a - M^2*l^2*cos(0)^2);
-% A = [0 1 0 0; a*M*g*l*(J_theta*a - M^2*l^2)/den^2 0 0 0; 0 0 0 1; 0 0 0 0];
-% 
-% 
-% B = [0 0; -M*l/(r*den) -M*l/(r*den); 0 0; b -b];
-% 
-% Q = eye(4);
-% R = eye(2);
-% [K,s,e] = lqr(A,B,Q,R,0)
+%linerization around forced eq
+state_d = [1.5 0. 0. 0. 1. 0.];
 
-%A = A*0.0001 + eye(4);
-%B = B*0.0001;
-
-% B = pinv(eye(4) - A*0.01/2.)*B*sqrt(0.01);
-% A = (eye(4) + A*0.01/2.)*pinv(eye(4) - A*0.01/2.);
-% 
-% [K,s,e] = dlqr(A,B,Q,R,0)
-
-
-
-% %lin around forced eq
 a = M + 2*M_w + 2*J_w/r^2;
 
-theta=-0.0;
-theta_dot=0;
-phi=0.0;
-phi_dot=0;
+theta=state_d(3);
+theta_dot=state_d(4);
+phi=state_d(5);
+phi_dot=state_d(6);
 
 cos_theta = cos(theta);
 sin_theta = sin(theta);
 sin_2theta = sin(2*theta);
 
 
-
 u_l = (r/2)*(a*M*g*l*sin(theta))/(M*l*cos(theta))
-%u_l = 0;
 u_r=u_l;
 u_ff = u_r;
 

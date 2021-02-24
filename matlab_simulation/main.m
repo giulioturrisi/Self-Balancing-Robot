@@ -1,5 +1,6 @@
 %here automatically compute LQR gain - change inside the linearization
 %point, should be equal to state_d here
+%N.B. desired state state_d is defined inside here
 linear_quadratic_regulator;
 
 %initial state
@@ -18,15 +19,6 @@ total = 0;
 state_array = state';
 state_array_noise = state(3:end)';
 control_input = [0 0]';
-
-%desired state
-state_d = state;
-state_d(1) = 1.5;
-state_d(2) = 0.;
-state_d(3) = 0;
-state_d(4) = 0.;
-state_d(5) = 1.;
-state_d(6) = 0.;
 
 %initialization covariance matrix Kalman
 P_old = eye(4);
