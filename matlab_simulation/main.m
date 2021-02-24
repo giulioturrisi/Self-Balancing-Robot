@@ -2,6 +2,7 @@
 %point, should be equal to state_d here
 linear_quadratic_regulator;
 
+%initial state
 %x, x_dot, theta, theta_dot, phi, phi_dot
 state = [0 0 0.349 0. .0 0];
 
@@ -18,11 +19,7 @@ state_array = state';
 state_array_noise = state(3:end)';
 control_input = [0 0]';
 
-% state_d = state(3:end);
-% state_d(1) = 0.0;
-% state_d(2) = 0.;
-% state_d(3) = 0;
-% state_d(4) = 0.;
+%desired state
 state_d = state;
 state_d(1) = 1.5;
 state_d(2) = 0.;
