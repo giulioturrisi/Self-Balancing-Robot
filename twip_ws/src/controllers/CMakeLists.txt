@@ -24,11 +24,14 @@ find_package(tf2 REQUIRED)
 
 
 add_executable(lqr src/lqr.cpp)
+add_executable(pd src/pd.cpp)
 ament_target_dependencies(lqr rclcpp tf2_msgs tf2 std_msgs)
+ament_target_dependencies(pd rclcpp tf2_msgs tf2 std_msgs)
 
 
 install(TARGETS
   lqr
+  pd
   DESTINATION lib/${PROJECT_NAME})
 
 
