@@ -10,7 +10,7 @@ state = [0 0 0.349 0. .0 0];
 %control time, initial and final time
 dt = 0.01;
 t = 0;
-t_f = 50;
+t_f = 1000;
 
 %plotting array
 cost = [];
@@ -30,11 +30,18 @@ while t < t_f
 
     
     %calculate LQR without pos
-    %u = -k_lqr*(state(3:end)' - state_d');
+    u = -k_lqr*(state(3:end)' - state_d(3:end)');
     %calculate LQR with pos
-    u = -K_withx*(state' - state_d');
+    %u = -K_withx*(state' - state_d');
     u_l = u(1) + u_ff;
     u_r = u(2) + u_ff;
+    
+    %sliding
+    %[u_l,u_r] = sliding_mode_fun(state,state_d);
+    c = 5;
+    s = c*(state(3) - state_d(3)) + state(4);
+    u_l = u_l - 20*tanh(s);
+    u_r = u_r - 20*tanh(s);
     
     
     %forward dynamics for state evolution
@@ -43,7 +50,7 @@ while t < t_f
     last_state = state
     state = euler_integration_fun(theta_ddot,phi_ddot,x_ddot,state,dt);
     %add measurement noise
-    state_w_noise = state(3:end)' + rand(4,1)*0.02;
+    state_w_noise = state(3:end)' + rand(4,1)*0.00;
     state(3:end) = state_w_noise'
     
     %filter using Kalman

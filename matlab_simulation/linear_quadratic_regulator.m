@@ -34,7 +34,7 @@ l =0.8;
 
 
 %linerization around forced eq
-state_d = [1.5 0. 0. 0. 1. 0.];
+state_d = [0 0. 0.5/10 0. 0. 0.];
 
 a = M + 2*M_w + 2*J_w/r^2;
 
@@ -67,8 +67,11 @@ b = (d/2)*r/(J_phi + d^2/(2*(J_w/r^2+M_w)));
 B = [0 0; -(M*l*cos(theta)/(r*den))*(1), -(M*l*cos(theta)/(r*den))*(1); 0 0; b*(1) , b*(- 1)];
 
 Q = eye(4)*2;
+Q(2,2) = 0.1
+Q(3,3) = 0.2
+Q(4,4) = 0.1
 R = eye(2)*0.1;
-%[K,s,e] = lqr(A,B,Q,R,0)
+[K,s,e] = lqr(A,B,Q,R,0)
 
 
 B_eq = pinv(eye(4) - A*0.01/2.)*B*sqrt(0.01);
@@ -93,7 +96,9 @@ A_withx = vertcat(A_0,A);
 b = (d/2)*r/(J_phi + d^2/(2*(J_w/r^2+M_w)));
 B_withx = [0 0; 1/(den_x*r) 1/(den_x*r) ;0 0; -(M*l*cos(theta)/(r*den))*(1), -(M*l*cos(theta)/(r*den))*(1); 0 0; b*(1) , b*(- 1)];
 Q_withx = eye(6)*2;
-Q_withx(1,1) = 0.10;
-Q_withx(2,2) = 0.10;
+Q_withx(1,1) = 1;
+Q_withx(2,2) = 1;
+Q_withx(5,5) = 0.10;
+Q_withx(6,6) = 0.10;
 R_withx = eye(2)*0.1;
 [K_withx,s,e] = lqr(A_withx,B_withx,Q_withx,R_withx,0)
