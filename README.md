@@ -1,9 +1,9 @@
-Simulation and exmperiment for a two wheeled balancing robot using Ros 2. 
+Code for a two wheeled balancing robot using Ros 2. 
 
-- the simulation are performed in Matlab and in CoppeliaSim using Ros 2 separately.
+- the simulation are performed in Matlab and (separately) in CoppeliaSim using Ros 2.
 
-- the same code using for CoppeliaSim is used for the real robot, with additional packages for the robot driver (imu, dc motor)
+- the same code using for CoppeliaSim is used on the real robot, with some additional packages for the electronics (imu, dc motor)
 
-The controllers are based on the Linear Qquadratic Regulator (LQR) and the Iterative LQR. A Kalman filter and a Complementary Filter are employed for the state estimator. 
+It's possible to control the robot both with the Linear Quadratic Regulator (LQR) or with the Iterative LQR. The state estimation is performed with a Kalman filter or a simple Complementary Filter. 
 
 Still work in progress
