@@ -1,4 +1,4 @@
-Code for a two wheeled balancing robot using Ros 2. 
+Code for a two wheeled inverted pendulum robot using Ros 2. 
 
 - the simulation is performed in Matlab and (separately) in CoppeliaSim using Ros 2.
 
