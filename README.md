@@ -1,6 +1,6 @@
 Code for a two wheeled balancing robot using Ros 2. 
 
-- the simulation are performed in Matlab and (separately) in CoppeliaSim using Ros 2.
+- the simulation is performed in Matlab and (separately) in CoppeliaSim using Ros 2.
 
 - the same code using for CoppeliaSim is used on the real robot, with some additional packages for the electronics (imu, dc motor)
 
