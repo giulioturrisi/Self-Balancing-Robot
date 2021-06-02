@@ -113,7 +113,7 @@ int main(int argc, char *argv[])
 
 
         old_angle_rad = angle_rad;
-        angle_rad = (count*0.41)*3.14159/180;
+        angle_rad = (count*0.20)*3.14159/180;
 
         speed = (angle_rad - old_angle_rad)/0.001;
         
@@ -132,7 +132,7 @@ int main(int argc, char *argv[])
 
         //duty_cycle = W*(10*error_vel + 0.1*error_vel_integral - 0*error_acc);
 
-        duty_cycle = 100;
+        duty_cycle = 255;
         std::cout << count << std::endl;
 
         if(duty_cycle > 255) duty_cycle = 255;

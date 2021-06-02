@@ -46,7 +46,7 @@
    std::cout << "lastGPIO" << lastGpio <<  std::endl;
 }*/
 
-void re_decoder::_pulse(int gpio, int level, uint32_t tick)
+/*void re_decoder::_pulse(int gpio, int level, uint32_t tick)
 {
    if (gpio == mygpioA) levA = level; else levB = level;
 
@@ -63,6 +63,27 @@ void re_decoder::_pulse(int gpio, int level, uint32_t tick)
          if (levA) (mycallback)(-1);
       }
    }
+}*/
+
+void re_decoder::_pulse(int gpio, int level, uint32_t tick)
+{
+   bool A,B;
+   if (gpio == mygpioA) A = level; else B = level;
+   //bool A = gpioRead(22), B = gpioRead(23);
+
+   if(levA == A && levB == B) return; 
+
+
+   int encoded = (A << 1) | B;
+   int sum = (lastGpio << 2) | encoded;
+
+   if(sum == 0b1101 || sum == 0b0100 || sum == 0b0010 || sum == 0b1011) (mycallback)(-1);
+   if(sum == 0b1110 || sum == 0b0111 || sum == 0b0001 || sum == 0b1000) (mycallback)(1);
+
+   lastGpio = encoded;
+   levA = A;
+   levB = B;
+
 }
 
 /*void re_decoder::_pulse(int gpio, int level, uint32_t tick) {
