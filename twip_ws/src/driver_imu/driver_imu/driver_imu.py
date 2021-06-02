@@ -29,7 +29,7 @@ class MinimalPublisher(Node):
         super().__init__('minimal_publisher')
         self.publisher_ = self.create_publisher(Imu, '/imu', 1)
         self.initialize_imu()
-        self.dt = 0.01  # seconds
+        self.dt = 0.001  # seconds
         self.timer = self.create_timer(self.dt, self.imu_callback)
 
 
@@ -45,10 +45,12 @@ class MinimalPublisher(Node):
         self.gyroAngleX = 0
         self.gyroAngleY = 0
         self.gyroAngleZ = 0
+        self.last_complementary_x = 0
+        self.actual_complementary_x = 0
         self.anglex = 0
         self.angley = 0
 
-        self.alpha = 0.98
+        self.alpha = 0.9
 
         print("Ok initialization")
 
@@ -106,39 +108,50 @@ class MinimalPublisher(Node):
         gyro_yout = self.read_word_2c(0x45)/131
         gyro_zout = self.read_word_2c(0x47)/131
         
-        self.gyroAngleX = self.anglex + gyro_xout*self.dt
-        self.gyroAngleY = self.angley + (gyro_yout - 1.70)*self.dt
+        #self.gyroAngleX = self.anglex + gyro_xout*self.dt*math.pi/180.
+        self.gyroAngleX = self.actual_complementary_x + gyro_xout*self.dt*math.pi/180.
+        self.gyroAngleY = self.angley + (gyro_yout - 1.70)*self.dt*math.pi/180.
         self.gyroAngleZ = self.gyroAngleZ + (gyro_zout- 1.54)*self.dt
 
         #print("x rotation gyro: " , gyro_xout)
         #print("y rotation gyro: " , gyro_yout)
 
         #FILTER        
+        
+        self.last_complementary_x = self.actual_complementary_x
+        complementary_x = self.anglex*(1-self.alpha) + (self.gyroAngleX)*(self.alpha)
+        complementary_y = self.angley*(1-self.alpha) + (self.gyroAngleY)*(self.alpha)
 
-        complementary_x = self.anglex*self.alpha + (self.gyroAngleX*math.pi/180.)*(1-self.alpha)
-        complementary_y = self.angley*self.alpha + (self.gyroAngleY*math.pi/180.)*(1-self.alpha)
+        self.actual_complementary_x = complementary_x
+
+        
+        #print("xdot rotation FILTERED: " , (complementary_x - self.last_complementary_x)/0.01)
 
         self.gyroAngleX = complementary_x
         self.gyroAngleY = complementary_y
         
         #print("#######################")
         
-        #print("x rotation FILTERED: " , complementary_x)
+        #print("x rotation FILTERED: " , complementary_x )
         #print("y rotation FILTERED: " , self.angley)
         #print("z rotation FILTERED: " , self.gyroAngleZ*math.pi/180.)
 
      
 
         imu_msg = Imu()
+        imu_msg.header.stamp = Node.get_clock(self).now().to_msg()
         imu_msg.linear_acceleration.x = accel_xout_scaled
         imu_msg.linear_acceleration.y = accel_yout_scaled
         imu_msg.linear_acceleration.z = accel_zout_scaled
 
 
-        imu_msg.angular_velocity.x = gyro_xout
+        #imu_msg.angular_velocity.x = gyro_xout
+        imu_msg.angular_velocity.x = (complementary_x - self.last_complementary_x)/self.dt
         imu_msg.angular_velocity.y = gyro_yout
         imu_msg.angular_velocity.z = gyro_zout
 
+        #imu_msg.orientation.x = self.anglex
+        #imu_msg.orientation.y = self.angley
         imu_msg.orientation.x = complementary_x
         imu_msg.orientation.y = complementary_y
         imu_msg.orientation.z = self.gyroAngleZ*math.pi/180.
@@ -157,7 +170,7 @@ def signal_handler(sig, frame):
 
 
 def main(args=None):
-    signal.signal(signal.SIGINT, signal_handler)
+    #signal.signal(signal.SIGINT, signal_handler)
 
     rclpy.init(args=args)
 
