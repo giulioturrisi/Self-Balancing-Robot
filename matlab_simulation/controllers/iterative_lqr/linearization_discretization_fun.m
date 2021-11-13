@@ -2,16 +2,8 @@ function [A,B] = linearization_discretization_fun(u_l,u_r,theta,theta_dot,phi,ph
 %Linearization over desired point
 
 %robot parameters
-M = 1.426971; %kg
-com_pos = [0 0 10.007]; %mm
-M_w = 0.1;
-J_theta = 0.005928; %kg m^2
-J_w = 0.001;
-J_phi = 0.003343;
-r = 0.1;
-d = 0.7; %mm
-g = 9.8;
-l =0.8;
+[M,com_pos,J_theta,J_phi, M_w, J_w, r,d,g,l] = get_dynamic_parameters_fun();
+
 
 
 %linearization with state theta, theta_dot, phi, phi_dot - to do other lin. point
