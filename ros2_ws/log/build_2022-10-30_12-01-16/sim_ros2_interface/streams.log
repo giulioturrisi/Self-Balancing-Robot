@@ -1,0 +1,50 @@
+[0.619s] Invoking command in '/home/twip_ws/build/sim_ros2_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/sim_ros2_interface -- -j8 -l8
+[0.714s] [  2%] [34m[1mGenerating generated/actcli_cancelLastGoal.cpp[0m
+[0.714s] [  4%] [34m[1mGenerating generated/actcli_del.cpp[0m
+[0.717s] [  7%] [34m[1mGenerating generated/actcli_sendGoal.cpp[0m
+[0.718s] [  9%] [34m[1mGenerating generated/actcli_new.cpp[0m
+[0.733s] [ 14%] [34m[1mGenerating generated/actsrv_action_execute.cpp[0m
+[0.733s] [ 14%] [34m[1mGenerating generated/actsrv_action_abort.cpp[0m
+[0.734s] [ 17%] [34m[1mGenerating generated/actsrv_action_canceled.cpp[0m
+[0.761s] [ 19%] [34m[1mGenerating generated/actsrv_action_is_active.cpp[0m
+[1.259s] [ 21%] [34m[1mGenerating generated/actsrv_action_is_canceling.cpp[0m
+[1.300s] [ 24%] [34m[1mGenerating generated/actsrv_action_is_executing.cpp[0m
+[1.413s] [ 26%] [34m[1mGenerating generated/actsrv_action_publish_feedback.cpp[0m
+[1.427s] [ 29%] [34m[1mGenerating generated/actsrv_action_succeed.cpp[0m
+[1.514s] [ 31%] [34m[1mGenerating generated/actsrv_del.cpp[0m
+[1.552s] [ 34%] [34m[1mGenerating generated/actsrv_new.cpp[0m
+[1.609s] [ 36%] [34m[1mGenerating generated/callbacks.cpp[0m
+[1.638s] [ 39%] [34m[1mGenerating generated/callbacks.h[0m
+[1.865s] [ 41%] [34m[1mGenerating generated/cli_call.cpp[0m
+[1.897s] [ 43%] [34m[1mGenerating generated/cli_del.cpp[0m
+[2.053s] [ 46%] [34m[1mGenerating generated/cli_new.cpp[0m
+[2.065s] [ 48%] [34m[1mGenerating generated/if_const.cpp[0m
+[2.095s] [ 51%] [34m[1mGenerating generated/cli_wait.cpp[0m
+[2.141s] [ 53%] [34m[1mGenerating generated/if_list.cpp[0m
+[2.237s] [ 56%] [34m[1mGenerating generated/if_new.cpp[0m
+[2.374s] [ 58%] [34m[1mGenerating generated/pub_del.cpp[0m
+[2.392s] [ 60%] [34m[1mGenerating generated/pub_new.cpp[0m
+[2.497s] [ 63%] [34m[1mGenerating generated/pub_publish.cpp[0m
+[2.567s] [ 65%] [34m[1mGenerating generated/srv_del.cpp[0m
+[2.591s] [ 68%] [34m[1mGenerating generated/srv_new.cpp[0m
+[2.808s] [ 70%] [34m[1mGenerating generated/sub_del.cpp[0m
+[2.834s] [ 73%] [34m[1mGenerating generated/sub_new.cpp[0m
+[3.316s] [ 73%] Built target generate_ros_code
+[3.355s] [35m[1mConsolidate compiler generated dependencies of target simExtROS2[0m
+[3.449s] [ 75%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/src/sim_ros2_interface.cpp.o[0m
+[3.451s] [ 78%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/generated/callbacks.cpp.o[0m
+[9.508s] [01m[K/home/twip_ws/build/sim_ros2_interface/generated/callbacks.cpp:[m[K In function ‘[01m[Kvoid write__std_msgs__msg__Float64MultiArray(const Float64MultiArray&, int, const ROS2WriteOptions*)[m[K’:
+[9.508s] [01m[K/home/twip_ws/build/sim_ros2_interface/generated/callbacks.cpp:2739:13:[m[K [01;31m[Kerror: [m[K‘[01m[Kwrite__std_msgs__msg__MultiArrayLayout[m[K’ was not declared in this scope; did you mean ‘[01m[KDEPRECATED__std_msgs__msg__MultiArrayLayout[m[K’?
+[9.508s]  2739 |             [01;31m[Kwrite__std_msgs__msg__MultiArrayLayout[m[K(msg.layout, stack, opt);
+[9.508s]       |             [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[9.509s]       |             [32m[KDEPRECATED__std_msgs__msg__MultiArrayLayout[m[K
+[9.577s] [01m[K/home/twip_ws/build/sim_ros2_interface/generated/callbacks.cpp:[m[K In function ‘[01m[Kvoid read__std_msgs__msg__Float64MultiArray(int, std_msgs::msg::Float64MultiArray*, const ROS2ReadOptions*)[m[K’:
+[9.578s] [01m[K/home/twip_ws/build/sim_ros2_interface/generated/callbacks.cpp:2800:25:[m[K [01;31m[Kerror: [m[K‘[01m[Kread__std_msgs__msg__MultiArrayLayout[m[K’ was not declared in this scope; did you mean ‘[01m[KDEPRECATED__std_msgs__msg__MultiArrayLayout[m[K’?
+[9.578s]  2800 |                         [01;31m[Kread__std_msgs__msg__MultiArrayLayout[m[K(stack, &(msg->layout), opt);
+[9.578s]       |                         [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[9.578s]       |                         [32m[KDEPRECATED__std_msgs__msg__MultiArrayLayout[m[K
+[10.630s] gmake[2]: *** [CMakeFiles/simExtROS2.dir/build.make:227: CMakeFiles/simExtROS2.dir/generated/callbacks.cpp.o] Error 1
+[10.630s] gmake[2]: *** Waiting for unfinished jobs....
+[171.518s] gmake[1]: *** [CMakeFiles/Makefile2:164: CMakeFiles/simExtROS2.dir/all] Error 2
+[171.518s] gmake: *** [Makefile:146: all] Error 2
+[171.521s] Invoked command in '/home/twip_ws/build/sim_ros2_interface' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/sim_ros2_interface -- -j8 -l8

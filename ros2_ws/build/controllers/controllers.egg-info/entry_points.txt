@@ -1,0 +1,3 @@
+[console_scripts]
+run_lqr = controllers.run_lqr:main
+

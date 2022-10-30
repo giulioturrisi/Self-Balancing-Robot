@@ -1,0 +1,19 @@
+[100%] Built target ros2BubbleRob
+-- Install configuration: "Release"
+-- Execute custom install script
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ament_index/resource_index/package_run_dependencies/ros2_bubble_rob
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ament_index/resource_index/parent_prefix_path/ros2_bubble_rob
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/environment/ament_prefix_path.sh
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/environment/ament_prefix_path.dsv
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/environment/path.sh
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/environment/path.dsv
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/local_setup.bash
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/local_setup.sh
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/local_setup.zsh
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/local_setup.dsv
+-- Symlinking: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/package.dsv
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ament_index/resource_index/packages/ros2_bubble_rob
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/cmake/ros2_bubble_robConfig.cmake
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/cmake/ros2_bubble_robConfig-version.cmake
+-- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/package.xml
+-- Up-to-date: /home/twip_ws/install/ros2_bubble_rob/lib/ros2_bubble_rob/ros2BubbleRob

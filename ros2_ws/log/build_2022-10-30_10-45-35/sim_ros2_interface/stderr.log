@@ -1,0 +1,15 @@
+warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+warning: missing python package "xmlschema"; input file lua.xml will not be validated.
+warning: missing python package "xmlschema"; input file lua.xml will not be validated.
+warning: missing python package "xmlschema"; input file reference.xml will not be validated.
+warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+[01m[K/home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simPlusPlus/Plugin.cpp:[m[K In member function ‘[01m[Kvirtual void* sim::Plugin::loadSimLibrary()[m[K’:
+[01m[K/home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simPlusPlus/Plugin.cpp:615:15:[m[K [01;35m[Kwarning: [m[Kignoring return value of ‘[01m[Kchar* getcwd(char*, size_t)[m[K’ declared with attribute ‘[01m[Kwarn_unused_result[m[K’ [[01;35m[K-Wunused-result[m[K]
+  615 |         [01;35m[Kgetcwd(curDirAndFile, sizeof(curDirAndFile))[m[K;
+      |         [01;35m[K~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K

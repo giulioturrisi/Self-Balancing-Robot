@@ -1,0 +1,15 @@
+running develop
+running egg_info
+writing controllers.egg-info/PKG-INFO
+writing dependency_links to controllers.egg-info/dependency_links.txt
+writing entry points to controllers.egg-info/entry_points.txt
+writing requirements to controllers.egg-info/requires.txt
+writing top-level names to controllers.egg-info/top_level.txt
+reading manifest file 'controllers.egg-info/SOURCES.txt'
+writing manifest file 'controllers.egg-info/SOURCES.txt'
+running build_ext
+Creating /home/twip_ws/install/controllers/lib/python3.10/site-packages/controllers.egg-link (link to .)
+Installing run_lqr script to /home/twip_ws/install/controllers/lib/controllers
+
+Installed /home/twip_ws/build/controllers
+running install_data

@@ -1,0 +1,78 @@
+[0.340s] Invoking command in '/home/twip_ws/build/state_estimator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake /home/twip_ws/src/state_estimator -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/twip_ws/install/state_estimator
+[0.414s] -- The C compiler identification is GNU 11.2.0
+[0.492s] -- The CXX compiler identification is GNU 11.2.0
+[0.499s] -- Detecting C compiler ABI info
+[0.567s] -- Detecting C compiler ABI info - done
+[0.576s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.576s] -- Detecting C compile features
+[0.577s] -- Detecting C compile features - done
+[0.580s] -- Detecting CXX compiler ABI info
+[0.651s] -- Detecting CXX compiler ABI info - done
+[0.657s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.658s] -- Detecting CXX compile features
+[0.658s] -- Detecting CXX compile features - done
+[0.661s] -- Found ament_cmake: 1.3.2 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.852s] -- Found Python3: /usr/bin/python3.10 (found version "3.10.4") found components: Interpreter 
+[0.928s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.967s] -- Found rclcpp: 16.0.1 (/opt/ros/humble/share/rclcpp/cmake)
+[1.020s] -- Found rosidl_generator_c: 3.1.3 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.027s] -- Found rosidl_adapter: 3.1.3 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.038s] -- Found rosidl_generator_cpp: 3.1.3 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.055s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.080s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.141s] -- Found rmw_implementation_cmake: 6.1.0 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.144s] -- Found rmw_fastrtps_cpp: 6.2.1 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[1.235s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[1.260s] -- Found FastRTPS: /opt/ros/humble/include  
+[1.302s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[1.428s] -- Found sensor_msgs: 4.2.2 (/opt/ros/humble/share/sensor_msgs/cmake)
+[1.531s] -- Found tf2_msgs: 0.25.0 (/opt/ros/humble/share/tf2_msgs/cmake)
+[1.704s] -- Found tf2_ros: 0.25.0 (/opt/ros/humble/share/tf2_ros/cmake)
+[1.885s] -- Configuring done
+[1.894s] -- Generating done
+[1.895s] -- Build files have been written to: /home/twip_ws/build/state_estimator
+[1.903s] Invoked command in '/home/twip_ws/build/state_estimator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake /home/twip_ws/src/state_estimator -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/twip_ws/install/state_estimator
+[1.904s] Invoking command in '/home/twip_ws/build/state_estimator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/state_estimator -- -j8 -l8
+[1.937s] [ 50%] [32mBuilding CXX object CMakeFiles/complementary_filter.dir/src/complementary_filter.cpp.o[0m
+[4.273s] [01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:[m[K In member function ‘[01m[Kvoid ComplementaryFilter::estimator_callback(sensor_msgs::msg::Imu_<std::allocator<void> >::SharedPtr) const[m[K’:
+[4.274s] [01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:53:16:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Klin_acc_x[m[K’ set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+[4.274s]    53 |         double [01;35m[Klin_acc_x[m[K = 0, lin_acc_y = 0, lin_acc_z = 0;
+[4.274s]       |                [01;35m[K^~~~~~~~~[m[K
+[4.274s] [01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:53:31:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Klin_acc_y[m[K’ set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+[4.274s]    53 |         double lin_acc_x = 0, [01;35m[Klin_acc_y[m[K = 0, lin_acc_z = 0;
+[4.274s]       |                               [01;35m[K^~~~~~~~~[m[K
+[4.274s] [01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:53:46:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Klin_acc_z[m[K’ set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+[4.274s]    53 |         double lin_acc_x = 0, lin_acc_y = 0, [01;35m[Klin_acc_z[m[K = 0;
+[4.274s]       |                                              [01;35m[K^~~~~~~~~[m[K
+[4.274s] [01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:54:16:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kang_acc_x[m[K’ set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+[4.274s]    54 |         double [01;35m[Kang_acc_x[m[K = 0, ang_acc_y = 0, ang_acc_z = 0;
+[4.274s]       |                [01;35m[K^~~~~~~~~[m[K
+[4.274s] [01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:54:31:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kang_acc_y[m[K’ set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+[4.274s]    54 |         double ang_acc_x = 0, [01;35m[Kang_acc_y[m[K = 0, ang_acc_z = 0;
+[4.274s]       |                               [01;35m[K^~~~~~~~~[m[K
+[4.274s] [01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:54:46:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kang_acc_z[m[K’ set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+[4.275s]    54 |         double ang_acc_x = 0, ang_acc_y = 0, [01;35m[Kang_acc_z[m[K = 0;
+[4.275s]       |                                              [01;35m[K^~~~~~~~~[m[K
+[13.102s] [100%] [32m[1mLinking CXX executable complementary_filter[0m
+[13.248s] [100%] Built target complementary_filter
+[13.257s] Invoked command in '/home/twip_ws/build/state_estimator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/state_estimator -- -j8 -l8
+[13.277s] Invoking command in '/home/twip_ws/build/state_estimator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --install /home/twip_ws/build/state_estimator
+[13.281s] -- Install configuration: "Release"
+[13.281s] -- Execute custom install script
+[13.281s] -- Symlinking: /home/twip_ws/install/state_estimator/lib/state_estimator/complementary_filter
+[13.287s] -- Symlinking: /home/twip_ws/install/state_estimator/share/ament_index/resource_index/package_run_dependencies/state_estimator
+[13.293s] -- Symlinking: /home/twip_ws/install/state_estimator/share/ament_index/resource_index/parent_prefix_path/state_estimator
+[13.298s] -- Symlinking: /home/twip_ws/install/state_estimator/share/state_estimator/environment/ament_prefix_path.sh
+[13.304s] -- Symlinking: /home/twip_ws/install/state_estimator/share/state_estimator/environment/ament_prefix_path.dsv
+[13.309s] -- Symlinking: /home/twip_ws/install/state_estimator/share/state_estimator/environment/path.sh
+[13.315s] -- Symlinking: /home/twip_ws/install/state_estimator/share/state_estimator/environment/path.dsv
+[13.320s] -- Symlinking: /home/twip_ws/install/state_estimator/share/state_estimator/local_setup.bash
+[13.326s] -- Symlinking: /home/twip_ws/install/state_estimator/share/state_estimator/local_setup.sh
+[13.331s] -- Symlinking: /home/twip_ws/install/state_estimator/share/state_estimator/local_setup.zsh
+[13.336s] -- Symlinking: /home/twip_ws/install/state_estimator/share/state_estimator/local_setup.dsv
+[13.342s] -- Symlinking: /home/twip_ws/install/state_estimator/share/state_estimator/package.dsv
+[13.348s] -- Symlinking: /home/twip_ws/install/state_estimator/share/ament_index/resource_index/packages/state_estimator
+[13.353s] -- Symlinking: /home/twip_ws/install/state_estimator/share/state_estimator/cmake/state_estimatorConfig.cmake
+[13.359s] -- Symlinking: /home/twip_ws/install/state_estimator/share/state_estimator/cmake/state_estimatorConfig-version.cmake
+[13.365s] -- Symlinking: /home/twip_ws/install/state_estimator/share/state_estimator/package.xml
+[13.373s] Invoked command in '/home/twip_ws/build/state_estimator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --install /home/twip_ws/build/state_estimator

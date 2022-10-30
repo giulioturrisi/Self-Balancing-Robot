@@ -1,0 +1,19 @@
+[01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:[m[K In member function ‘[01m[Kvoid ComplementaryFilter::estimator_callback(sensor_msgs::msg::Imu_<std::allocator<void> >::SharedPtr) const[m[K’:
+[01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:53:16:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Klin_acc_x[m[K’ set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+   53 |         double [01;35m[Klin_acc_x[m[K = 0, lin_acc_y = 0, lin_acc_z = 0;
+      |                [01;35m[K^~~~~~~~~[m[K
+[01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:53:31:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Klin_acc_y[m[K’ set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+   53 |         double lin_acc_x = 0, [01;35m[Klin_acc_y[m[K = 0, lin_acc_z = 0;
+      |                               [01;35m[K^~~~~~~~~[m[K
+[01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:53:46:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Klin_acc_z[m[K’ set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+   53 |         double lin_acc_x = 0, lin_acc_y = 0, [01;35m[Klin_acc_z[m[K = 0;
+      |                                              [01;35m[K^~~~~~~~~[m[K
+[01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:54:16:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kang_acc_x[m[K’ set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+   54 |         double [01;35m[Kang_acc_x[m[K = 0, ang_acc_y = 0, ang_acc_z = 0;
+      |                [01;35m[K^~~~~~~~~[m[K
+[01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:54:31:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kang_acc_y[m[K’ set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+   54 |         double ang_acc_x = 0, [01;35m[Kang_acc_y[m[K = 0, ang_acc_z = 0;
+      |                               [01;35m[K^~~~~~~~~[m[K
+[01m[K/home/twip_ws/src/state_estimator/src/complementary_filter.cpp:54:46:[m[K [01;35m[Kwarning: [m[Kvariable ‘[01m[Kang_acc_z[m[K’ set but not used [[01;35m[K-Wunused-but-set-variable[m[K]
+   54 |         double ang_acc_x = 0, ang_acc_y = 0, [01;35m[Kang_acc_z[m[K = 0;
+      |                                              [01;35m[K^~~~~~~~~[m[K

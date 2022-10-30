@@ -1,0 +1,150 @@
+[0.340s] Invoking command in '/home/twip_ws/build/sim_ros2_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake /home/twip_ws/src/external/simExtROS2 -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/twip_ws/install/sim_ros2_interface
+[0.421s] -- The C compiler identification is GNU 11.2.0
+[0.495s] -- The CXX compiler identification is GNU 11.2.0
+[0.502s] -- Detecting C compiler ABI info
+[0.566s] -- Detecting C compiler ABI info - done
+[0.574s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.574s] -- Detecting C compile features
+[0.575s] -- Detecting C compile features - done
+[0.577s] -- Detecting CXX compiler ABI info
+[0.646s] -- Detecting CXX compiler ABI info - done
+[0.648s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[0.648s] -- Detecting CXX compile features
+[0.649s] -- Detecting CXX compile features - done
+[0.654s] -- Found ament_cmake: 1.3.2 (/opt/ros/humble/share/ament_cmake/cmake)
+[0.858s] -- Found Python3: /usr/bin/python3.10 (found version "3.10.4") found components: Interpreter 
+[0.942s] -- Override CMake install command with custom implementation using symlinks instead of copying resources
+[0.971s] -- Found ament_cmake_ros: 0.10.0 (/opt/ros/humble/share/ament_cmake_ros/cmake)
+[0.981s] -- Found diagnostic_msgs: 4.2.2 (/opt/ros/humble/share/diagnostic_msgs/cmake)
+[1.020s] -- Found rosidl_generator_c: 3.1.3 (/opt/ros/humble/share/rosidl_generator_c/cmake)
+[1.026s] -- Found rosidl_adapter: 3.1.3 (/opt/ros/humble/share/rosidl_adapter/cmake)
+[1.036s] -- Found rosidl_generator_cpp: 3.1.3 (/opt/ros/humble/share/rosidl_generator_cpp/cmake)
+[1.057s] -- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+[1.076s] -- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+[1.187s] -- Found geometry_msgs: 4.2.2 (/opt/ros/humble/share/geometry_msgs/cmake)
+[1.224s] -- Found lifecycle_msgs: 1.2.0 (/opt/ros/humble/share/lifecycle_msgs/cmake)
+[1.241s] -- Found map_msgs: 2.1.0 (/opt/ros/humble/share/map_msgs/cmake)
+[1.490s] -- Found pendulum_msgs: 0.20.2 (/opt/ros/humble/share/pendulum_msgs/cmake)
+[1.515s] -- Found rosgraph_msgs: 1.2.0 (/opt/ros/humble/share/rosgraph_msgs/cmake)
+[1.542s] -- Found shape_msgs: 4.2.2 (/opt/ros/humble/share/shape_msgs/cmake)
+[1.585s] -- Found stereo_msgs: 4.2.2 (/opt/ros/humble/share/stereo_msgs/cmake)
+[1.655s] -- Found tf2_geometry_msgs: 0.25.0 (/opt/ros/humble/share/tf2_geometry_msgs/cmake)
+[1.786s] -- Found rmw_implementation_cmake: 6.1.0 (/opt/ros/humble/share/rmw_implementation_cmake/cmake)
+[1.788s] -- Found rmw_fastrtps_cpp: 6.2.1 (/opt/ros/humble/share/rmw_fastrtps_cpp/cmake)
+[1.856s] -- Found OpenSSL: /usr/lib/x86_64-linux-gnu/libcrypto.so (found version "3.0.2")  
+[1.881s] -- Found FastRTPS: /opt/ros/humble/include  
+[1.924s] -- Using RMW implementation 'rmw_fastrtps_cpp' as default
+[2.285s] -- Found trajectory_msgs: 4.2.2 (/opt/ros/humble/share/trajectory_msgs/cmake)
+[2.357s] -- Found visualization_msgs: 4.2.2 (/opt/ros/humble/share/visualization_msgs/cmake)
+[2.455s] -- Found std_srvs: 4.2.2 (/opt/ros/humble/share/std_srvs/cmake)
+[2.473s] -- Found example_interfaces: 0.9.3 (/opt/ros/humble/share/example_interfaces/cmake)
+[2.525s] -- Found image_transport: 3.1.4 (/opt/ros/humble/share/image_transport/cmake)
+[2.551s] -- CoppeliaSim: LIBPLUGIN_DIR: /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin.
+[2.551s] -- CoppeliaSim: COPPELIASIM_ROOT_DIR: /home/coppeliasim_simulation/CoppeliaSim.
+[2.551s] -- Found CoppeliaSim installation at /home/coppeliasim_simulation/CoppeliaSim.
+[2.551s] -- Checking CoppeliaSim header version...
+[2.775s] -- CoppeliaSim headers version 4.4.0 rev0
+[2.785s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0") found components: regex 
+[2.792s] -- Found Git: /usr/bin/git (found version "2.34.1") 
+[2.843s] -- Found Boost: /usr/lib/x86_64-linux-gnu/cmake/Boost-1.74.0/BoostConfig.cmake (found version "1.74.0")  
+[2.844s] -- Adding simStubsGen command...
+[2.887s] -- Reading plugin metadata...
+[2.922s] warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+[2.947s] warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+[2.958s] -- Plugin: ROS2
+[3.034s] -- Configuring done
+[3.050s] -- Generating done
+[3.051s] -- Build files have been written to: /home/twip_ws/build/sim_ros2_interface
+[3.063s] Invoked command in '/home/twip_ws/build/sim_ros2_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake /home/twip_ws/src/external/simExtROS2 -DCMAKE_BUILD_TYPE=Release -DAMENT_CMAKE_SYMLINK_INSTALL=1 -DCMAKE_INSTALL_PREFIX=/home/twip_ws/install/sim_ros2_interface
+[3.064s] Invoking command in '/home/twip_ws/build/sim_ros2_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/sim_ros2_interface -- -j8 -l8
+[3.105s] [ 12%] [34m[1mGenerating generated/actcli_cancelLastGoal.cpp[0m
+[3.105s] [ 12%] [34m[1mGenerating generated/actsrv_action_canceled.cpp[0m
+[3.105s] [ 12%] [34m[1mGenerating generated/actcli_sendGoal.cpp[0m
+[3.106s] [ 12%] [34m[1mGenerating generated/actcli_del.cpp[0m
+[3.106s] [ 14%] [34m[1mGenerating generated/actsrv_action_abort.cpp[0m
+[3.106s] [ 12%] [34m[1mGenerating generated/actcli_new.cpp[0m
+[3.111s] [ 17%] [34m[1mGenerating generated/actsrv_action_execute.cpp[0m
+[3.111s] [ 19%] [34m[1mGenerating generated/actsrv_action_is_active.cpp[0m
+[3.336s] [ 21%] [34m[1mGenerating generated/actsrv_action_is_canceling.cpp[0m
+[3.360s] [ 24%] [34m[1mGenerating generated/actsrv_action_is_executing.cpp[0m
+[3.361s] [ 26%] [34m[1mGenerating generated/actsrv_action_succeed.cpp[0m
+[3.364s] [ 29%] [34m[1mGenerating generated/actsrv_action_publish_feedback.cpp[0m
+[3.367s] [ 31%] [34m[1mGenerating generated/actsrv_del.cpp[0m
+[3.390s] [ 34%] [34m[1mGenerating generated/actsrv_new.cpp[0m
+[3.400s] [ 36%] [34m[1mGenerating generated/callbacks.cpp[0m
+[3.420s] [ 39%] [34m[1mGenerating generated/callbacks.h[0m
+[3.518s] [ 41%] [34m[1mGenerating generated/cli_call.cpp[0m
+[3.563s] [ 43%] [34m[1mGenerating generated/cli_del.cpp[0m
+[3.563s] [ 46%] [34m[1mGenerating generated/cli_new.cpp[0m
+[3.570s] [ 48%] [34m[1mGenerating generated/cli_wait.cpp[0m
+[3.635s] [ 51%] [34m[1mGenerating generated/if_const.cpp[0m
+[3.693s] [ 53%] [34m[1mGenerating generated/if_list.cpp[0m
+[3.754s] [ 58%] [34m[1mGenerating generated/pub_del.cpp[0m
+[3.759s] [ 58%] [34m[1mGenerating generated/if_new.cpp[0m
+[3.777s] [ 60%] [34m[1mGenerating generated/pub_new.cpp[0m
+[3.825s] [ 63%] [34m[1mGenerating generated/pub_publish.cpp[0m
+[3.848s] [ 65%] [34m[1mGenerating generated/srv_del.cpp[0m
+[3.892s] [ 68%] [34m[1mGenerating generated/srv_new.cpp[0m
+[3.906s] [ 70%] [34m[1mGenerating generated/sub_del.cpp[0m
+[3.982s] [ 73%] [34m[1mGenerating generated/sub_new.cpp[0m
+[4.183s] [ 73%] Built target generate_ros_code
+[4.189s] [ 75%] [34m[1mGenerating generated/stubs.cpp, generated/stubs.h, generated/plugin.h, generated/stubsPlusPlus.cpp, generated/index.json, generated/reference.html, generated/lua_calltips.cpp, generated/simROS2-typecheck.lua[0m
+[4.216s] /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/generate.py --verbose --xml-file /home/twip_ws/src/external/simExtROS2/meta/callbacks.xml --gen-all /home/twip_ws/build/sim_ros2_interface/generated --lua-file /home/twip_ws/src/external/simExtROS2/simROS2.lua
+[4.216s] warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+[4.222s] /usr/bin/python3.10 /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/generate_lua_xml.py /home/twip_ws/src/external/simExtROS2/meta/callbacks.xml /home/twip_ws/src/external/simExtROS2/simROS2.lua /home/twip_ws/build/sim_ros2_interface/generated/lua.xml
+[4.255s] warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+[4.265s] /usr/bin/python3.10 /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/merge_xml.py /home/twip_ws/src/external/simExtROS2/meta/callbacks.xml /home/twip_ws/build/sim_ros2_interface/generated/lua.xml /home/twip_ws/build/sim_ros2_interface/generated/reference.xml
+[4.295s] xsltproc -o /home/twip_ws/build/sim_ros2_interface/generated/reference.html /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/xsl/reference.xsl /home/twip_ws/build/sim_ros2_interface/generated/reference.xml
+[4.332s] /usr/bin/python3.10 /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/generate_lua_calltips.py /home/twip_ws/build/sim_ros2_interface/generated/lua.xml /home/twip_ws/build/sim_ros2_interface/generated/lua_calltips.cpp
+[4.354s] warning: missing python package "xmlschema"; input file lua.xml will not be validated.
+[4.358s] /usr/bin/python3.10 /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/generate_lua_typechecker.py /home/twip_ws/src/external/simExtROS2/simROS2.lua /home/twip_ws/build/sim_ros2_interface/generated/lua.xml /home/twip_ws/build/sim_ros2_interface/generated/simROS2-typecheck.lua
+[4.381s] warning: missing python package "xmlschema"; input file lua.xml will not be validated.
+[4.384s] /usr/bin/python3.10 /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/generate_api_index.py /home/twip_ws/build/sim_ros2_interface/generated/reference.xml /home/twip_ws/build/sim_ros2_interface/generated/index.json
+[4.408s] warning: missing python package "xmlschema"; input file reference.xml will not be validated.
+[4.415s] /usr/bin/python3.10 /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/external/pycpp/pycpp.py -p xml_file=/home/twip_ws/src/external/simExtROS2/meta/callbacks.xml -p have_lua_calltips=True -P /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen -p lua_require=simROS2-typecheck -i /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/cpp/stubs.cpp -o /home/twip_ws/build/sim_ros2_interface/generated/stubs.cpp
+[4.449s] warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+[4.460s] /usr/bin/python3.10 /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/external/pycpp/pycpp.py -p xml_file=/home/twip_ws/src/external/simExtROS2/meta/callbacks.xml -p have_lua_calltips=True -P /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen -p lua_require=simROS2-typecheck -i /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/cpp/stubs.h -o /home/twip_ws/build/sim_ros2_interface/generated/stubs.h
+[4.487s] warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+[4.495s] /usr/bin/python3.10 /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/external/pycpp/pycpp.py -p xml_file=/home/twip_ws/src/external/simExtROS2/meta/callbacks.xml -p have_lua_calltips=True -P /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen -p lua_require=simROS2-typecheck -i /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/cpp/plugin.h -o /home/twip_ws/build/sim_ros2_interface/generated/plugin.h
+[4.520s] warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+[4.526s] /usr/bin/python3.10 /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/external/pycpp/pycpp.py -p xml_file=/home/twip_ws/src/external/simExtROS2/meta/callbacks.xml -p have_lua_calltips=True -P /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen -p lua_require=simROS2-typecheck -i /home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simStubsGen/cpp/stubsPlusPlus.cpp -o /home/twip_ws/build/sim_ros2_interface/generated/stubsPlusPlus.cpp
+[4.551s] warning: missing python package "xmlschema"; input file callbacks.xml will not be validated.
+[4.587s] [ 80%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simPlusPlus/Handle.cpp.o[0m
+[4.587s] [ 82%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simPlusPlus/Lib.cpp.o[0m
+[4.587s] [ 82%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/generated/stubs.cpp.o[0m
+[4.587s] [ 85%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/home/coppeliasim_simulation/CoppeliaSim/programming/common/simLib.cpp.o[0m
+[4.588s] [ 87%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/src/ros_msg_builtin_io.cpp.o[0m
+[4.590s] [ 92%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simPlusPlus/Plugin.cpp.o[0m
+[4.590s] [ 92%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/src/sim_ros2_interface.cpp.o[0m
+[4.594s] [ 95%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/generated/callbacks.cpp.o[0m
+[5.867s] [01m[K/home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simPlusPlus/Plugin.cpp:[m[K In member function ‘[01m[Kvirtual void* sim::Plugin::loadSimLibrary()[m[K’:
+[5.867s] [01m[K/home/coppeliasim_simulation/CoppeliaSim/programming/libPlugin/simPlusPlus/Plugin.cpp:615:15:[m[K [01;35m[Kwarning: [m[Kignoring return value of ‘[01m[Kchar* getcwd(char*, size_t)[m[K’ declared with attribute ‘[01m[Kwarn_unused_result[m[K’ [[01;35m[K-Wunused-result[m[K]
+[5.867s]   615 |         [01;35m[Kgetcwd(curDirAndFile, sizeof(curDirAndFile))[m[K;
+[5.867s]       |         [01;35m[K~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[112.677s] [ 97%] [32m[1mLinking CXX shared library libsimExtROS2.so[0m
+[113.758s] [100%] Built target simExtROS2
+[113.767s] Invoked command in '/home/twip_ws/build/sim_ros2_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/sim_ros2_interface -- -j8 -l8
+[113.795s] Invoking command in '/home/twip_ws/build/sim_ros2_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --install /home/twip_ws/build/sim_ros2_interface
+[113.800s] -- Install configuration: "Release"
+[113.800s] -- Execute custom install script
+[113.800s] -- Up-to-date symlink: /home/coppeliasim_simulation/CoppeliaSim/lua/simROS2-typecheck.lua
+[113.800s] -- Up-to-date symlink: /home/coppeliasim_simulation/CoppeliaSim/lua/simROS2.lua
+[113.801s] -- Up-to-date symlink: /home/coppeliasim_simulation/CoppeliaSim/helpFiles/en/simROS2.htm
+[113.801s] -- Up-to-date symlink: /home/coppeliasim_simulation/CoppeliaSim/helpFiles/index/simROS2.json
+[113.801s] -- Up-to-date symlink: /home/coppeliasim_simulation/CoppeliaSim/libsimExtROS2.so
+[113.801s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/ament_index/resource_index/package_run_dependencies/sim_ros2_interface
+[113.808s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/ament_index/resource_index/parent_prefix_path/sim_ros2_interface
+[113.815s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/environment/ament_prefix_path.sh
+[113.821s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/environment/ament_prefix_path.dsv
+[113.828s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/environment/path.sh
+[113.836s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/environment/path.dsv
+[113.841s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/local_setup.bash
+[113.848s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/local_setup.sh
+[113.854s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/local_setup.zsh
+[113.860s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/local_setup.dsv
+[113.865s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/package.dsv
+[113.871s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/ament_index/resource_index/packages/sim_ros2_interface
+[113.877s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/cmake/sim_ros2_interfaceConfig.cmake
+[113.882s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/cmake/sim_ros2_interfaceConfig-version.cmake
+[113.888s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/package.xml
+[113.896s] Invoked command in '/home/twip_ws/build/sim_ros2_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --install /home/twip_ws/build/sim_ros2_interface

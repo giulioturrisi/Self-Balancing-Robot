@@ -1,0 +1,23 @@
+[0.621s] Invoking command in '/home/twip_ws/build/state_estimator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/state_estimator -- -j8 -l8
+[0.744s] [100%] Built target complementary_filter
+[0.786s] Invoked command in '/home/twip_ws/build/state_estimator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/state_estimator -- -j8 -l8
+[0.970s] Invoking command in '/home/twip_ws/build/state_estimator': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --install /home/twip_ws/build/state_estimator
+[1.002s] -- Install configuration: "Release"
+[1.003s] -- Execute custom install script
+[1.003s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/lib/state_estimator/complementary_filter
+[1.003s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/ament_index/resource_index/package_run_dependencies/state_estimator
+[1.003s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/ament_index/resource_index/parent_prefix_path/state_estimator
+[1.006s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/state_estimator/environment/ament_prefix_path.sh
+[1.006s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/state_estimator/environment/ament_prefix_path.dsv
+[1.007s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/state_estimator/environment/path.sh
+[1.011s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/state_estimator/environment/path.dsv
+[1.011s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/state_estimator/local_setup.bash
+[1.012s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/state_estimator/local_setup.sh
+[1.012s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/state_estimator/local_setup.zsh
+[1.012s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/state_estimator/local_setup.dsv
+[1.012s] -- Symlinking: /home/twip_ws/install/state_estimator/share/state_estimator/package.dsv
+[1.077s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/ament_index/resource_index/packages/state_estimator
+[1.078s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/state_estimator/cmake/state_estimatorConfig.cmake
+[1.078s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/state_estimator/cmake/state_estimatorConfig-version.cmake
+[1.079s] -- Up-to-date symlink: /home/twip_ws/install/state_estimator/share/state_estimator/package.xml
+[1.096s] Invoked command in '/home/twip_ws/build/state_estimator' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --install /home/twip_ws/build/state_estimator

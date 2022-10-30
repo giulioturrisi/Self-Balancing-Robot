@@ -1,0 +1,1 @@
+/home/twip_ws/build/ros2_bubble_rob/ament_cmake_core/ros2_bubble_robConfig-version.cmake

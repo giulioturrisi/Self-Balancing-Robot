@@ -1,0 +1,21 @@
+[0.991s] Invoking command in '/home/twip_ws/build/controllers': PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] PYTHONPATH=/home/twip_ws/install/controllers/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --prefix /home/twip_ws/install/controllers --editable --build-directory /home/twip_ws/build/controllers/build --no-deps install_data --install-dir /home/twip_ws/install/controllers
+[1.295s] running develop
+[1.295s] /usr/lib/python3/dist-packages/setuptools/command/easy_install.py:158: EasyInstallDeprecationWarning: easy_install command is deprecated. Use build and pip and other standards-based tools.
+[1.295s]   warnings.warn(
+[1.296s] /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+[1.297s]   warnings.warn(
+[1.432s] running egg_info
+[1.433s] writing controllers.egg-info/PKG-INFO
+[1.433s] writing dependency_links to controllers.egg-info/dependency_links.txt
+[1.433s] writing entry points to controllers.egg-info/entry_points.txt
+[1.433s] writing requirements to controllers.egg-info/requires.txt
+[1.433s] writing top-level names to controllers.egg-info/top_level.txt
+[1.435s] reading manifest file 'controllers.egg-info/SOURCES.txt'
+[1.436s] writing manifest file 'controllers.egg-info/SOURCES.txt'
+[1.438s] running build_ext
+[1.438s] Creating /home/twip_ws/install/controllers/lib/python3.10/site-packages/controllers.egg-link (link to .)
+[1.439s] Installing run_lqr script to /home/twip_ws/install/controllers/lib/controllers
+[1.440s] 
+[1.440s] Installed /home/twip_ws/build/controllers
+[1.440s] running install_data
+[1.471s] Invoked command in '/home/twip_ws/build/controllers' returned '0': PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] PYTHONPATH=/home/twip_ws/install/controllers/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --prefix /home/twip_ws/install/controllers --editable --build-directory /home/twip_ws/build/controllers/build --no-deps install_data --install-dir /home/twip_ws/install/controllers

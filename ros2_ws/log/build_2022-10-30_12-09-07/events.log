@@ -1,0 +1,85 @@
+[0.000000] (-) TimerEvent: {}
+[0.000267] (-) JobUnselected: {'identifier': 'controllers'}
+[0.000320] (-) JobUnselected: {'identifier': 'driver_imu'}
+[0.000355] (-) JobUnselected: {'identifier': 'ros2_bubble_rob'}
+[0.000397] (-) JobUnselected: {'identifier': 'state_estimator'}
+[0.000433] (sim_ros2_interface) JobQueued: {'identifier': 'sim_ros2_interface', 'dependencies': OrderedDict()}
+[0.000465] (sim_ros2_interface) JobStarted: {'identifier': 'sim_ros2_interface'}
+[0.013412] (sim_ros2_interface) JobProgress: {'identifier': 'sim_ros2_interface', 'progress': 'cmake'}
+[0.014462] (sim_ros2_interface) JobProgress: {'identifier': 'sim_ros2_interface', 'progress': 'build'}
+[0.015567] (sim_ros2_interface) Command: {'cmd': ['/usr/bin/cmake', '--build', '/home/twip_ws/build/sim_ros2_interface', '--', '-j8', '-l8'], 'cwd': '/home/twip_ws/build/sim_ros2_interface', 'env': OrderedDict([('HOSTNAME', 'cbed1ff0f3fc'), ('SHLVL', '1'), ('LD_LIBRARY_PATH', '/opt/ros/humble/opt/rviz_ogre_vendor/lib:/opt/ros/humble/lib/x86_64-linux-gnu:/opt/ros/humble/lib'), ('HOME', '/root'), ('OLDPWD', '/home'), ('ROS_PYTHON_VERSION', '3'), ('PS1', '\\[\\e]0;\\u@\\h: \\w\\a\\]\\[\\033[01;37m\\]\\u\\[\\033[00m\\]@\\[\\033[01;32m\\]\\h\\[\\033[00m\\]:\\[\\033[01;34m\\]\\w\\[\\033[00m\\]'), ('WAYLAND_DISPLAY', 'wayland-0'), ('COLCON_PREFIX_PATH', '/home/twip_ws/install'), ('ROS_DISTRO', 'humble'), ('_', '/usr/bin/colcon'), ('ROS_VERSION', '2'), ('TERM', 'xterm'), ('COPPELIASIM_ROOT_DIR', '/home/coppeliasim_simulation/CoppeliaSim'), ('ROS_LOCALHOST_ONLY', '0'), ('PATH', '/opt/ros/humble/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin'), ('DISPLAY', ':0'), ('LANG', 'C.UTF-8'), ('LS_COLORS', 'rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=00:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:*.tar=01;31:*.tgz=01;31:*.arc=01;31:*.arj=01;31:*.taz=01;31:*.lha=01;31:*.lz4=01;31:*.lzh=01;31:*.lzma=01;31:*.tlz=01;31:*.txz=01;31:*.tzo=01;31:*.t7z=01;31:*.zip=01;31:*.z=01;31:*.dz=01;31:*.gz=01;31:*.lrz=01;31:*.lz=01;31:*.lzo=01;31:*.xz=01;31:*.zst=01;31:*.tzst=01;31:*.bz2=01;31:*.bz=01;31:*.tbz=01;31:*.tbz2=01;31:*.tz=01;31:*.deb=01;31:*.rpm=01;31:*.jar=01;31:*.war=01;31:*.ear=01;31:*.sar=01;31:*.rar=01;31:*.alz=01;31:*.ace=01;31:*.zoo=01;31:*.cpio=01;31:*.7z=01;31:*.rz=01;31:*.cab=01;31:*.wim=01;31:*.swm=01;31:*.dwm=01;31:*.esd=01;31:*.jpg=01;35:*.jpeg=01;35:*.mjpg=01;35:*.mjpeg=01;35:*.gif=01;35:*.bmp=01;35:*.pbm=01;35:*.pgm=01;35:*.ppm=01;35:*.tga=01;35:*.xbm=01;35:*.xpm=01;35:*.tif=01;35:*.tiff=01;35:*.png=01;35:*.svg=01;35:*.svgz=01;35:*.mng=01;35:*.pcx=01;35:*.mov=01;35:*.mpg=01;35:*.mpeg=01;35:*.m2v=01;35:*.mkv=01;35:*.webm=01;35:*.webp=01;35:*.ogm=01;35:*.mp4=01;35:*.m4v=01;35:*.mp4v=01;35:*.vob=01;35:*.qt=01;35:*.nuv=01;35:*.wmv=01;35:*.asf=01;35:*.rm=01;35:*.rmvb=01;35:*.flc=01;35:*.avi=01;35:*.fli=01;35:*.flv=01;35:*.gl=01;35:*.dl=01;35:*.xcf=01;35:*.xwd=01;35:*.yuv=01;35:*.cgm=01;35:*.emf=01;35:*.ogv=01;35:*.ogx=01;35:*.aac=00;36:*.au=00;36:*.flac=00;36:*.m4a=00;36:*.mid=00;36:*.midi=00;36:*.mka=00;36:*.mp3=00;36:*.mpc=00;36:*.ogg=00;36:*.ra=00;36:*.wav=00;36:*.oga=00;36:*.opus=00;36:*.spx=00;36:*.xspf=00;36:'), ('AMENT_PREFIX_PATH', '/home/twip_ws/install/state_estimator:/home/twip_ws/install/sim_ros2_interface:/home/twip_ws/install/ros2_bubble_rob:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble'), ('DEBIAN_FRONTEND', 'noninteractive'), ('PWD', '/home/twip_ws/build/sim_ros2_interface'), ('LC_ALL', 'C.UTF-8'), ('PYTHONPATH', '/home/twip_ws/build/driver_imu:/home/twip_ws/install/driver_imu/lib/python3.10/site-packages:/home/twip_ws/build/controllers:/home/twip_ws/install/controllers/lib/python3.10/site-packages:/opt/ros/humble/lib/python3.10/site-packages:/opt/ros/humble/local/lib/python3.10/dist-packages'), ('COLCON', '1'), ('CMAKE_PREFIX_PATH', '/home/twip_ws/install/state_estimator:/home/twip_ws/install/sim_ros2_interface:/home/twip_ws/install/ros2_bubble_rob:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble')]), 'shell': False}
+[0.078917] (sim_ros2_interface) StdoutLine: {'line': b'[ 73%] Built target generate_ros_code\n'}
+[0.098564] (-) TimerEvent: {}
+[0.105150] (sim_ros2_interface) StdoutLine: {'line': b'\x1b[35m\x1b[1mConsolidate compiler generated dependencies of target simExtROS2\x1b[0m\n'}
+[0.185142] (sim_ros2_interface) StdoutLine: {'line': b'[ 75%] \x1b[32mBuilding CXX object CMakeFiles/simExtROS2.dir/generated/callbacks.cpp.o\x1b[0m\n'}
+[0.198697] (-) TimerEvent: {}
+[0.299141] (-) TimerEvent: {}
+[0.399595] (-) TimerEvent: {}
+[0.500016] (-) TimerEvent: {}
+[0.600483] (-) TimerEvent: {}
+[0.701050] (-) TimerEvent: {}
+[0.801571] (-) TimerEvent: {}
+[0.902007] (-) TimerEvent: {}
+[1.002612] (-) TimerEvent: {}
+[1.103207] (-) TimerEvent: {}
+[1.203832] (-) TimerEvent: {}
+[1.304359] (-) TimerEvent: {}
+[1.404941] (-) TimerEvent: {}
+[1.505416] (-) TimerEvent: {}
+[1.605787] (-) TimerEvent: {}
+[1.706165] (-) TimerEvent: {}
+[1.806648] (-) TimerEvent: {}
+[1.907262] (-) TimerEvent: {}
+[2.007938] (-) TimerEvent: {}
+[2.108564] (-) TimerEvent: {}
+[2.209102] (-) TimerEvent: {}
+[2.309512] (-) TimerEvent: {}
+[2.409962] (-) TimerEvent: {}
+[2.510407] (-) TimerEvent: {}
+[2.610990] (-) TimerEvent: {}
+[2.711730] (-) TimerEvent: {}
+[2.812307] (-) TimerEvent: {}
+[2.913055] (-) TimerEvent: {}
+[3.013856] (-) TimerEvent: {}
+[3.114243] (-) TimerEvent: {}
+[3.214733] (-) TimerEvent: {}
+[3.315273] (-) TimerEvent: {}
+[3.415687] (-) TimerEvent: {}
+[3.516258] (-) TimerEvent: {}
+[3.616898] (-) TimerEvent: {}
+[3.717349] (-) TimerEvent: {}
+[3.817766] (-) TimerEvent: {}
+[3.918302] (-) TimerEvent: {}
+[4.018962] (-) TimerEvent: {}
+[4.119602] (-) TimerEvent: {}
+[4.220402] (-) TimerEvent: {}
+[4.321040] (-) TimerEvent: {}
+[4.421588] (-) TimerEvent: {}
+[4.521993] (-) TimerEvent: {}
+[4.622390] (-) TimerEvent: {}
+[4.691632] (sim_ros2_interface) StderrLine: {'line': b'\x1b[01m\x1b[K/home/twip_ws/build/sim_ros2_interface/generated/callbacks.cpp:\x1b[m\x1b[K In function \xe2\x80\x98\x1b[01m\x1b[Kvoid write__std_msgs__msg__Float64MultiArray(const Float64MultiArray&, int, const ROS2WriteOptions*)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[4.691945] (sim_ros2_interface) StderrLine: {'line': b'\x1b[01m\x1b[K/home/twip_ws/build/sim_ros2_interface/generated/callbacks.cpp:2739:13:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KDEPRECATED_write__std_msgs__msg__MultiArrayLayout\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[KDEPRECATED__std_msgs__msg__MultiArrayLayout\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[4.692092] (sim_ros2_interface) StderrLine: {'line': b' 2739 |             \x1b[01;31m\x1b[KDEPRECATED_write__std_msgs__msg__MultiArrayLayout\x1b[m\x1b[K(msg.layout, stack, opt);\n'}
+[4.692223] (sim_ros2_interface) StderrLine: {'line': b'      |             \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[4.692347] (sim_ros2_interface) StderrLine: {'line': b'      |             \x1b[32m\x1b[KDEPRECATED__std_msgs__msg__MultiArrayLayout\x1b[m\x1b[K\n'}
+[4.722536] (-) TimerEvent: {}
+[4.731836] (sim_ros2_interface) StderrLine: {'line': b'\x1b[01m\x1b[K/home/twip_ws/build/sim_ros2_interface/generated/callbacks.cpp:\x1b[m\x1b[K In function \xe2\x80\x98\x1b[01m\x1b[Kvoid read__std_msgs__msg__Float64MultiArray(int, std_msgs::msg::Float64MultiArray*, const ROS2ReadOptions*)\x1b[m\x1b[K\xe2\x80\x99:\n'}
+[4.732074] (sim_ros2_interface) StderrLine: {'line': b'\x1b[01m\x1b[K/home/twip_ws/build/sim_ros2_interface/generated/callbacks.cpp:2800:25:\x1b[m\x1b[K \x1b[01;31m\x1b[Kerror: \x1b[m\x1b[K\xe2\x80\x98\x1b[01m\x1b[KDEPRECATED_read__std_msgs__msg__MultiArrayLayout\x1b[m\x1b[K\xe2\x80\x99 was not declared in this scope; did you mean \xe2\x80\x98\x1b[01m\x1b[KDEPRECATED__std_msgs__msg__MultiArrayLayout\x1b[m\x1b[K\xe2\x80\x99?\n'}
+[4.732190] (sim_ros2_interface) StderrLine: {'line': b' 2800 |                         \x1b[01;31m\x1b[KDEPRECATED_read__std_msgs__msg__MultiArrayLayout\x1b[m\x1b[K(stack, &(msg->layout), opt);\n'}
+[4.732298] (sim_ros2_interface) StderrLine: {'line': b'      |                         \x1b[01;31m\x1b[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\x1b[m\x1b[K\n'}
+[4.732414] (sim_ros2_interface) StderrLine: {'line': b'      |                         \x1b[32m\x1b[KDEPRECATED__std_msgs__msg__MultiArrayLayout\x1b[m\x1b[K\n'}
+[4.822668] (-) TimerEvent: {}
+[4.923052] (-) TimerEvent: {}
+[5.023441] (-) TimerEvent: {}
+[5.123959] (-) TimerEvent: {}
+[5.224490] (-) TimerEvent: {}
+[5.324865] (-) TimerEvent: {}
+[5.425254] (-) TimerEvent: {}
+[5.525658] (-) TimerEvent: {}
+[5.545158] (sim_ros2_interface) StderrLine: {'line': b'gmake[2]: *** [CMakeFiles/simExtROS2.dir/build.make:227: CMakeFiles/simExtROS2.dir/generated/callbacks.cpp.o] Error 1\n'}
+[5.545601] (sim_ros2_interface) StderrLine: {'line': b'gmake[1]: *** [CMakeFiles/Makefile2:164: CMakeFiles/simExtROS2.dir/all] Error 2\n'}
+[5.546346] (sim_ros2_interface) StderrLine: {'line': b'gmake: *** [Makefile:146: all] Error 2\n'}
+[5.549278] (sim_ros2_interface) CommandEnded: {'returncode': 2}
+[5.624902] (sim_ros2_interface) JobEnded: {'identifier': 'sim_ros2_interface', 'rc': 2}
+[5.625710] (-) TimerEvent: {}
+[5.635352] (-) EventReactorShutdown: {}

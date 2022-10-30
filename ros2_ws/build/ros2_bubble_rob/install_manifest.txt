@@ -1,0 +1,1 @@
+/home/twip_ws/install/ros2_bubble_rob/lib/ros2_bubble_rob/ros2BubbleRob

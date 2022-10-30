@@ -1,0 +1,62 @@
+[0.019s] Invoking command in '/home/twip_ws/build/sim_ros2_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/sim_ros2_interface -- -j8 -l8
+[0.088s] [  2%] [34m[1mGenerating generated/actcli_cancelLastGoal.cpp[0m
+[0.088s] [  7%] [34m[1mGenerating generated/actcli_new.cpp[0m
+[0.089s] [  9%] [34m[1mGenerating generated/actcli_del.cpp[0m
+[0.089s] [ 12%] [34m[1mGenerating generated/actsrv_action_canceled.cpp[0m
+[0.089s] [ 14%] [34m[1mGenerating generated/actsrv_action_abort.cpp[0m
+[0.090s] [ 14%] [34m[1mGenerating generated/actcli_sendGoal.cpp[0m
+[0.090s] [ 17%] [34m[1mGenerating generated/actsrv_action_execute.cpp[0m
+[0.102s] [ 19%] [34m[1mGenerating generated/actsrv_action_is_active.cpp[0m
+[0.494s] [ 21%] [34m[1mGenerating generated/actsrv_action_is_canceling.cpp[0m
+[0.517s] [ 24%] [34m[1mGenerating generated/actsrv_action_is_executing.cpp[0m
+[0.522s] [ 26%] [34m[1mGenerating generated/actsrv_action_publish_feedback.cpp[0m
+[0.539s] [ 29%] [34m[1mGenerating generated/actsrv_action_succeed.cpp[0m
+[0.576s] [ 31%] [34m[1mGenerating generated/actsrv_del.cpp[0m
+[0.612s] [ 34%] [34m[1mGenerating generated/actsrv_new.cpp[0m
+[0.721s] [ 36%] [34m[1mGenerating generated/callbacks.cpp[0m
+[0.855s] [ 39%] [34m[1mGenerating generated/callbacks.h[0m
+[0.998s] [ 41%] [34m[1mGenerating generated/cli_call.cpp[0m
+[1.016s] [ 43%] [34m[1mGenerating generated/cli_del.cpp[0m
+[1.041s] [ 46%] [34m[1mGenerating generated/cli_wait.cpp[0m
+[1.051s] [ 48%] [34m[1mGenerating generated/cli_new.cpp[0m
+[1.078s] [ 51%] [34m[1mGenerating generated/if_const.cpp[0m
+[1.195s] [ 53%] [34m[1mGenerating generated/if_list.cpp[0m
+[1.198s] [ 56%] [34m[1mGenerating generated/if_new.cpp[0m
+[1.326s] [ 58%] [34m[1mGenerating generated/pub_del.cpp[0m
+[1.404s] [ 60%] [34m[1mGenerating generated/pub_new.cpp[0m
+[1.424s] [ 63%] [34m[1mGenerating generated/pub_publish.cpp[0m
+[1.571s] [ 65%] [34m[1mGenerating generated/srv_del.cpp[0m
+[1.617s] [ 68%] [34m[1mGenerating generated/srv_new.cpp[0m
+[1.653s] [ 70%] [34m[1mGenerating generated/sub_del.cpp[0m
+[1.766s] [ 73%] [34m[1mGenerating generated/sub_new.cpp[0m
+[2.133s] [ 73%] Built target generate_ros_code
+[2.170s] [35m[1mConsolidate compiler generated dependencies of target simExtROS2[0m
+[2.274s] [ 75%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/src/sim_ros2_interface.cpp.o[0m
+[2.275s] [ 78%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/generated/callbacks.cpp.o[0m
+[163.931s] [ 80%] [32m[1mLinking CXX shared library libsimExtROS2.so[0m
+[165.748s] [100%] Built target simExtROS2
+[165.765s] Invoked command in '/home/twip_ws/build/sim_ros2_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/sim_ros2_interface -- -j8 -l8
+[165.840s] Invoking command in '/home/twip_ws/build/sim_ros2_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --install /home/twip_ws/build/sim_ros2_interface
+[165.849s] -- Install configuration: "Release"
+[165.850s] -- Execute custom install script
+[165.850s] -- Up-to-date symlink: /home/coppeliasim_simulation/CoppeliaSim/lua/simROS2-typecheck.lua
+[165.850s] -- Up-to-date symlink: /home/coppeliasim_simulation/CoppeliaSim/lua/simROS2.lua
+[165.851s] -- Up-to-date symlink: /home/coppeliasim_simulation/CoppeliaSim/helpFiles/en/simROS2.htm
+[165.851s] -- Up-to-date symlink: /home/coppeliasim_simulation/CoppeliaSim/helpFiles/index/simROS2.json
+[165.851s] -- Up-to-date symlink: /home/coppeliasim_simulation/CoppeliaSim/libsimExtROS2.so
+[165.851s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/ament_index/resource_index/package_run_dependencies/sim_ros2_interface
+[165.852s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/ament_index/resource_index/parent_prefix_path/sim_ros2_interface
+[165.852s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/environment/ament_prefix_path.sh
+[165.852s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/environment/ament_prefix_path.dsv
+[165.853s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/environment/path.sh
+[165.853s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/environment/path.dsv
+[165.853s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/local_setup.bash
+[165.853s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/local_setup.sh
+[165.853s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/local_setup.zsh
+[165.854s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/local_setup.dsv
+[165.854s] -- Symlinking: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/package.dsv
+[165.866s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/ament_index/resource_index/packages/sim_ros2_interface
+[165.866s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/cmake/sim_ros2_interfaceConfig.cmake
+[165.866s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/cmake/sim_ros2_interfaceConfig-version.cmake
+[165.866s] -- Up-to-date symlink: /home/twip_ws/install/sim_ros2_interface/share/sim_ros2_interface/package.xml
+[165.870s] Invoked command in '/home/twip_ws/build/sim_ros2_interface' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --install /home/twip_ws/build/sim_ros2_interface

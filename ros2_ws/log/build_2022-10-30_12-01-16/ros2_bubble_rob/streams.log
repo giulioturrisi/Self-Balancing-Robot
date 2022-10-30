@@ -1,0 +1,23 @@
+[0.615s] Invoking command in '/home/twip_ws/build/ros2_bubble_rob': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/ros2_bubble_rob -- -j8 -l8
+[0.754s] [100%] Built target ros2BubbleRob
+[0.781s] Invoked command in '/home/twip_ws/build/ros2_bubble_rob' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/ros2_bubble_rob -- -j8 -l8
+[1.007s] Invoking command in '/home/twip_ws/build/ros2_bubble_rob': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --install /home/twip_ws/build/ros2_bubble_rob
+[1.031s] -- Install configuration: "Release"
+[1.032s] -- Execute custom install script
+[1.033s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ament_index/resource_index/package_run_dependencies/ros2_bubble_rob
+[1.033s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ament_index/resource_index/parent_prefix_path/ros2_bubble_rob
+[1.034s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/environment/ament_prefix_path.sh
+[1.034s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/environment/ament_prefix_path.dsv
+[1.034s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/environment/path.sh
+[1.035s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/environment/path.dsv
+[1.035s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/local_setup.bash
+[1.035s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/local_setup.sh
+[1.036s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/local_setup.zsh
+[1.036s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/local_setup.dsv
+[1.036s] -- Symlinking: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/package.dsv
+[1.155s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ament_index/resource_index/packages/ros2_bubble_rob
+[1.156s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/cmake/ros2_bubble_robConfig.cmake
+[1.156s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/cmake/ros2_bubble_robConfig-version.cmake
+[1.156s] -- Up-to-date symlink: /home/twip_ws/install/ros2_bubble_rob/share/ros2_bubble_rob/package.xml
+[1.156s] -- Up-to-date: /home/twip_ws/install/ros2_bubble_rob/lib/ros2_bubble_rob/ros2BubbleRob
+[1.175s] Invoked command in '/home/twip_ws/build/ros2_bubble_rob' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --install /home/twip_ws/build/ros2_bubble_rob

@@ -1,0 +1,25 @@
+[1.177s] Invoking command in '/home/twip_ws/build/driver_imu': PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] PYTHONPATH=/home/twip_ws/install/driver_imu/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --prefix /home/twip_ws/install/driver_imu --editable --build-directory /home/twip_ws/build/driver_imu/build --no-deps install_data --install-dir /home/twip_ws/install/driver_imu
+[1.569s] /usr/lib/python3/dist-packages/setuptools/dist.py:723: UserWarning: Usage of dash-separated 'script-dir' will not be supported in future versions. Please use the underscore name 'script_dir' instead
+[1.569s]   warnings.warn(
+[1.570s] /usr/lib/python3/dist-packages/setuptools/dist.py:723: UserWarning: Usage of dash-separated 'install-scripts' will not be supported in future versions. Please use the underscore name 'install_scripts' instead
+[1.570s]   warnings.warn(
+[1.617s] running develop
+[1.621s] /usr/lib/python3/dist-packages/setuptools/command/easy_install.py:158: EasyInstallDeprecationWarning: easy_install command is deprecated. Use build and pip and other standards-based tools.
+[1.621s]   warnings.warn(
+[1.622s] /usr/lib/python3/dist-packages/setuptools/command/install.py:34: SetuptoolsDeprecationWarning: setup.py install is deprecated. Use build and pip and other standards-based tools.
+[1.622s]   warnings.warn(
+[1.816s] running egg_info
+[1.816s] writing driver_imu.egg-info/PKG-INFO
+[1.816s] writing dependency_links to driver_imu.egg-info/dependency_links.txt
+[1.817s] writing entry points to driver_imu.egg-info/entry_points.txt
+[1.817s] writing requirements to driver_imu.egg-info/requires.txt
+[1.817s] writing top-level names to driver_imu.egg-info/top_level.txt
+[1.819s] reading manifest file 'driver_imu.egg-info/SOURCES.txt'
+[1.820s] writing manifest file 'driver_imu.egg-info/SOURCES.txt'
+[1.823s] running build_ext
+[1.823s] Creating /home/twip_ws/install/driver_imu/lib/python3.10/site-packages/driver-imu.egg-link (link to .)
+[1.824s] Installing driver_imu script to /home/twip_ws/install/driver_imu/lib/driver_imu
+[1.825s] 
+[1.825s] Installed /home/twip_ws/build/driver_imu
+[1.825s] running install_data
+[1.867s] Invoked command in '/home/twip_ws/build/driver_imu' returned '0': PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] PYTHONPATH=/home/twip_ws/install/driver_imu/lib/python3.10/site-packages:${PYTHONPATH} /usr/bin/python3 setup.py develop --prefix /home/twip_ws/install/driver_imu --editable --build-directory /home/twip_ws/build/driver_imu/build --no-deps install_data --install-dir /home/twip_ws/install/driver_imu

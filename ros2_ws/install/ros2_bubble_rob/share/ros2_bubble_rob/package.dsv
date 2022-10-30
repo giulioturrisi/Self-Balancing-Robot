@@ -1,0 +1,8 @@
+source;share/ros2_bubble_rob/hook/cmake_prefix_path.ps1
+source;share/ros2_bubble_rob/hook/cmake_prefix_path.dsv
+source;share/ros2_bubble_rob/hook/cmake_prefix_path.sh
+source;share/ros2_bubble_rob/local_setup.bash
+source;share/ros2_bubble_rob/local_setup.dsv
+source;share/ros2_bubble_rob/local_setup.ps1
+source;share/ros2_bubble_rob/local_setup.sh
+source;share/ros2_bubble_rob/local_setup.zsh

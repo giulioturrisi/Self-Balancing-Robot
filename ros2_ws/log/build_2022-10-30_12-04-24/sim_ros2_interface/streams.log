@@ -1,0 +1,18 @@
+[0.018s] Invoking command in '/home/twip_ws/build/sim_ros2_interface': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/sim_ros2_interface -- -j8 -l8
+[0.070s] [ 73%] Built target generate_ros_code
+[0.095s] [35m[1mConsolidate compiler generated dependencies of target simExtROS2[0m
+[0.159s] [ 75%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/generated/callbacks.cpp.o[0m
+[4.412s] [01m[K/home/twip_ws/build/sim_ros2_interface/generated/callbacks.cpp:[m[K In function ‘[01m[Kvoid write__std_msgs__msg__Float64MultiArray(const Float64MultiArray&, int, const ROS2WriteOptions*)[m[K’:
+[4.412s] [01m[K/home/twip_ws/build/sim_ros2_interface/generated/callbacks.cpp:2739:13:[m[K [01;31m[Kerror: [m[K‘[01m[Kwrite__std_msgs__msg__MultiArrayLayout[m[K’ was not declared in this scope; did you mean ‘[01m[KDEPRECATED__std_msgs__msg__MultiArrayLayout[m[K’?
+[4.412s]  2739 |             [01;31m[Kwrite__std_msgs__msg__MultiArrayLayout[m[K(msg.layout, stack, opt);
+[4.412s]       |             [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.412s]       |             [32m[KDEPRECATED__std_msgs__msg__MultiArrayLayout[m[K
+[4.452s] [01m[K/home/twip_ws/build/sim_ros2_interface/generated/callbacks.cpp:[m[K In function ‘[01m[Kvoid read__std_msgs__msg__Float64MultiArray(int, std_msgs::msg::Float64MultiArray*, const ROS2ReadOptions*)[m[K’:
+[4.452s] [01m[K/home/twip_ws/build/sim_ros2_interface/generated/callbacks.cpp:2800:25:[m[K [01;31m[Kerror: [m[K‘[01m[Kread__std_msgs__msg__MultiArrayLayout[m[K’ was not declared in this scope; did you mean ‘[01m[KDEPRECATED__std_msgs__msg__MultiArrayLayout[m[K’?
+[4.453s]  2800 |                         [01;31m[Kread__std_msgs__msg__MultiArrayLayout[m[K(stack, &(msg->layout), opt);
+[4.453s]       |                         [01;31m[K^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[m[K
+[4.453s]       |                         [32m[KDEPRECATED__std_msgs__msg__MultiArrayLayout[m[K
+[5.249s] gmake[2]: *** [CMakeFiles/simExtROS2.dir/build.make:227: CMakeFiles/simExtROS2.dir/generated/callbacks.cpp.o] Error 1
+[5.249s] gmake[1]: *** [CMakeFiles/Makefile2:164: CMakeFiles/simExtROS2.dir/all] Error 2
+[5.249s] gmake: *** [Makefile:146: all] Error 2
+[5.253s] Invoked command in '/home/twip_ws/build/sim_ros2_interface' returned '2': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/home/twip_ws/install/driver_imu:/home/twip_ws/install/controllers:/opt/ros/humble PS1=\[\e]0;\u@\h: \w\a\]\[\033[01;37m\]\u\[\033[00m\]@\[\033[01;32m\]\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\] /usr/bin/cmake --build /home/twip_ws/build/sim_ros2_interface -- -j8 -l8
