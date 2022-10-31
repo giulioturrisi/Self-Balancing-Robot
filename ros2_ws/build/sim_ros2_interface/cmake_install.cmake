@@ -1,8 +1,8 @@
-# Install script for directory: /home/twip_ws/src/external/simExtROS2
+# Install script for directory: /home/ros2_ws/src/external/simExtROS2
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/twip_ws/install/sim_ros2_interface")
+  set(CMAKE_INSTALL_PREFIX "/home/ros2_ws/install/sim_ros2_interface")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -43,7 +43,7 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/home/twip_ws/build/sim_ros2_interface/ament_cmake_symlink_install/ament_cmake_symlink_install.cmake")
+  include("/home/ros2_ws/build/sim_ros2_interface/ament_cmake_symlink_install/ament_cmake_symlink_install.cmake")
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -54,5 +54,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/twip_ws/build/sim_ros2_interface/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ros2_ws/build/sim_ros2_interface/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

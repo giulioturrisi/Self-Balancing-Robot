@@ -20,6 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': ['run_lqr = controllers.run_lqr:main',
+                            'run_sliding_mode = controllers.run_sliding_mode:main'
         ],
     },
 )

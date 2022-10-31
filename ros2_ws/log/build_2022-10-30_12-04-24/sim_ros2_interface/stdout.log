@@ -1,3 +1,0 @@
-[ 73%] Built target generate_ros_code
-[35m[1mConsolidate compiler generated dependencies of target simExtROS2[0m
-[ 75%] [32mBuilding CXX object CMakeFiles/simExtROS2.dir/generated/callbacks.cpp.o[0m

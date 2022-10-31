@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/twip_ws/src/external/ros2_bubble_rob
+CMAKE_SOURCE_DIR = /home/ros2_ws/src/external/ros2_bubble_rob
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/twip_ws/build/ros2_bubble_rob
+CMAKE_BINARY_DIR = /home/ros2_ws/build/ros2_bubble_rob
 
 # Utility rule file for ros2_bubble_rob_uninstall.
 
@@ -67,7 +67,7 @@ include CMakeFiles/ros2_bubble_rob_uninstall.dir/compiler_depend.make
 include CMakeFiles/ros2_bubble_rob_uninstall.dir/progress.make
 
 CMakeFiles/ros2_bubble_rob_uninstall:
-	/usr/bin/cmake -P /home/twip_ws/build/ros2_bubble_rob/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
+	/usr/bin/cmake -P /home/ros2_ws/build/ros2_bubble_rob/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
 
 ros2_bubble_rob_uninstall: CMakeFiles/ros2_bubble_rob_uninstall
 ros2_bubble_rob_uninstall: CMakeFiles/ros2_bubble_rob_uninstall.dir/build.make
@@ -82,6 +82,6 @@ CMakeFiles/ros2_bubble_rob_uninstall.dir/clean:
 .PHONY : CMakeFiles/ros2_bubble_rob_uninstall.dir/clean
 
 CMakeFiles/ros2_bubble_rob_uninstall.dir/depend:
-	cd /home/twip_ws/build/ros2_bubble_rob && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/twip_ws/src/external/ros2_bubble_rob /home/twip_ws/src/external/ros2_bubble_rob /home/twip_ws/build/ros2_bubble_rob /home/twip_ws/build/ros2_bubble_rob /home/twip_ws/build/ros2_bubble_rob/CMakeFiles/ros2_bubble_rob_uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ros2_ws/build/ros2_bubble_rob && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ros2_ws/src/external/ros2_bubble_rob /home/ros2_ws/src/external/ros2_bubble_rob /home/ros2_ws/build/ros2_bubble_rob /home/ros2_ws/build/ros2_bubble_rob /home/ros2_ws/build/ros2_bubble_rob/CMakeFiles/ros2_bubble_rob_uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/ros2_bubble_rob_uninstall.dir/depend
 

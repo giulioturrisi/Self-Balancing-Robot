@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<robot name="body__32__">
+    <link name="body__32__">
+        <inertial>
+            <origin rpy="-3.141593 3.141593 -3.141593" xyz="0.000000 0.000000 0.000000" />
+            <inertia ixy="0.0" ixx="0.24166665971279" ixz="0.0" izz="0.04166666790843" iyz="0.0" iyy="0.21666666865349" />
+            <mass value="10.0" />
+        </inertial>
+        <collision>
+            <origin rpy="-3.141593 3.141593 -3.141593" xyz="0.000000 0.000000 0.000000" />
+            <geometry>
+                <box size="0.100000 0.200000 0.500000" />
+            </geometry>
+        </collision>
+    </link>
+    <link name="Wheel1__34__">
+        <inertial>
+            <origin rpy="-3.141593 3.141593 -3.141593" xyz="0.000000 -0.000000 0.000000" />
+            <inertia ixy="0.0" ixx="0.00060672010295093" ixz="0.0" izz="0.0011780972126871" iyz="0.0" iyy="0.00060672010295093" />
+            <mass value="0.23561945557594" />
+        </inertial>
+        <collision>
+            <origin rpy="-3.141593 3.141593 -3.141593" xyz="0.000000 0.000000 0.000000" />
+            <geometry>
+                <cylinder length="0.029999999329448" radius="0.10000000149012" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="Revolute_joint1__33__" type="continuous">
+        <axis xyz="0 0 1" />
+        <parent link="body__32__" />
+        <child link="Wheel1__34__" />
+        <origin rpy="-1.570770 3.141593 -3.141593" xyz="0.000000 -0.180000 -0.250000" />
+    </joint>
+    <link name="Wheel2__36__">
+        <inertial>
+            <origin rpy="-3.141593 3.141593 -3.141593" xyz="0.000000 -0.000000 0.000000" />
+            <inertia ixy="0.0" ixx="0.00060672010295093" ixz="0.0" izz="0.0011780972126871" iyz="0.0" iyy="0.00060672010295093" />
+            <mass value="0.23561945557594" />
+        </inertial>
+        <collision>
+            <origin rpy="-3.141593 3.141593 -3.141593" xyz="0.000000 0.000000 0.000000" />
+            <geometry>
+                <cylinder length="0.029999999329448" radius="0.10000001639128" />
+            </geometry>
+        </collision>
+    </link>
+    <joint name="Revolute_joint2__35__" type="continuous">
+        <axis xyz="0 0 1" />
+        <parent link="body__32__" />
+        <child link="Wheel2__36__" />
+        <origin rpy="-1.570771 3.141593 3.141593" xyz="0.000000 0.180000 -0.250000" />
+    </joint>
+</robot>

@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/twip_ws/src/external/simExtROS2
+CMAKE_SOURCE_DIR = /home/ros2_ws/src/external/simExtROS2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/twip_ws/build/sim_ros2_interface
+CMAKE_BINARY_DIR = /home/ros2_ws/build/sim_ros2_interface
 
 # Utility rule file for uninstall.
 
@@ -78,6 +78,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/twip_ws/build/sim_ros2_interface && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/twip_ws/src/external/simExtROS2 /home/twip_ws/src/external/simExtROS2 /home/twip_ws/build/sim_ros2_interface /home/twip_ws/build/sim_ros2_interface /home/twip_ws/build/sim_ros2_interface/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ros2_ws/build/sim_ros2_interface && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ros2_ws/src/external/simExtROS2 /home/ros2_ws/src/external/simExtROS2 /home/ros2_ws/build/sim_ros2_interface /home/ros2_ws/build/sim_ros2_interface /home/ros2_ws/build/sim_ros2_interface/CMakeFiles/uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/uninstall.dir/depend
 

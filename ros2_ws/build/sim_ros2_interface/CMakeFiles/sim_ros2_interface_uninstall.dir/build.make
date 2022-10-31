@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/twip_ws/src/external/simExtROS2
+CMAKE_SOURCE_DIR = /home/ros2_ws/src/external/simExtROS2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/twip_ws/build/sim_ros2_interface
+CMAKE_BINARY_DIR = /home/ros2_ws/build/sim_ros2_interface
 
 # Utility rule file for sim_ros2_interface_uninstall.
 
@@ -67,7 +67,7 @@ include CMakeFiles/sim_ros2_interface_uninstall.dir/compiler_depend.make
 include CMakeFiles/sim_ros2_interface_uninstall.dir/progress.make
 
 CMakeFiles/sim_ros2_interface_uninstall:
-	/usr/bin/cmake -P /home/twip_ws/build/sim_ros2_interface/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
+	/usr/bin/cmake -P /home/ros2_ws/build/sim_ros2_interface/ament_cmake_uninstall_target/ament_cmake_uninstall_target.cmake
 
 sim_ros2_interface_uninstall: CMakeFiles/sim_ros2_interface_uninstall
 sim_ros2_interface_uninstall: CMakeFiles/sim_ros2_interface_uninstall.dir/build.make
@@ -82,6 +82,6 @@ CMakeFiles/sim_ros2_interface_uninstall.dir/clean:
 .PHONY : CMakeFiles/sim_ros2_interface_uninstall.dir/clean
 
 CMakeFiles/sim_ros2_interface_uninstall.dir/depend:
-	cd /home/twip_ws/build/sim_ros2_interface && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/twip_ws/src/external/simExtROS2 /home/twip_ws/src/external/simExtROS2 /home/twip_ws/build/sim_ros2_interface /home/twip_ws/build/sim_ros2_interface /home/twip_ws/build/sim_ros2_interface/CMakeFiles/sim_ros2_interface_uninstall.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/ros2_ws/build/sim_ros2_interface && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/ros2_ws/src/external/simExtROS2 /home/ros2_ws/src/external/simExtROS2 /home/ros2_ws/build/sim_ros2_interface /home/ros2_ws/build/sim_ros2_interface /home/ros2_ws/build/sim_ros2_interface/CMakeFiles/sim_ros2_interface_uninstall.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/sim_ros2_interface_uninstall.dir/depend
 

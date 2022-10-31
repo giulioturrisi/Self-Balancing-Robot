@@ -2,3 +2,23 @@
 matlab_simulation/main.asv
 
 matlab_simulation/sliding_mode_fun.asv
+
+coppeliasim_simulation/CoppeliaSim/
+
+
+
+ros2_ws/src/.vscode/
+.vscode/
+
+
+*.log
+
+*.pot
+
+*.pyc
+
+*/*/*/__pycache__/
+
+*/*/__pycache__/
+
+*/__pycache__/

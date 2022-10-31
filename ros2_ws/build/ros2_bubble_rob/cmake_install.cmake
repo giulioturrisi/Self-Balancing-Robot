@@ -1,8 +1,8 @@
-# Install script for directory: /home/twip_ws/src/external/ros2_bubble_rob
+# Install script for directory: /home/ros2_ws/src/external/ros2_bubble_rob
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/twip_ws/install/ros2_bubble_rob")
+  set(CMAKE_INSTALL_PREFIX "/home/ros2_ws/install/ros2_bubble_rob")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -43,7 +43,7 @@ if(NOT DEFINED CMAKE_OBJDUMP)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  include("/home/twip_ws/build/ros2_bubble_rob/ament_cmake_symlink_install/ament_cmake_symlink_install.cmake")
+  include("/home/ros2_ws/build/ros2_bubble_rob/ament_cmake_symlink_install/ament_cmake_symlink_install.cmake")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
@@ -53,7 +53,7 @@ if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_
          FILE "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/ros2_bubble_rob/ros2BubbleRob"
          RPATH "")
   endif()
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/ros2_bubble_rob" TYPE EXECUTABLE FILES "/home/twip_ws/build/ros2_bubble_rob/ros2BubbleRob")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/ros2_bubble_rob" TYPE EXECUTABLE FILES "/home/ros2_ws/build/ros2_bubble_rob/ros2BubbleRob")
   if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/ros2_bubble_rob/ros2BubbleRob" AND
      NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/ros2_bubble_rob/ros2BubbleRob")
     file(RPATH_CHANGE
@@ -74,5 +74,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/twip_ws/build/ros2_bubble_rob/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/ros2_ws/build/ros2_bubble_rob/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

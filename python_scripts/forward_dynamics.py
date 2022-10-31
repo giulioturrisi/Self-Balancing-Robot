@@ -2,17 +2,15 @@ import numpy as np
 import casadi as cs
 
 #robot parameters
-m_b = 1.426971 #mass base - kg
-com_pos = np.array([0, 0, 10.007]) #mm
+m_b = 1.0 #mass base - kg
 m_w = 0.25 #wheel mass - kg
 I_pitch = 2.167e-02 #inertia pitch
-I_roll = 4.167e-03 #inertia roll
+I_roll = 2.167e-02 #inertia roll
 I_yaw = 4.167e-03
-I_w1 = 4.968e-03 #inertial wheel axis
-I_w2 = 4.968e-03 #inertial wheel vertical axis
-J = 0.001
+I_w1 = 5.000e-03 #inertial wheel axis
+I_w2 = 2.575e-03 #inertial wheel vertical axis
 
-r = 0.2 #radius wheels
+r = 0.1 #radius wheels
 d = 0.2  #distance between wheels
 g = 9.8 #gravity
 l = 0.8 #lenght body
@@ -35,39 +33,44 @@ def forward_dynamics(state, tau):
     a11 = m_b + 2*m_w + 2*I_w1/(r*r)
     a12 = m_b*l*cs.np.cos(pitch)
     a21 = a12
-    a22 = J + m_b*l*l
-    a33 = J + 2*I_w2 + (m_w + I_w1/(r*r))*(d*d/2) - (J - J - m_b*l*l)*cs.np.sin(pitch)*cs.np.sin(pitch)
+    a22 = I_roll + m_b*l*l
+    a33 = I_pitch + 2*I_w2 + (m_w + I_w1/(r*r))*(d*d/2) - (I_roll - I_yaw - m_b*l*l)*cs.np.sin(pitch)*cs.np.sin(pitch)
     c12 = -m_b*l*pitch_d*cs.np.sin(pitch)
     c13 = -m_b*l*yaw_d*cs.np.sin(pitch)
-    c23 = (J - J - m_b*l*l)*yaw_d*cs.np.sin(pitch)*cs.np.cos(pitch)
+    c23 = (I_yaw - I_roll - m_b*l*l)*yaw_d*cs.np.sin(pitch)*cs.np.cos(pitch)
     c31 = m_b*l*yaw_d*cs.np.sin(pitch)
-    c32 = -(J - J - m_b*l*l)*yaw_d*cs.np.sin(pitch)*cs.np.cos(pitch)
-    c33 = -(J - J - m_b*l*l)*pitch_d*cs.np.sin(pitch)*cs.np.cos(pitch)
+    c32 = -(I_yaw - I_roll - m_b*l*l)*yaw_d*cs.np.sin(pitch)*cs.np.cos(pitch)
+    c33 = -(I_yaw - I_roll - m_b*l*l)*pitch_d*cs.np.sin(pitch)*cs.np.cos(pitch)
     d11 = 2*c_alpha/(r*r)
     d12 = -2*c_alpha/r
     d21 = d12
     d3 = ((d*d)/(2*r*r))*c_alpha
 
     M = cs.np.matrix([[a11, a12, 0], [a21, a22, 0], [0, 0, a33]])
-    print("M",M)
+    #print("M",M)
     
     C = cs.np.matrix([[0, c12, c13], [0, 0, c23], [c31, c32, c33]])
-    print("C",C)
+    #print("C",C)
     
     B = cs.np.matrix([[1/r, 1/r], [-1, -1], [-d/(2*r), d/(2*r)]])
-    print("B",B)
+    #print("B",B)
     G = cs.np.array([[0, -m_b*l*g*cs.np.sin(pitch), 0]]).T
-    print("G",G)
+    #print("G",G)
 
     tau = cs.np.array([[tau_l, tau_r]]).T
     qd = cs.np.array([[x_d, pitch_d, yaw_d]]).T
-    qdd = cs.inv(M)@(-C*qd - G + B*tau) 
+    qdd = cs.inv(M)@(-C@qd - G + B@tau) 
 
     #xdd = qdd[0]
     #pitch_dd = qdd[1]
     #yaw_dd = qdd[2]
 
     return cs.vertcat(qd,qdd)
+
+def inv_control_matrix():
+    B = np.matrix([[1/r, 1/r], [-1, -1], [-d/(2*r), d/(2*r)]])
+    return np.linalg.pinv(B)
+
 
 def compute_A_matrix(state, tau):
     state_sym = cs.SX.sym("state", 6, 1)

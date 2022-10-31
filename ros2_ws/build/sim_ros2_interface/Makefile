@@ -57,10 +57,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/twip_ws/src/external/simExtROS2
+CMAKE_SOURCE_DIR = /home/ros2_ws/src/external/simExtROS2
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/twip_ws/build/sim_ros2_interface
+CMAKE_BINARY_DIR = /home/ros2_ws/build/sim_ros2_interface
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -142,9 +142,9 @@ install/strip/fast: preinstall/fast
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/twip_ws/build/sim_ros2_interface/CMakeFiles /home/twip_ws/build/sim_ros2_interface//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ros2_ws/build/sim_ros2_interface/CMakeFiles /home/ros2_ws/build/sim_ros2_interface//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/twip_ws/build/sim_ros2_interface/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/ros2_ws/build/sim_ros2_interface/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

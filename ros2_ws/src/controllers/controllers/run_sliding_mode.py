@@ -14,13 +14,13 @@ import numpy as np # type: ignore
 np.set_printoptions(threshold=sys.maxsize)
 
 sys.path.append('/home/python_scripts/controllers')
-from lqr import LQR 
+from sliding_mode import Sliding_Mode 
 
 
 
 class Controller(Node):
     def __init__(self):
-        super().__init__('Sliding Mode')
+        super().__init__('SlidingMode')
         self.ref_x_d = 0
         self.ref_yaw_d = 0
         self.vel_ready = False;
@@ -39,9 +39,12 @@ class Controller(Node):
         self.publisher_motor_left = self.create_publisher(Float64,"leftMotor", 1);
         self.publisher_motor_right = self.create_publisher(Float64,"rightMotor", 1);
 
-        #self.horizon = 30
-        self.controller = LQR()
-        #self.controller = Casadi_nmpc(self.horizon,[],[], 0.01)
+        self.k_s = 40
+        self.k_x_d = -0.3
+        self.k_roll = 20
+        self.k_roll_d = 2
+        self.k_yaw_d = 0.02
+        self.controller = Sliding_Mode(self.k_s, self.k_x_d, self.k_roll, self.k_roll_d, self.k_yaw_d)
 
 
 
@@ -68,6 +71,7 @@ class Controller(Node):
             start_time = time.time()
 
             state_d = np.zeros(6)
+            state_d[5] = 0.3
             torques = self.controller.compute_control(self.state_robot, state_d)
 
             print("torques", torques)
