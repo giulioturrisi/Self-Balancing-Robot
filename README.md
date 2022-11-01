@@ -11,7 +11,7 @@ This repo contains the code for controlling both a real and a simulated two whee
 ## Dependencies
 1. [ROS2](https://docs.ros.org/en/humble/Installation.html) Humble
 
-2. [CoppeliaSim](https://www.coppeliarobotics.com/downloads) for simulations (not mandatory)
+2. [CoppeliaSim](https://www.coppeliarobotics.com/downloads) for simulations 
 
 
 
@@ -64,4 +64,4 @@ where in <control_node> you can choose the type of controller you want (for now 
 
 
 ## Status
-Still working in progress. Recently added IsaacGym to learn an RL policy ([IsaacGym_env](https://github.com/giulioturrisi/Self-Balancing-Robot-IsaacGym))!
+Still working in progress, the real robot does not exist yet. Recently added IsaacGym to learn an RL policy ([Self-Balancing-Robot-IsaacGym](https://github.com/giulioturrisi/Self-Balancing-Robot-IsaacGym))!
