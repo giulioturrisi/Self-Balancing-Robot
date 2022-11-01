@@ -16,9 +16,11 @@ class LQR:
         
         self.Q[0,0] = 0.0 #x
         self.Q[2,2] = 0.0 #yaw
-        self.Q[1,1] = 2.0 #yaw
+        
+        self.Q[1,1] = 1.0 #pitch
+        self.Q[5,5] = 0.2 #pitch
 
-        self.R = np.identity(2)*2
+        self.R = np.identity(2)*10
         
         #self.K = self.calculate_continuous_LQR_gain(self.lin_state, self.lin_tau)
         self.K = self.calculate_discrete_LQR_gain(self.lin_state, self.lin_tau)
