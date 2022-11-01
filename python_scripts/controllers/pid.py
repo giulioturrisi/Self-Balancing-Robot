@@ -16,26 +16,29 @@ class PID:
         self.integral_e_pitch = 0
 
     def calculate_errors(self,state, state_des):
-        e_pitch = self.k_pitch*(state_des[1] - state[1])  + self.k_pitch_d*(state_des[4] - state[4])
+        e_pitch = self.k_pitch*(state_des[1] - state[1])  
+        e_pitch_d =  self.k_pitch_d*(state_des[4] - state[4])
+        self.integral_e_pitch += e_pitch
+        e_pitch_i = self.k_i*(self.integral_e_pitch)
+
         e_vel = self.k_x_d*(state_des[3] - state[3])  
-        e_yaw = self.k_yaw_d*(state_des[5] - state[5])
+        
+        e_yaw_d = self.k_yaw_d*(state_des[5] - state[5])
 
-        e_pitch = e_pitch + self.k_i*(self.integral_e_pitch)
-        self.integral_e_pitch = e_pitch
 
-        return np.array((e_vel, e_pitch, e_yaw))
+
+        return np.array((e_vel, e_pitch + e_pitch_d + e_pitch_i, e_yaw_d))
 
     def compute_control(self, state, state_des):
         gen_forces = self.calculate_errors(state, state_des)
 
         control_matrix = forward_dynamics.inv_control_matrix()
-        print("control matrix", control_matrix)
-        print("generilized forces", gen_forces)
-        print("mapping to torque", control_matrix@gen_forces)
+
+        u_ff = forward_dynamics.compute_feed_forward(state_des[1])
+
         torque = control_matrix@gen_forces
-        print("torque_l: ", torque.item(0))
-        print("torque_r: ", torque.item(1))
-        return [torque.item(0),torque.item(1)]
+
+        return [u_ff + torque.item(0),u_ff + torque.item(1)]
 
 
 

@@ -13,7 +13,7 @@ I_w2 = 2.575e-03 #inertial wheel vertical axis
 r = 0.1 #radius wheels
 d = 0.2  #distance between wheels
 g = 9.8 #gravity
-l = 0.8 #lenght body
+l = 0.2 #lenght body
 c_alpha = 0 #viscous friction
 
 

@@ -18,8 +18,9 @@ class LQR:
         self.Q[3,3] = 0 #x_d
         self.Q[2,2] = 0.0 #yaw
         
-        self.Q[1,1] = 1.0 #pitch
-        self.Q[5,5] = 0.2 #pitch
+        self.Q[1,1] = 5.0 #pitch
+        self.Q[4,4] = 1.0 #pitch_d
+        self.Q[5,5] = 0.2 #yawd
 
         self.R = np.identity(2)*10
         
