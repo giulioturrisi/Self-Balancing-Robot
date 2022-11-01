@@ -39,11 +39,11 @@ class Controller(Node):
         self.publisher_motor_left = self.create_publisher(Float64,"leftMotor", 1);
         self.publisher_motor_right = self.create_publisher(Float64,"rightMotor", 1);
 
-        self.k_s = 40
-        self.k_x_d = -0.3
-        self.k_roll = 20
-        self.k_roll_d = 2
-        self.k_yaw_d = 0.02
+        self.k_s = 100
+        self.k_x_d = 0
+        self.k_roll = 100
+        self.k_roll_d = 15
+        self.k_yaw_d = 0.
         self.controller = Sliding_Mode(self.k_s, self.k_x_d, self.k_roll, self.k_roll_d, self.k_yaw_d)
 
 

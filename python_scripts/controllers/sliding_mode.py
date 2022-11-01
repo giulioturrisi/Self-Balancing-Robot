@@ -6,15 +6,15 @@ sys.path.append('/home/python_scripts/')
 import forward_dynamics
 
 class Sliding_Mode:
-    def __init__(self, k_s, k_x_d, k_roll, k_roll_d, k_yaw_d):
+    def __init__(self, k_s, k_x_d, k_pitch, k_pitch_d, k_yaw_d):
         self.k_s = k_s 
         self.k_x_d = k_x_d
-        self.k_roll = k_roll
-        self.k_roll_d = k_roll_d
+        self.k_pitch = k_pitch
+        self.k_pitch_d = k_pitch_d
         self.k_yaw_d = k_yaw_d
 
     def calculate_sliding_surface(self,state, state_des):
-        s2 = self.k_roll*(state_des[1] - state[1])  + self.k_roll_d*(state_des[4] - state[4])
+        s2 = self.k_pitch*(state_des[1] - state[1])  + self.k_pitch_d*(state_des[4] - state[4])
         s1 = self.k_x_d*(state_des[3] - state[3])  
         s3 = self.k_yaw_d*(state_des[5] - state[5])
 
