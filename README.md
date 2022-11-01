@@ -52,9 +52,8 @@ colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ## How to run the simulation
 1. Open Coppeliasim and run the scene `self_balancing_robot.ttt` in the folder coppeliasim_simulation 
 ```sh
-./coppeliaSim.sh -s ../self_balancing_robot.ttt -h
+./coppeliaSim.sh -s ../self_balancing_robot.ttt 
 ```
-disable -h flag to run the gui!
 
 2. on a new terminal 
 ```sh
