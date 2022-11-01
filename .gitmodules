@@ -1,3 +1,9 @@
 [submodule "python_scripts/controllers/isaac_gym/Self-Balancing-Robot-IsaacGym"]
 	path = python_scripts/controllers/isaac_gym/Self-Balancing-Robot-IsaacGym
 	url = git@github.com:giulioturrisi/Self-Balancing-Robot-IsaacGym.git
+[submodule "ros2_ws/src/external/simExtROS2"]
+	path = ros2_ws/src/external/simExtROS2
+	url = https://github.com/CoppeliaRobotics/simExtROS2.git
+[submodule "ros2_ws/src/external/ros2_bubble_rob"]
+	path = ros2_ws/src/external/ros2_bubble_rob
+	url = https://github.com/CoppeliaRobotics/ros2_bubble_rob.git
