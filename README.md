@@ -19,7 +19,7 @@ This repo contains the code for controlling both a real and a simulated two whee
 ## Build on Linux
 1. clone the repo
 ```sh
-git clone --recurse-submodules https://github.com/giulioturrisi/differential_drive.git
+git clone --recurse-submodules https://github.com/giulioturrisi/Self-Balancing-Robot.git
 ```
 and extract CoppeliaSim in Self-Balancing-Robot/coppeliasim_simulation
 

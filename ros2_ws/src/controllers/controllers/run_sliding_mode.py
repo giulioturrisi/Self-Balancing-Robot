@@ -71,7 +71,7 @@ class Controller(Node):
             start_time = time.time()
 
             state_d = np.zeros(6)
-            state_d[5] = 0.3
+            #state_d[5] = 0.3
             torques = self.controller.compute_control(self.state_robot, state_d)
 
             print("torques", torques)
