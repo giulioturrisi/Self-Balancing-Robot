@@ -1,9 +1,0 @@
-source;share/driver_imu/hook/pythonpath.ps1
-source;share/driver_imu/hook/pythonpath.dsv
-source;share/driver_imu/hook/pythonpath.sh
-source;share/driver_imu/hook/ament_prefix_path.ps1
-source;share/driver_imu/hook/ament_prefix_path.dsv
-source;share/driver_imu/hook/ament_prefix_path.sh
-source;../../build/driver_imu/share/driver_imu/hook/pythonpath_develop.ps1
-source;../../build/driver_imu/share/driver_imu/hook/pythonpath_develop.dsv
-source;../../build/driver_imu/share/driver_imu/hook/pythonpath_develop.sh

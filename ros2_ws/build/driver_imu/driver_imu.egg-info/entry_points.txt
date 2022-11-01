@@ -1,3 +1,0 @@
-[console_scripts]
-driver_imu = driver_imu.driver_imu:main
-
