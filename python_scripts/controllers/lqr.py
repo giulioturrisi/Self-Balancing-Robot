@@ -15,6 +15,7 @@ class LQR:
         self.Q = np.identity(6)
         
         self.Q[0,0] = 0.0 #x
+        self.Q[3,3] = 0 #x_d
         self.Q[2,2] = 0.0 #yaw
         
         self.Q[1,1] = 1.0 #pitch
@@ -56,13 +57,18 @@ class LQR:
             
             self.K = (np.linalg.pinv(self.R + B_discrete.T@P_next@B_discrete)@B_discrete.T@P_next@A_discrete)
 
-
+        print("K discrete", self.K)
         return self.K
 
     def compute_control(self, state, state_des):
-        print("state", state)
+        u_ff = forward_dynamics.compute_feed_forward(state_des[1])
+        u_ff = np.ones(2)*u_ff
+
+        #self.K = self.calculate_discrete_LQR_gain(state_des, u_ff)
+        
+        print("u_ff", u_ff)
         print("state des", state_des)
-        return self.K@(state-state_des)
+        return u_ff + self.K@(state_des - state)
 
 
 

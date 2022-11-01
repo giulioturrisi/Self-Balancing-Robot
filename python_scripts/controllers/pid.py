@@ -32,7 +32,7 @@ class PID:
         print("control matrix", control_matrix)
         print("generilized forces", gen_forces)
         print("mapping to torque", control_matrix@gen_forces)
-        torque = -control_matrix@gen_forces
+        torque = control_matrix@gen_forces
         print("torque_l: ", torque.item(0))
         print("torque_r: ", torque.item(1))
         return [torque.item(0),torque.item(1)]

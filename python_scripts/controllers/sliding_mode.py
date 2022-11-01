@@ -27,7 +27,7 @@ class Sliding_Mode:
         s = self.calculate_sliding_surface(state, state_des)
         #calculate equivalent control
         #gen_forces = -self.k_s*np.sign(s)
-        gen_forces = -self.k_s*np.tanh(s) 
+        gen_forces = self.k_s*np.tanh(s) 
         control_matrix = forward_dynamics.inv_control_matrix()
         print("control matrix", control_matrix)
         print("generilized forces", gen_forces)

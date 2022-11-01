@@ -71,6 +71,9 @@ def inv_control_matrix():
     B = np.matrix([[1/r, 1/r], [-1, -1], [-d/(2*r), d/(2*r)]])
     return np.linalg.pinv(B)
 
+def compute_feed_forward(pitch):
+    return m_b*l*g*np.sin(pitch)/2.
+
 
 def compute_A_matrix(state, tau):
     state_sym = cs.SX.sym("state", 6, 1)
@@ -125,4 +128,6 @@ print(B_f(np.random.rand(6), np.zeros(2)))'''
 
 
 if __name__=="__main__":
-    forward_dynamics(np.zeros(6), np.zeros(2))
+    #forward_dynamics(np.zeros(6), np.zeros(2))
+    pitch_des = -0.261799
+    print("compute_feed_forward", compute_feed_forward(pitch_des))
