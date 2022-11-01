@@ -59,7 +59,7 @@ colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```sh
 ros2 run controllers <control_node>                     
 ```
-where in <control_node> you can choose the type of controller you want (for now LQR and Sliding Mode)
+where in <control_node> you can choose the type of controller you want (for now LQR, Sliding Mode and PID)
 
 
 ## Status
