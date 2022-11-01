@@ -27,6 +27,9 @@ class Controller(Node):
         self.state_arrived = False
         self.dt = 0.01
 
+        self.x_world = 0
+        self.y_world = 0
+
         self.state_robot = np.zeros(6)
 
         self.create_timer(self.dt, self.controller_callback)
@@ -133,8 +136,15 @@ class Controller(Node):
                       float(msg.transforms[0].transform.rotation.z), float(msg.transforms[0].transform.rotation.w)]
         euler = tf_transformations.euler_from_quaternion(quaternion)
 
+        x_d_world = (msg.transforms[0].transform.translation.x - self.x_world)/self.dt
+        y_d_world = (msg.transforms[0].transform.translation.y - self.y_world)/self.dt
+        self.x_world = msg.transforms[0].transform.translation.x
+        self.y_world = msg.transforms[0].transform.translation.y
 
-        self.state_robot[3] = (msg.transforms[0].transform.translation.x - self.state_robot[0])/self.dt
+        print("x_w: ", msg.transforms[0].transform.translation.x)
+        print("y_w: ", msg.transforms[0].transform.translation.y)
+
+        self.state_robot[3] = math.cos(euler[2])*x_d_world + math.sin(euler[2])*y_d_world
         self.state_robot[4] = (euler[1] - self.state_robot[1])/self.dt #derivative pitch
         self.state_robot[5] = (euler[2] - self.state_robot[2])/self.dt #derivative yaw
 
