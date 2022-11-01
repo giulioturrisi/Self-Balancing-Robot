@@ -63,5 +63,5 @@ ros2 run controllers <control_node>
 where in <control_node> you can choose the type of controller you want (for now LQR and Sliding Mode)
 
 
-
-Still working in progress. Recently added IsaacGym to learn an RL policy!
+## Status
+Still working in progress. Recently added IsaacGym to learn an RL policy ([IsaacGym_env](https://github.com/giulioturrisi/Self-Balancing-Robot-IsaacGym))!
