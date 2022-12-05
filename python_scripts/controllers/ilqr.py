@@ -200,8 +200,8 @@ class iLQR:
             state = state.reshape(self.state_dim,)
             control = self.control_vec[step]
             control = control.reshape(self.control_dim,)
-            next_state = self.twip.fd(state,control); 
-            qdd = next_state[3:6]
+            qdd = self.twip.fd(state,control); 
+            qdd = qdd[3:6]
 
             # integration
             self.state_vec[step+1] = euler_integration.euler_integration(state, qdd, self.dt).reshape(self.state_dim,1)
