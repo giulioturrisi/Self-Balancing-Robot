@@ -24,14 +24,17 @@ class Sliding_Mode:
         return np.array((s1, s2, s3))
 
     def compute_control(self, state, state_des):
+
+        state_des[1] = forward_dynamics.compute_angle_from_vel(state_des[3])
+        print("angle des", state_des[1])
+        u_ff = forward_dynamics.compute_feed_forward(state_des[1], state_des[3])
+
         s = self.calculate_sliding_surface(state, state_des)
         #calculate equivalent control
         #gen_forces = -self.k_s*np.sign(s)
         gen_forces = self.k_s*np.tanh(s) 
         control_matrix = forward_dynamics.inv_control_matrix()
 
-
-        u_ff = forward_dynamics.compute_feed_forward(state_des[1])
         
         torque = control_matrix@gen_forces
 

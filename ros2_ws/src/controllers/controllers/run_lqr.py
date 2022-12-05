@@ -43,7 +43,7 @@ class Controller(Node):
         self.publisher_motor_right = self.create_publisher(Float64,"rightMotor", 1);
 
         #self.horizon = 30
-        self.controller = LQR()
+        self.controller = LQR(dt = self.dt/10.)
         #self.controller = Casadi_nmpc(self.horizon,[],[], 0.01)
 
 
@@ -72,6 +72,7 @@ class Controller(Node):
 
             state_d = np.zeros(6)
             state_d[1] = 0.0
+            state_d[5] = 0.2
             torques = self.controller.compute_control(self.state_robot, state_d)
 
             print("torques", torques)

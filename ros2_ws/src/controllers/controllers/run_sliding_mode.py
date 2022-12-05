@@ -43,11 +43,11 @@ class Controller(Node):
         self.publisher_motor_right = self.create_publisher(Float64,"rightMotor", 1);
 
         self.k_s = 100
-        self.k_x_d = 0
-        self.k_roll = 100
-        self.k_roll_d = 15
+        self.k_x_d = 0.3
+        self.k_pitch = 100
+        self.k_pitch_d = 15
         self.k_yaw_d = 0.
-        self.controller = Sliding_Mode(self.k_s, self.k_x_d, self.k_roll, self.k_roll_d, self.k_yaw_d)
+        self.controller = Sliding_Mode(self.k_s, self.k_x_d, self.k_pitch, self.k_pitch_d, self.k_yaw_d)
 
 
 
@@ -74,7 +74,7 @@ class Controller(Node):
             start_time = time.time()
 
             state_d = np.zeros(6)
-            state_d[1] = 0.1
+            state_d[3] = 0.3
             torques = self.controller.compute_control(self.state_robot, state_d)
 
             print("torques", torques)

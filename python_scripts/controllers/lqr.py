@@ -10,12 +10,12 @@ class LQR:
         self.lin_state = np.zeros(6)
         self.lin_tau = np.zeros(2)
         self.horizon = 2000
-        self.dt = 0.001
+        self.dt = dt
 
         self.Q = np.identity(6)
         
         self.Q[0,0] = 0.0 #x
-        self.Q[3,3] = 0 #x_d
+        self.Q[3,3] = 2 #x_d
         self.Q[2,2] = 0.0 #yaw
         
         self.Q[1,1] = 5.0 #pitch
@@ -62,7 +62,8 @@ class LQR:
         return self.K
 
     def compute_control(self, state, state_des):
-        u_ff = forward_dynamics.compute_feed_forward(state_des[1])
+        state_des[1] = forward_dynamics.compute_angle_from_vel(state_des[3])
+        u_ff = forward_dynamics.compute_feed_forward(state_des[1], state_des[3])
         u_ff = np.ones(2)*u_ff
 
         #self.K = self.calculate_discrete_LQR_gain(state_des, u_ff)
