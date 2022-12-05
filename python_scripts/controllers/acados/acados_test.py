@@ -82,6 +82,10 @@ def closed_loop_simulation():
 
     # create solvers
     ocp = create_ocp_solver_description()
+    #acados_ocp_solver = AcadosOcpSolver(
+    #    ocp, json_file="acados_ocp_" + ocp.model.name + ".json"
+    #)
+
     acados_ocp_solver = AcadosOcpSolver(
         ocp, json_file="acados_ocp_" + ocp.model.name + ".json"
     )
