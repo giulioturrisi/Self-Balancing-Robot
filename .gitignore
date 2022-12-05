@@ -9,6 +9,7 @@ ros2_ws/build/
 ros2_ws/install/
 ros2_ws/log/
 
+python_scripts/controllers/acados/c_generated_code
 
 ros2_ws/src/.vscode/
 .vscode/
