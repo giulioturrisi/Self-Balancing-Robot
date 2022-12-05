@@ -67,9 +67,10 @@ class NMPC:
         ocp.cost.yref_e = np.zeros((ny_e,))
 
         # set constraints
-        #ocp.constraints.lbu = np.array([-F_max])
-        #ocp.constraints.ubu = np.array([+F_max])
-        #ocp.constraints.idxbu = np.array([0])
+        tau_max = 0.5 
+        ocp.constraints.lbu = np.array([-tau_max, -tau_max])
+        ocp.constraints.ubu = np.array([+tau_max, +tau_max])
+        ocp.constraints.idxbu = np.array([0,1])
 
         X0 = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
         ocp.constraints.x0 = X0
@@ -88,6 +89,7 @@ class NMPC:
         return ocp
 
     def compute_control(self, state, state_des):
+        state_des[1] = self.twip.compute_angle_from_vel(state_des[3])
 
         # initialize solver
         for stage in range(self.horizon + 1):
@@ -96,13 +98,12 @@ class NMPC:
             self.acados_ocp_solver.set(stage, "u", np.zeros((self.control_dim,)))
 
         for j in range(self.horizon):
-            yref = np.array([state_des, 0, 0])
+            yref = np.array([state_des[0], state_des[1], state_des[2], state_des[3], state_des[4], state_des[5], 0, 0])
             self.acados_ocp_solver.set(j, "yref", yref)
         yref_N = np.array(state_des)
         self.acados_ocp_solver.set(self.horizon, "yref", yref_N)
 
 
-        start_time = time.time()
         # set initial state constraint
         self.acados_ocp_solver.set(0, "lbx", state)
         self.acados_ocp_solver.set(0, "ubx", state)
@@ -114,6 +115,5 @@ class NMPC:
         control = self.acados_ocp_solver.get(0, "u")
 
 
-        print("control time: ", time.time()-start_time)
 
         return control

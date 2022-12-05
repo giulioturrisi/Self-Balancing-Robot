@@ -22,7 +22,8 @@ setup(
         'console_scripts': ['run_lqr = controllers.run_lqr:main',
                             'run_lqi = controllers.run_lqi:main',
                             'run_sliding_mode = controllers.run_sliding_mode:main',
-                            'run_pid = controllers.run_pid:main'
+                            'run_pid = controllers.run_pid:main',
+                            'run_acados_nmpc = controllers.run_acados_nmpc:main'
         ],
     },
 )
