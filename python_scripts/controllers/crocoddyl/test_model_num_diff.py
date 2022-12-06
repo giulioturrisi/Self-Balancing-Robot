@@ -45,12 +45,12 @@ twipDAM = model = DifferentialActionModelTwip()
 twipND = crocoddyl.DifferentialActionModelNumDiff(twipDAM, True)
 
 # Getting the IAM using the simpletic Euler rule
-timeStep = 0.1
+timeStep = 0.01
 twipIAM = crocoddyl.IntegratedActionModelEuler(twipND, timeStep)
 
 # Creating the shooting problem
 x0 = np.array([0., 1, 0., 0., 0., 0.])
-T = 10
+T = 100
 
 terminalTwip = DifferentialActionModelTwip()
 terminalTwipDAM = crocoddyl.DifferentialActionModelNumDiff(terminalTwip, True)
