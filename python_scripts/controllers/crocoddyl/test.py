@@ -69,10 +69,14 @@ start_time = time.time()
 problem = crocoddyl.ShootingProblem(x0, [twipIAM] * T, terminalTwipIAM)
 
 # Solving it using FDDP
-fddp = crocoddyl.SolverFDDP(problem)
-fddp.setCallbacks([crocoddyl.CallbackVerbose()])
-fddp.solve([], [], 10)
+#ddp = crocoddyl.SolverFDDP(problem)
+ddp = crocoddyl.SolverDDP(problem)
+ddp.setCallbacks([crocoddyl.CallbackVerbose()])
+ddp.solve([], [], 10)
+
 
 print("comp. time: ", time.time()-start_time)
 
-crocoddyl.plotOCSolution(fddp.xs, fddp.us, figIndex=1)
+
+print("ddp.K",ddp.K[-1]) 
+crocoddyl.plotOCSolution(ddp.xs, ddp.us, figIndex=1)
