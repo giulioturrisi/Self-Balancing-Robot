@@ -1,4 +1,3 @@
-import control
 import numpy as np
 
 import sys

@@ -29,7 +29,7 @@ class TwipModelDerived(crocoddyl.ActionModelAbstract):
         qdd = next_state[3:6]
 
         data.xnext = euler_integration.euler_integration(x, qdd, self.dt).reshape(self.state.nx,1)
-
+        
 
         # Computing the cost residual and value
         data.r = np.matrix(self.costWeights * np.array([np.asscalar(x[0]), np.asscalar(x[1]), np.asscalar(x[2]), np.asscalar(x[3]), np.asscalar(x[4]), np.asscalar(x[5]), np.asscalar(u[0]), np.asscalar(u[1])])).T

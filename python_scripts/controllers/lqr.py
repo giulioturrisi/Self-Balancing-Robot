@@ -1,4 +1,3 @@
-import control
 import numpy as np
 
 import sys
@@ -27,15 +26,7 @@ class LQR:
         #self.K = self.calculate_continuous_LQR_gain(self.lin_state, self.lin_tau)
         self.K = self.calculate_discrete_LQR_gain(self.lin_state, self.lin_tau)
 
-    def calculate_continuous_LQR_gain(self,lin_state, lin_tau):
-        A = forward_dynamics.compute_A_matrix(lin_state, lin_tau)
-        B = forward_dynamics.compute_B_matrix(lin_state, lin_tau)
 
-        K, S, E = control.lqr(A, B, self.Q, self.R)
-
-        print("K continuous",K)
-
-        return K
 
     def calculate_discrete_LQR_gain(self,lin_state, lin_tau):
 
@@ -68,8 +59,7 @@ class LQR:
 
         #self.K = self.calculate_discrete_LQR_gain(state_des, u_ff)
         
-        print("u_ff", u_ff)
-        print("state des", state_des)
+
         return u_ff + self.K@(state_des - state)
 
 

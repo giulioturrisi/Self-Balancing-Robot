@@ -12,16 +12,19 @@ def euler_integration(state, qdd, dt):
     yaw = state[3]
     yaw_dot = state[5]
     
-    x_dot = x_dot + qdd[0]*dt
     x = x + x_dot*dt
+    x_dot = x_dot + qdd[0]*dt
+    #x = x + x_dot*dt
 
-    pitch_dot = pitch_dot + qdd[1]*dt
     pitch = pitch + pitch_dot*dt
+    pitch_dot = pitch_dot + qdd[1]*dt
+    #pitch = pitch + pitch_dot*dt
 
-    yaw_dot = yaw_dot + qdd[2]*dt
     yaw = yaw + yaw_dot*dt
+    yaw_dot = yaw_dot + qdd[2]*dt
+    #yaw = yaw + yaw_dot*dt
 
-    state = np.array([x, pitch, yaw, x_dot, pitch_dot, yaw_dot])
+    state = np.array([x, pitch, yaw, x_dot.__float__(), pitch_dot.__float__(), yaw_dot.__float__()])
     state = state.reshape(6,)
 
     return state

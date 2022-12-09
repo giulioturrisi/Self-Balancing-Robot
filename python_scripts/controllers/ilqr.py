@@ -18,8 +18,8 @@ class iLQR:
     def __init__(self, lin_state = None, lin_tau = None, horizon = None, dt = None):
         self.lin_state = np.zeros(6)
         self.lin_tau = np.zeros(2)
-        self.horizon = 10
-        self.iteration = 5
+        self.horizon = 20
+        self.iteration = 3
         self.dt = dt
 
         self.twip = Twip_dynamics()
@@ -62,23 +62,25 @@ class iLQR:
         self.Q_ux_vec = np.zeros((self.horizon, self.control_dim, self.state_dim));
         self.Q_u_vec = np.zeros((self.horizon, self.control_dim, 1));
 
-        #self.twip.fd.generate("fd.c")
-        #C = cs.Importer("fd.c", "shell")
-        #self.f = cs.external('fd',C)
+        self.twip.fd.generate("fd.c")
+        C = cs.Importer("fd.c", "shell")
+        self.f = cs.external('fd',C)
 
 
     def compute_discrete_LQR_P(self,lin_state, lin_tau):
+
+        dt = 0.001
 
         P_next = np.identity(self.state_dim)
 
         A = forward_dynamics.compute_A_matrix(lin_state, lin_tau)
         B = forward_dynamics.compute_B_matrix(lin_state, lin_tau)
 
-        A_discrete = A*self.dt + np.identity(self.state_dim)
-        B_discrete = B*self.dt
+        A_discrete = A*dt + np.identity(self.state_dim)
+        B_discrete = B*dt
 
 
-        for i in range(0, self.horizon):
+        for i in range(0, 2000):
             Q_uu = self.R + B_discrete.T@P_next@B_discrete
 
             temp = (-np.linalg.pinv(Q_uu)@B_discrete.T@P_next@A_discrete)
@@ -105,6 +107,14 @@ class iLQR:
 
             A_step = A_step*self.dt + np.identity(self.state_dim)
             B_step = B_step*self.dt
+
+            #temp = np.linalg.pinv((np.identity(self.state_dim) - A_step*self.dt/2.0))
+            #A_step = (np.identity(self.state_dim) + A_step*self.dt/2.0)@temp
+            #B_step = temp@B_step*np.sqrt(self.dt)
+
+            #temp = np.linalg.pinv(np.identity(self.state_dim) - A_step*self.dt)
+            #A_step = temp@(B_step*self.dt)
+            #B_step = temp
             self.A_vec[self.horizon - step - 1] = A_step
             self.B_vec[self.horizon - step - 1] = B_step
 
@@ -184,9 +194,10 @@ class iLQR:
             control = self.control_vec[step]
             control = control.reshape(self.control_dim,)
             #next_state = forward_dynamics.forward_dynamics(state,control);
-            next_state = self.twip.fd(state,control);
+            #next_state = self.twip.fd(state,control);
             #print("fd: ", time.time()-start_time)
-            #next_state = self.f(state,control); 
+            #start_time = time.time()
+            next_state = self.f(state,control); 
             #print("fd c++: ", time.time()-start_time)
             qdd = next_state[3:6]
 
@@ -216,7 +227,8 @@ class iLQR:
             state = state.reshape(self.state_dim,)
             control = self.control_vec[step]
             control = control.reshape(self.control_dim,)
-            qdd = self.twip.fd(state,control); 
+            #qdd = self.twip.fd(state,control); 
+            qdd = self.f(state,control); 
             qdd = qdd[3:6]
 
             # integration
@@ -226,12 +238,13 @@ class iLQR:
 
 
     def compute_control(self, state, state_des):
-        #state_des[1] = forward_dynamics.compute_angle_from_vel(state_des[3])
+        state_des[1] = forward_dynamics.compute_angle_from_vel(state_des[3])
         state_des = state_des.reshape(self.state_dim,1)
 
         # setting last V and initial system simulation
         self.V_vec[self.horizon] = self.P@(state.reshape(self.state_dim,1) - state_des)
         self.compute_forward_simulation(initial_state=state)
+        #self.V_vec[self.horizon] = self.P@(self.state_vec[self.horizon].reshape(self.state_dim,1) - state_des_vec.reshape(self.state_dim,1))
 
         #plt.plot(self.state_vec[:,1])
         #plt.show()
@@ -239,16 +252,16 @@ class iLQR:
         for i in range(0,self.iteration):
             start_time = time.time()
             self.compute_backward_pass(state_des=state_des)
-            print("backward time: ", time.time()-start_time)
+            #print("backward time: ", time.time()-start_time)
             start_time = time.time()
             self.compute_forward_pass(initial_state=state)
-            print("forward time: ", time.time()-start_time)
+            #print("forward time: ", time.time()-start_time)
         
             #plt.plot(self.state_vec[:,1])
             #plt.show()
         #print("control vec", self.control_vec)
 
-        return [0,0]
+        return [self.control_vec[0,0],self.control_vec[0,1]]
 
 
 

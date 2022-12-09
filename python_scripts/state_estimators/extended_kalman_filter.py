@@ -2,7 +2,6 @@ import numpy as np
 
 import sys
 sys.path.append('/home/python_scripts/')
-import forward_dynamics
 import euler_integration
 from twip_dynamics import Twip_dynamics
 
