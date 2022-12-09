@@ -66,7 +66,7 @@ where in <control_node> you can choose the type of controller you want.
 ros2 launch teleop_twist_joy teleop-launch.py joy_config:='xbox'
 ```
 
-## List of controllers
+## List of available controllers
 1. PID
 2. Linear Quadratic Regulator
 3. Linear Quadratic Integral Regulator
@@ -75,7 +75,7 @@ ros2 launch teleop_twist_joy teleop-launch.py joy_config:='xbox'
 6. Iterative Linear Quadratic Regulator
 7. RL policy via IsaacGym
 
-## List of state estimator
+## List of available state estimators
 1. Extended Kalman Filter
 
 
