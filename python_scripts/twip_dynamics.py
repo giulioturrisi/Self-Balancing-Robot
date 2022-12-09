@@ -25,8 +25,8 @@ class Twip_dynamics:
         forward_dynamics_f = self.forward_dynamics(state, tau)
         self.fd = cs.Function("fd", [state, tau], [forward_dynamics_f])
 
-        self.A_f = self.get_A_f_matrix(state, tau)
-        self.B_f = self.get_B_f_matrix(state, tau)
+        self.A_f = self.get_A_f_matrix()
+        self.B_f = self.get_B_f_matrix()
 
 
     def forward_dynamics(self, state, tau):
@@ -69,7 +69,6 @@ class Twip_dynamics:
         qd = cs.np.array([[x_d, pitch_d, yaw_d]]).T
         qdd = cs.inv(M)@(-C@qd - G - D@qd + B@tau) 
 
-
         return cs.vertcat(qd,qdd)
 
     def inv_control_matrix(self,):
@@ -85,7 +84,8 @@ class Twip_dynamics:
         return np.arcsin(2*self.c_alpha*vel/self.r)/(-self.m_b*self.l*self.g)
 
 
-    def compute_A_matrix(self,state, tau):
+
+    def get_A_f_matrix(self, ):
         state_sym = cs.SX.sym("state", 6, 1)
         tau_sym = cs.SX.sym("tau", 2, 1)
         forward_dynamics_f = self.forward_dynamics(state_sym, tau_sym)
@@ -93,37 +93,10 @@ class Twip_dynamics:
 
         A = cs.jacobian(forward_dynamics_f, state_sym)
         A_f = cs.Function("A", [state_sym, tau_sym], [A])
-
-        return np.array(A_f(state, tau))
-
-
-
-    def compute_B_matrix(self, state, tau):
-        state_sym = cs.SX.sym("state", 6, 1)
-        tau_sym = cs.SX.sym("tau", 2, 1)
-        forward_dynamics_f = self.forward_dynamics(state_sym, tau_sym)
-        #fd = cs.Function("fd", [state, tau], [forward_dynamics_f])
-
-        B = cs.jacobian(forward_dynamics_f, tau_sym)
-        B_f = cs.Function("B", [state_sym, tau_sym], [B])
-
-        return np.array(B_f(state, tau))
-
-
-    def get_A_f_matrix(self,state, tau):
-        state_sym = cs.SX.sym("state", 6, 1)
-        tau_sym = cs.SX.sym("tau", 2, 1)
-        forward_dynamics_f = self.forward_dynamics(state_sym, tau_sym)
-        #fd = cs.Function("fd", [state_sym, tau_sym], [forward_dynamics_f])
-
-        A = cs.jacobian(forward_dynamics_f, state_sym)
-        A_f = cs.Function("A", [state_sym, tau_sym], [A])
-
         return A_f
 
 
-
-    def get_B_f_matrix(self, state, tau):
+    def get_B_f_matrix(self, ):
         state_sym = cs.SX.sym("state", 6, 1)
         tau_sym = cs.SX.sym("tau", 2, 1)
         forward_dynamics_f = self.forward_dynamics(state_sym, tau_sym)
@@ -131,52 +104,44 @@ class Twip_dynamics:
 
         B = cs.jacobian(forward_dynamics_f, tau_sym)
         B_f = cs.Function("B", [state_sym, tau_sym], [B])
-
         return B_f
+    
 
+    # with augmented state for integral control!
     def forward_dynamics_integral(self, state, reference, tau):
         forward_dynamics_output =  self.forward_dynamics(state[0:6],tau)
-        #print("forward dynamic output", forward_dynamics_output)
-        #print("reference - state[6]", reference - state[6])
-        #qd = cs.vertcat(forward_dynamics_output[0:3], reference - state[1])
-        #print("qd", qd)
         qd = forward_dynamics_output[0:3]
-        qdd = cs.vertcat(forward_dynamics_output[3:], state[3] - reference)
-        #print("qdd", qdd)
+        qdd = cs.vertcat(forward_dynamics_output[3:], state[3] - reference[0], state[5] - reference[1])
         return cs.vertcat(qd,qdd)
 
 
-    def compute_A_matrix_integral(self, state, reference, tau):
-        state_sym = cs.SX.sym("state", 7, 1)
+    def compute_A_matrix_integral(self, state, tau):
+        state_sym = cs.SX.sym("state", 8, 1)
         tau_sym = cs.SX.sym("tau", 2, 1)
-        reference_sym = cs.SX.sym("reference", 1, 1)
+        reference_sym = cs.SX.sym("reference", 2, 1)
         forward_dynamics_f = self.forward_dynamics_integral(state_sym, reference_sym, tau_sym)
         #fd = cs.Function("fd", [state_sym, tau_sym], [forward_dynamics_f])
 
         A = cs.jacobian(forward_dynamics_f, state_sym)
         A_f = cs.Function("A", [state_sym, tau_sym], [A])
-
         return np.array(A_f(state, tau))
 
 
 
-    def compute_B_matrix_integral(self, state, reference, tau):
-        state_sym = cs.SX.sym("state", 7, 1)
+    def compute_B_matrix_integral(self, state, tau):
+        state_sym = cs.SX.sym("state", 8, 1)
         tau_sym = cs.SX.sym("tau", 2, 1)
-        reference_sym = cs.SX.sym("reference", 1, 1)
+        reference_sym = cs.SX.sym("reference", 2, 1)
         forward_dynamics_f = self.forward_dynamics_integral(state_sym, reference_sym, tau_sym)
         #fd = cs.Function("fd", [state, tau], [forward_dynamics_f])
 
         B = cs.jacobian(forward_dynamics_f, tau_sym)
         B_f = cs.Function("B", [state_sym, tau_sym], [B])
-
         return np.array(B_f(state, tau))
-
-
 
 
 
 if __name__=="__main__":
-    forward_dynamics(np.zeros(6), np.zeros(2))
+    Twip_dynamics()
 
     

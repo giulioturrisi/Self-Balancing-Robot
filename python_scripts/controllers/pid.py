@@ -3,7 +3,7 @@ import math
 
 import sys
 sys.path.append('/home/python_scripts/')
-import forward_dynamics
+from twip_dynamics import Twip_dynamics
 
 class PID:
     def __init__(self, k_x_d, k_pitch, k_pitch_d, k_yaw_d, k_i):
@@ -14,6 +14,8 @@ class PID:
         self.k_yaw_d = k_yaw_d
 
         self.integral_e_pitch = 0
+
+        self.twip = Twip_dynamics()
 
     def calculate_errors(self,state, state_des):
         e_pitch = self.k_pitch*(state_des[1] - state[1])  
@@ -32,9 +34,9 @@ class PID:
     def compute_control(self, state, state_des):
         gen_forces = self.calculate_errors(state, state_des)
 
-        control_matrix = forward_dynamics.inv_control_matrix()
+        control_matrix = self.twip.inv_control_matrix()
 
-        u_ff = forward_dynamics.compute_feed_forward(state_des[1])
+        u_ff = self.twip.compute_feed_forward(state_des[1])
 
         torque = control_matrix@gen_forces
 

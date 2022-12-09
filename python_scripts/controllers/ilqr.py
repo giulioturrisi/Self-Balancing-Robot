@@ -2,7 +2,6 @@ import numpy as np
 
 import sys
 sys.path.append('/home/python_scripts/')
-import forward_dynamics
 import euler_integration
 from twip_dynamics import Twip_dynamics
 
@@ -73,8 +72,8 @@ class iLQR:
 
         P_next = np.identity(self.state_dim)
 
-        A = forward_dynamics.compute_A_matrix(lin_state, lin_tau)
-        B = forward_dynamics.compute_B_matrix(lin_state, lin_tau)
+        A = self.twip.A_f(lin_state, lin_tau)
+        B = self.twip.B_f(lin_state, lin_tau)
 
         A_discrete = A*dt + np.identity(self.state_dim)
         B_discrete = B*dt
@@ -238,7 +237,7 @@ class iLQR:
 
 
     def compute_control(self, state, state_des):
-        state_des[1] = forward_dynamics.compute_angle_from_vel(state_des[3])
+        state_des[1] = self.twip.compute_angle_from_vel(state_des[3])
         state_des = state_des.reshape(self.state_dim,1)
 
         # setting last V and initial system simulation

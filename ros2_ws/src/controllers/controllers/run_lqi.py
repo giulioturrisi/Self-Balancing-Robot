@@ -16,7 +16,7 @@ class Controller(Base_Controller):
     def __init__(self):
         super().__init__('LQI')
 
-        self.lin_state = np.zeros(7)
+        self.lin_state = np.zeros(8)
         self.lin_state[1] = 0.0
         self.controller = LQI(dt = self.dt/10., lin_state = self.lin_state)
 

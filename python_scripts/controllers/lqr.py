@@ -2,7 +2,7 @@ import numpy as np
 
 import sys
 sys.path.append('/home/python_scripts/')
-import forward_dynamics
+from twip_dynamics import Twip_dynamics
 
 class LQR:
     def __init__(self, lin_state = None, lin_tau = None, horizon = None, dt = None):
@@ -10,6 +10,8 @@ class LQR:
         self.lin_tau = np.zeros(2)
         self.horizon = 2000
         self.dt = dt
+
+        self.twip = Twip_dynamics()
 
         self.Q = np.identity(6)
         
@@ -34,8 +36,8 @@ class LQR:
         P_next[0,0] = 0.0 #x
         P_next[2,2] = 0.0 #yaw
 
-        A = forward_dynamics.compute_A_matrix(lin_state, lin_tau)
-        B = forward_dynamics.compute_B_matrix(lin_state, lin_tau)
+        A = self.twip.A_f(lin_state, lin_tau)
+        B = self.twip.B_f(lin_state, lin_tau)
 
         A_discrete = A*self.dt + np.identity(6)
         B_discrete = B*self.dt
@@ -53,8 +55,8 @@ class LQR:
         return self.K
 
     def compute_control(self, state, state_des):
-        state_des[1] = forward_dynamics.compute_angle_from_vel(state_des[3])
-        u_ff = forward_dynamics.compute_feed_forward(state_des[1], state_des[3])
+        state_des[1] = self.twip.compute_angle_from_vel(state_des[3])
+        u_ff = self.twip.compute_feed_forward(state_des[1], state_des[3])
         u_ff = np.ones(2)*u_ff
 
         #self.K = self.calculate_discrete_LQR_gain(state_des, u_ff)
