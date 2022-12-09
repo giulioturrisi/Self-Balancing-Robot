@@ -1,29 +1,27 @@
 import rclpy # type: ignore 
 
+
 import time
 import sys
 import numpy as np # type: ignore
 np.set_printoptions(threshold=sys.maxsize)
 
+
 sys.path.append('/home/python_scripts/controllers')
-from sliding_mode import Sliding_Mode 
+from ilqr import iLQR 
 sys.path.append('/home/ros2_ws/src/controllers/controllers')
 from base_controller import Base_Controller
 
 
-
 class Controller(Base_Controller):
     def __init__(self):
-        super().__init__('SlidingMode')
+        super().__init__('iLQR')
+
+        self.lin_state = np.zeros(7)
+        self.lin_state[1] = 0.0
+        self.controller = iLQR(dt = self.dt/10., lin_state = self.lin_state)
 
         self.create_timer(self.dt, self.controller_callback)
-        
-        self.k_s = 100
-        self.k_x_d = 0.3
-        self.k_pitch = 100
-        self.k_pitch_d = 15
-        self.k_yaw_d = 0.
-        self.controller = Sliding_Mode(self.k_s, self.k_x_d, self.k_pitch, self.k_pitch_d, self.k_yaw_d)
 
 
 
@@ -42,7 +40,8 @@ class Controller(Base_Controller):
 
         # Trigger next step Simulation ---------------------------------------
         self.triggerNextStep_Sim()
-
+        
+        
 
 
 
