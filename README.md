@@ -32,8 +32,8 @@ docker build -t ros2_humble .
 ```sh
 cd 
 gedit .bashrc
-alias twip_humble='xhost + && docker run -it --rm -v /path/to/your_folder/Self-Balancing-Robot:/home/ -v /tmp/.X11-unix:/tmp/.X11-unix:rw -e DISPLAY=$DISPLAY -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY  -e QT_X11_NO_MITSHM=1 --gpus all --name ddrive_humble ros2_humble'  (if used /nvidia)
-alias twip_humble="xhost + && docker run -it --rm -v /home/giulio/giulio_projects/Self-Balancing-Robot:/home/ -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/dri -e DISPLAY=$DISPLAY -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY --name ddrive_humble  ros2_humble" (if used /integrated_gpu)
+alias twip_humble='xhost + && docker run -it --rm -v /path/to/your_folder/Self-Balancing-Robot:/home/ -v /tmp/.X11-unix:/tmp/.X11-unix:rw --device=/dev/input/ -e DISPLAY=$DISPLAY -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY  -e QT_X11_NO_MITSHM=1 --gpus all --name ddrive_humble ros2_humble'  (if used /nvidia)
+alias twip_humble="xhost + && docker run -it --rm -v /home/giulio/giulio_projects/Self-Balancing-Robot:/home/ -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/dri --device=/dev/input/ -e DISPLAY=$DISPLAY -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY --name ddrive_humble  ros2_humble" (if used /integrated_gpu)
 alias twip_humble='xhost + && docker run -it --rm -v /path/to/your_folder/Self-Balancing-Robot:/home/ -v /tmp/.X11-unix:/tmp/.X11-unix -v /mnt/wslg:/mnt/wslg -v /usr/lib/wsl:/usr/lib/wsl --device=/dev/dxg -e DISPLAY=$DISPLAY -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR -e PULSE_SERVER=$PULSE_SERVER -e LD_LIBRARY_PATH=/usr/lib/wsl/lib --name ddrive_humble ros2_humble' (if Windows Linux Subsystem)
 
 alias twip='docker exec -it ddrive_humble bash' (to attach a new terminal to the running docker)
@@ -59,7 +59,24 @@ colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```sh
 ros2 run controllers <control_node>                     
 ```
-where in <control_node> you can choose the type of controller you want (for now LQR, Sliding Mode and PID)
+where in <control_node> you can choose the type of controller you want. 
+
+3. to command the robot with a joystick
+```sh
+ros2 launch teleop_twist_joy teleop-launch.py joy_config:='xbox'
+```
+
+## List of controllers
+1. PID
+2. Linear Quadratic Regulator
+3. Linear Quadratic Integral Regulator
+4. Nonlinear Model Predictive Control via Acados
+5. Sliding Mode
+6. Iterative Linear Quadratic Regulator
+7. RL policy via IsaacGym
+
+## List of state estimator
+1. Extended Kalman Filter
 
 
 ## Status
