@@ -70,10 +70,11 @@ ros2 launch teleop_twist_joy teleop-launch.py joy_config:='xbox'
 1. PID
 2. Linear Quadratic Regulator
 3. Linear Quadratic Integral Regulator
-4. Nonlinear Model Predictive Control via Acados
+4. Nonlinear MPC via Acados
 5. Sliding Mode
 6. Iterative Linear Quadratic Regulator
-7. RL policy via IsaacGym
+7. Iterative Linear Quadratic Regulator via Crocoddyl
+8. RL policy via IsaacGym
 
 ## List of available state estimators
 1. Extended Kalman Filter
