@@ -48,8 +48,8 @@ class LQI:
         P_next[0,0] = 0.0 #x
         P_next[2,2] = 0.0 #yaw
 
-        A = self.twip.compute_A_matrix_integral(lin_state, lin_tau)
-        B = self.twip.compute_B_matrix_integral(lin_state, lin_tau)
+        A = self.twip.A_f_integral(lin_state, lin_tau)
+        B = self.twip.B_f_integral(lin_state, lin_tau)
 
         A_discrete = A*self.dt + np.identity(self.state_dim + self.state_integral_dim)
         B_discrete = B*self.dt

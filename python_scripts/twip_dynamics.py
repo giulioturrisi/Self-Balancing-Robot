@@ -5,7 +5,7 @@ import casadi as cs
 class Twip_dynamics:
     def __init__(self,):
 
-        #robot parameters
+        # Robot parameters -----------------------------------------
         self.m_b = 1.0 #mass base - kg
         self.m_w = 0.25 #wheel mass - kg
         self.I_pitch = 2.167e-02 #inertia pitch
@@ -20,6 +20,9 @@ class Twip_dynamics:
         self.l = 0.2 #lenght body
         self.c_alpha = -0.001 #viscous friction
 
+        
+        
+        # Precompute dynamics and linearization func. --------------
         state = cs.SX.sym("state", 6, 1)
         tau = cs.SX.sym("tau", 2, 1)
         forward_dynamics_f = self.forward_dynamics(state, tau)
@@ -28,7 +31,11 @@ class Twip_dynamics:
         self.A_f = self.get_A_f_matrix()
         self.B_f = self.get_B_f_matrix()
 
+        self.A_f_integral = self.get_A_f_matrix_integral()
+        self.B_f_integral = self.get_B_f_matrix_integral()
 
+
+    # Direct dynamics ------------------------------------------------
     def forward_dynamics(self, state, tau):
         #x, pitch, yaw, xd, pitch_d, yaw_d
         x = state[0] 
@@ -71,6 +78,18 @@ class Twip_dynamics:
 
         return cs.vertcat(qd,qdd)
 
+
+
+    # Direct dynamics with integral states ---------------------------------
+    def forward_dynamics_integral(self, state, reference, tau):
+        forward_dynamics_output =  self.forward_dynamics(state[0:6],tau)
+        qd = forward_dynamics_output[0:3]
+        qdd = cs.vertcat(forward_dynamics_output[3:], state[3] - reference[0], state[5] - reference[1])
+        return cs.vertcat(qd,qdd)
+
+
+
+    # Minor utilities ------------------------------------------------------
     def inv_control_matrix(self,):
         B = np.matrix([[1/self.r, 1/self.r], [-1, -1], [-self.d/(2*self.r), self.d/(2*self.r)]])
         return np.linalg.pinv(B)
@@ -85,6 +104,7 @@ class Twip_dynamics:
 
 
 
+    # Linearization Matrices ------------------------------------------------------
     def get_A_f_matrix(self, ):
         state_sym = cs.SX.sym("state", 6, 1)
         tau_sym = cs.SX.sym("tau", 2, 1)
@@ -107,15 +127,9 @@ class Twip_dynamics:
         return B_f
     
 
-    # with augmented state for integral control!
-    def forward_dynamics_integral(self, state, reference, tau):
-        forward_dynamics_output =  self.forward_dynamics(state[0:6],tau)
-        qd = forward_dynamics_output[0:3]
-        qdd = cs.vertcat(forward_dynamics_output[3:], state[3] - reference[0], state[5] - reference[1])
-        return cs.vertcat(qd,qdd)
 
-
-    def compute_A_matrix_integral(self, state, tau):
+    # Linearization Matrices with integral states ----------------------------------
+    def get_A_f_matrix_integral(self, ):
         state_sym = cs.SX.sym("state", 8, 1)
         tau_sym = cs.SX.sym("tau", 2, 1)
         reference_sym = cs.SX.sym("reference", 2, 1)
@@ -124,11 +138,9 @@ class Twip_dynamics:
 
         A = cs.jacobian(forward_dynamics_f, state_sym)
         A_f = cs.Function("A", [state_sym, tau_sym], [A])
-        return np.array(A_f(state, tau))
+        return A_f
 
-
-
-    def compute_B_matrix_integral(self, state, tau):
+    def get_B_f_matrix_integral(self, ):
         state_sym = cs.SX.sym("state", 8, 1)
         tau_sym = cs.SX.sym("tau", 2, 1)
         reference_sym = cs.SX.sym("reference", 2, 1)
@@ -137,7 +149,8 @@ class Twip_dynamics:
 
         B = cs.jacobian(forward_dynamics_f, tau_sym)
         B_f = cs.Function("B", [state_sym, tau_sym], [B])
-        return np.array(B_f(state, tau))
+        return B_f
+    
 
 
 
