@@ -2,6 +2,7 @@ import numpy as np
 
 import sys
 sys.path.append('/home/python_scripts/')
+import euler_integration
 from twip_dynamics import Twip_dynamics
 
 class LQR:
@@ -28,6 +29,9 @@ class LQR:
         #self.K = self.calculate_continuous_LQR_gain(self.lin_state, self.lin_tau)
         self.K = self.calculate_discrete_LQR_gain(self.lin_state, self.lin_tau)
 
+        self.phi_vec = np.array([])
+        self.error_vec = np.array([])
+        self.best_param = None
 
 
     def calculate_discrete_LQR_gain(self,lin_state, lin_tau):
@@ -54,10 +58,41 @@ class LQR:
         print("K discrete", self.K)
         return self.K
 
+    def lift_space(self, state):
+        return np.array([1, state[1]*state[1], state[2]*state[2], state[3]*state[3], state[4]*state[4], state[5]*state[5]])
 
-    def update_model(self, previous_state, control, state):
-        qdd = self.twip.forward_dynamics(previous_state, control)
-        # TO DO
+
+    def update_dataset(self, previous_state, control, state_meas):
+        next_state = self.twip.forward_dynamics(previous_state, control)
+        qdd = next_state[3:6]
+        state_pred = euler_integration.euler_integration(previous_state, qdd, self.dt)
+        
+        # should be 1 x num_features
+        state_pred_lift = self.lift_space(state_pred)
+        state_pred_lift = state_pred_lift.reshape(1,6)
+
+        # should be n_datapoints x num_features
+        if(not np.any(self.phi_vec)):
+            self.phi_vec = state_pred_lift
+        else:
+            self.phi_vec = np.append(self.phi_vec, state_pred_lift, axis=0)
+
+        # should be n_datapoints x num_features
+        error = state_meas - state_pred[1:]
+        error = error.reshape(1,5)
+        if(not np.any(self.error_vec)):
+            self.error_vec = error
+        else:
+            self.error_vec = np.append(self.error_vec, error, axis=0)
+        
+    def update_parameters(self,):
+        # least square
+        self.best_param = np.linalg.pinv(self.phi_vec.T@self.phi_vec)@self.phi_vec.T@self.error_vec
+
+        print("best_param", self.best_param)
+
+
+        
 
     def compute_control(self, state, state_des):
         state_des[1] = self.twip.compute_angle_from_vel(state_des[3])
@@ -73,4 +108,19 @@ class LQR:
 
 
 if __name__=="__main__":
-    LQR()
+    control = LQR(dt=0.01)
+    
+    x = np.array([0, 0, 0, 0, 1., 0.])
+    u = np.array([0.1, 0.1])
+    y_meas = np.array([0, 0, 0, 0.95, 0])
+
+    control.update_dataset(x, u, y_meas)
+
+    x2 = np.array([0, 0, 0, 0, 0.95, 0.])
+    u2 = np.array([0.1, 0.1])
+    y2_meas = np.array([0, 0, 0, 1.9, 0])
+    control.update_dataset(x2, u2, y2_meas)
+
+    control.update_parameters()
+    
+    
