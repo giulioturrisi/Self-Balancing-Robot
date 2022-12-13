@@ -14,7 +14,17 @@ import copy
 import casadi as cs
 
 class iLQR:
+    """This is a small class that computes an iterative LQR control law"""
+
+
     def __init__(self, lin_state = None, lin_tau = None, horizon = None, dt = None):
+        """
+        Args:
+            lin_state (np.array): linearization state
+            lin_tau (np.array): linearization control inputs
+            horizon (int): how much to look into the future for optimizing the gains 
+            dt (int): desidered sampling time
+        """
         self.lin_state = np.zeros(6)
         self.lin_tau = np.zeros(2)
         self.horizon = 20
@@ -43,15 +53,12 @@ class iLQR:
         # compute optimal cost to go LQR
         self.P = self.compute_discrete_LQR_P(self.lin_state, self.lin_tau)
 
-
         self.P_vec = np.zeros((self.horizon+1, self.state_dim, self.state_dim));
         self.P_vec[self.horizon] = self.P
         self.V_vec = np.zeros(((self.horizon+1),self.state_dim,1));
-    
 
         self.state_vec = np.zeros(((self.horizon+1), self.state_dim, 1));
         self.control_vec = np.zeros(((self.horizon), self.control_dim, 1));
-
 
         self.A_vec = np.zeros((self.horizon, self.state_dim, self.state_dim));
         self.B_vec = np.zeros((self.horizon, self.state_dim, self.control_dim));
@@ -66,10 +73,18 @@ class iLQR:
         self.f = cs.external('fd',C)
 
 
+
     def compute_discrete_LQR_P(self,lin_state, lin_tau):
+        """Calculate by backward iterations the optimal LQR gains
 
+        Args:
+            lin_state (np.array): linearization state
+            lin_tau (np.array): linearization control inputs
+
+        Returns:
+             K (np.array): optimal gains
+        """
         dt = 0.001
-
         P_next = np.identity(self.state_dim)
 
         A = self.twip.A_f(lin_state, lin_tau)
@@ -88,11 +103,16 @@ class iLQR:
             self.K = (np.linalg.pinv(self.R + B_discrete.T@P_next@B_discrete)@B_discrete.T@P_next@A_discrete)
 
         return P_next
-    
-    def compute_backward_pass(self, state_des):
-        #print("##BACKWATD PASS")
-        
 
+
+
+    def compute_backward_pass(self, state_des):
+        """Calculate ILQR backward pass
+
+        Args:
+            state_des (np.array): desired state
+        """
+        
         for step in range(0,self.horizon):
             state_actual = self.state_vec[self.horizon-step-1];
             control_actual = self.control_vec[self.horizon-step-1];
@@ -153,11 +173,13 @@ class iLQR:
             self.V_vec[self.horizon - step - 1] = V_x
         
 
-        
-
 
     def compute_forward_pass(self,initial_state):
+        """Calculate ILQR forward pass
 
+        Args:
+            initial_state (np.array): actual state of the robot
+        """
         self.state_vec[0] = initial_state.reshape(6,1) 
         state_forward = copy.deepcopy(self.state_vec)
         
@@ -215,8 +237,13 @@ class iLQR:
         #print("evolution forward pass", self.state_vec)
 
 
-    def compute_forward_simulation(self,initial_state):
 
+    def compute_forward_simulation(self,initial_state):
+        """Calculate first ILQR rollout
+
+        Args:
+            initial_state (np.array): actual state of the robot
+        """
         self.state_vec[0] = initial_state.reshape(6,1) 
 
         for step in range(0,self.horizon):
@@ -232,18 +259,26 @@ class iLQR:
 
             # integration
             self.state_vec[step+1] = euler_integration.euler_integration(state, qdd, self.dt).reshape(self.state_dim,1)
-
             
 
 
     def compute_control(self, state, state_des):
+        """Compute ILQR control inputs
+
+        Args:
+            state (np.array): actual robot state
+            state_des (np.array): desired robot state
+
+        Returns:
+            (np.array): optimized control inputs
+
+        """
         state_des[1] = self.twip.compute_angle_from_vel(state_des[3])
         state_des = state_des.reshape(self.state_dim,1)
 
         # setting last V and initial system simulation
         self.V_vec[self.horizon] = self.P@(state.reshape(self.state_dim,1) - state_des)
         self.compute_forward_simulation(initial_state=state)
-        #self.V_vec[self.horizon] = self.P@(self.state_vec[self.horizon].reshape(self.state_dim,1) - state_des_vec.reshape(self.state_dim,1))
 
         #plt.plot(self.state_vec[:,1])
         #plt.show()
@@ -259,10 +294,7 @@ class iLQR:
             #plt.plot(self.state_vec[:,1])
             #plt.show()
         #print("control vec", self.control_vec)
-
         return [self.control_vec[0,0],self.control_vec[0,1]]
-
-
 
 
 

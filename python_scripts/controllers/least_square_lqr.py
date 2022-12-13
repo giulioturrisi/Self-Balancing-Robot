@@ -9,7 +9,8 @@ from twip_dynamics import Twip_dynamics
 
 class LS_LQR:
     """This is a small class that computes an LQR control law based on a least square update"""
-    
+
+
     def __init__(self, lin_state = None, lin_tau = None, horizon = None, dt = None):
         """
         Args:
@@ -83,6 +84,7 @@ class LS_LQR:
         return self.K
 
 
+
     def lift_space(self, state):
         """Nonlinear features for least square
 
@@ -93,6 +95,7 @@ class LS_LQR:
             (np.array): nonlinear state
         """
         return np.array([1, state[1]*state[1], state[2]*state[2], state[3]*state[3], state[4]*state[4], state[5]*state[5]])
+
 
 
     def compute_error_and_lift(self, previous_state, control, state_meas):
@@ -120,6 +123,7 @@ class LS_LQR:
 
         return state_pred_lift, error
 
+
     
     def recursive_least_square(self, previous_state, control, state_meas):
         """Compute a recursive least square update
@@ -140,7 +144,8 @@ class LS_LQR:
             self.P_least_square = self.P_least_square - self.P_least_square@state_pred_lift.T@np.linalg.pinv(np.identity(6) + state_pred_lift@self.P_least_square@state_pred_lift.T)@state_pred_lift@self.P_least_square
             K_least_square = self.P_least_square@state_pred_lift.T
             self.best_param = self.best_param + K_least_square@(error)
-    
+
+
     
     def full_least_square(self, previous_state, control, state_meas):
         """Compute a full least square update
@@ -165,6 +170,7 @@ class LS_LQR:
 
         self.P_least_square = np.linalg.pinv(self.phi_vec.T@self.phi_vec)
         self.best_param = self.P_least_square@self.phi_vec.T@self.error_vec
+
 
 
     def compute_control(self, state, state_des):

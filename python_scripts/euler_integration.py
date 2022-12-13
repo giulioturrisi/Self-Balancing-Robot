@@ -1,6 +1,16 @@
 import numpy as np
 
 def euler_integration(state, qdd, dt):
+    """Small function that compute a simple euler integration
+
+    Args:
+        state (np.array): state of the robot at tike K
+        qdd (np.array): instantaneous acceleration of the system
+        dt (float): sampling time
+
+    Returns:
+        (np.array): new state of the robot at time K+1
+    """
     #x, pitch, yaw, xd, pitch_d, yaw_d
 
     x = state[0] 

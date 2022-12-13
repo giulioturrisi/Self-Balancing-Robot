@@ -5,7 +5,18 @@ sys.path.append('/home/python_scripts/')
 from twip_dynamics import Twip_dynamics
 
 class LQI:
+    """This is a small class that computes an LQR control law using integral actions
+       for the yaw and pitch angular velocities"""
+
+
     def __init__(self, lin_state = None, lin_tau = None, horizon = None, dt = None):
+        """
+        Args:
+            lin_state (np.array): linearization state
+            lin_tau (np.array): linearization control inputs
+            horizon (int): how much to look into the future for optimizing the gains 
+            dt (int): desidered sampling time
+        """
         self.lin_state = lin_state
         self.lin_tau = np.zeros(2)
         self.horizon = 2000
@@ -37,13 +48,20 @@ class LQI:
 
         self.R = np.identity(self.control_dim)*10
         
- 
         self.K = self.calculate_discrete_LQR_gain(self.lin_state, self.lin_tau)
 
 
 
     def calculate_discrete_LQR_gain(self,lin_state, lin_tau):
+        """Calculate by backward iterations the optimal LQR gains
 
+        Args:
+            lin_state (np.array): linearization state
+            lin_tau (np.array): linearization control inputs
+
+        Returns:
+             K (np.array): optimal gains
+        """
         P_next = np.identity(self.state_dim + self.state_integral_dim)
         P_next[0,0] = 0.0 #x
         P_next[2,2] = 0.0 #yaw
@@ -54,7 +72,6 @@ class LQI:
         A_discrete = A*self.dt + np.identity(self.state_dim + self.state_integral_dim)
         B_discrete = B*self.dt
 
-
         for i in range(0, self.horizon):
             Q_uu = self.R + B_discrete.T@P_next@B_discrete
 
@@ -63,10 +80,21 @@ class LQI:
             
             self.K = (np.linalg.pinv(self.R + B_discrete.T@P_next@B_discrete)@B_discrete.T@P_next@A_discrete)
 
-        print("K discrete", self.K)
         return self.K
 
+
+
     def compute_control(self, state, state_des):
+        """Compute feedforward and LQR control inputs
+
+        Args:
+            state (np.array): actual robot state
+            state_des (np.array): desired robot state
+
+        Returns:
+            (np.array): optimized control inputs
+
+        """
         state_des[1] = self.twip.compute_angle_from_vel(state_des[3])
         u_ff = self.twip.compute_feed_forward(state_des[1], state_des[3])
         u_ff = np.ones(2)*u_ff
@@ -80,12 +108,9 @@ class LQI:
         #errors = np.hstack((state_des - state, self.integral_error_x_d))
         errors = np.hstack((state_des - state, self.integral_error_x_d, self.integral_error_yaw_d))
 
-        #print("errors", errors)
+        print("errors", errors)
         
         return u_ff + self.K@(errors) 
-
-
-
 
 
 if __name__=="__main__":

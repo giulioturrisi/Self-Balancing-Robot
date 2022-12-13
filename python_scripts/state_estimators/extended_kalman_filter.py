@@ -5,25 +5,46 @@ sys.path.append('/home/python_scripts/')
 import euler_integration
 from twip_dynamics import Twip_dynamics
 
+
+
 class Extended_Kalman:
-    def __init__(self,):
-        print("init EKF")
+    """This is a small class that computes an EKF for state estimation"""
+
+
+    def __init__(self, V, W, P):
+        """
+        Args:
+            V (float): process noise
+            W (float): measurement noise
+            P (float); initial covariance
+        """
 
         self.state_dim = 6
         self.control_dim = 2
 
         # process noise
-        self.V = np.eye(self.state_dim)*0.1
+        self.V = np.eye(self.state_dim)*V
         # measurement noise
-        self.W = np.eye(self.state_dim)*50
+        self.W = np.eye(self.state_dim)*W
 
         # covariance initialization
-        self.P = np.eye(self.state_dim)
+        self.P = np.eye(self.state_dim)*P
 
         # observation matrix
         self.C = np.eye(self.state_dim)
 
+
+
     def compute_prediction(self, state, control):
+        """Compute state prediction
+
+        Args:
+            state (np.array): state of the robot at time K-1
+            control (np.array): control applied to the robot at time K-1
+
+        Returns:
+            (np.array): predicted state at time K
+        """
         qdd = self.twip.fd(state,control)
         qdd = qdd[3:6]
         # integration
@@ -42,7 +63,17 @@ class Extended_Kalman:
         return predicted_state
 
 
+
     def compute_correction(self, predicted_state, measurements):
+        """Compute state correction
+
+        Args:
+            predicted_state (np.array): predicted state at time K
+            measurements (np.array): measured state at time K
+
+        Returns:
+            (np.array): filtered state at time K
+        """
         R = self.P@self.C.T@np.linalg.pinv(self.C@self.P@self.C.T + self.W)
         v = measurements - predicted_state
         state_new = predicted_state.T + self.R*v
@@ -52,7 +83,18 @@ class Extended_Kalman:
         return state_new
 
 
+
     def filter(self, state, control, measurements):
+        """Compute prediction and correction step of the EKF filter
+
+        Args:
+            state (np.array): state of the robot at time K-1
+            control (np.array): control applied to the robot at time K-1
+            measurements (np.array): measured state at time K
+
+        Returns:
+            (np.array): filtered state at time K
+        """
         predicted_state = self.compute_prediction(state, control)
         return self.compute_correction(predicted_state, measurements)
 
