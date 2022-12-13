@@ -7,7 +7,7 @@ from twip_dynamics import Twip_dynamics
 
 
 
-class LQR_LS:
+class LS_LQR:
     """This is a small class that computes an LQR control law based on a least square update."""
     
     def __init__(self, lin_state = None, lin_tau = None, horizon = None, dt = None):
@@ -191,7 +191,7 @@ class LQR_LS:
 
 
 if __name__=="__main__":
-    control = LQR_LS(dt=0.01, horizon=2000)
+    control = LS_LQR(dt=0.01, horizon=2000)
     
     x = np.array([0, 0, 0, 0, 1., 0.])
     u = np.array([0.1, 0.1])
