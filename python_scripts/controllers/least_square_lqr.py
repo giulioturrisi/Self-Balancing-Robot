@@ -8,7 +8,7 @@ from twip_dynamics import Twip_dynamics
 
 
 class LS_LQR:
-    """This is a small class that computes an LQR control law based on a least square update."""
+    """This is a small class that computes an LQR control law based on a least square update"""
     
     def __init__(self, lin_state = None, lin_tau = None, horizon = None, dt = None):
         """
@@ -96,7 +96,7 @@ class LS_LQR:
 
 
     def compute_error_and_lift(self, previous_state, control, state_meas):
-        """compute error signal and lift the state
+        """Compute error signal and lift the state
 
         Args:
             previous_state (np.array): state at timestep K-1
@@ -122,7 +122,7 @@ class LS_LQR:
 
     
     def recursive_least_square(self, previous_state, control, state_meas):
-        """compute a recursive least square update
+        """Compute a recursive least square update
 
         Args:
             previous_state (np.array): state at timestep K-1
@@ -143,7 +143,7 @@ class LS_LQR:
     
     
     def full_least_square(self, previous_state, control, state_meas):
-        """compute a full least square update
+        """Compute a full least square update
 
         Args:
             previous_state (np.array): state at timestep K-1
@@ -168,7 +168,7 @@ class LS_LQR:
 
 
     def compute_control(self, state, state_des):
-        """compute feedforward and LQR control inputs
+        """Compute feedforward and LQR control inputs
 
         Args:
             state (np.array): actual robot state
