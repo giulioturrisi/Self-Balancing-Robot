@@ -3,7 +3,7 @@ from rclpy.node import Node # type: ignore
 
 from std_msgs.msg import String, Bool, Float64, Float64MultiArray # type: ignore
 from tf2_msgs.msg import TFMessage # type: ignore
-from geometry_msgs.msg import PoseStamped, Twist # type: ignore
+from geometry_msgs.msg import PoseStamped, Twist, Vector3 # type: ignore
 import tf_transformations # type: ignore
 
 import copy
@@ -35,9 +35,10 @@ class Base_Controller(Node):
         self.subscription_tf = self.create_subscription(TFMessage,'tf',self.tf_callback,1)
         self.subscription_cmd_vel = self.create_subscription(Twist,"cmd_vel", self.getVel_callback, 1);
 
-        self.publisher_command = self.create_publisher(Float64MultiArray,"torques", 1);
+        '''self.publisher_command = self.create_publisher(Float64MultiArray,"torques", 1);
         self.publisher_motor_left = self.create_publisher(Float64,"leftMotor", 1);
-        self.publisher_motor_right = self.create_publisher(Float64,"rightMotor", 1);
+        self.publisher_motor_right = self.create_publisher(Float64,"rightMotor", 1);'''
+        self.publisher_command = self.create_publisher(Vector3,"torques", 1);
 
 
  
@@ -68,14 +69,19 @@ class Base_Controller(Node):
         #commanded_torques.data = [tau_l, tau_r]
         #self.publisher_command.publish(commanded_torques);
 
-        commanded_torque_left = Float64();
+        '''commanded_torque_left = Float64();
         commanded_torque_left.data = np.float(tau_l)
         self.publisher_motor_left.publish(commanded_torque_left)
 
 
         commanded_torque_right = Float64();
         commanded_torque_right.data = np.float(tau_r)
-        self.publisher_motor_right.publish(commanded_torque_right)
+        self.publisher_motor_right.publish(commanded_torque_right)'''
+
+        commanded_torques = Vector3()
+        commanded_torques.x = np.float(tau_l)
+        commanded_torques.y = np.float(tau_r)
+        self.publisher_command.publish(commanded_torques)
 
 
 
