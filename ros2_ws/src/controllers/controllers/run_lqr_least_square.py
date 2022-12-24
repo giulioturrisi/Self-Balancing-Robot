@@ -10,6 +10,8 @@ sys.path.append('/home/python_scripts/controllers')
 from least_square_lqr import LS_LQR 
 sys.path.append('/home/ros2_ws/src/controllers/controllers')
 from base_controller import Base_Controller
+sys.path.append('/home/python_scripts/')
+import euler_integration
 
 
 
@@ -36,6 +38,7 @@ class Controller(Base_Controller):
         if(self.simStep_done):
             print("###############")
             print("state robot: ", self.state_robot)
+            print("old robot: ", self.old_state_robot)
 
             start_time = time.time()
 
@@ -44,8 +47,9 @@ class Controller(Base_Controller):
             '''if(self.iteration > 100 ):
                 self.controller.recursive_least_square(self.old_state_robot, np.array(self.old_control).reshape(2,), self.state_robot[1:])
                 self.old_control = torques'''
-            if(self.iteration == 200 ):
+            if(self.iteration == 20 ):
                 self.controller.full_least_square(self.x_old, self.u_old, self.y_meas)
+            
             elif (self.iteration > 1 and self.iteration < 200):
                 if(self.x_old.size == 0):
                     self.x_old = self.old_state_robot
@@ -55,12 +59,24 @@ class Controller(Base_Controller):
                     self.x_old = np.vstack((self.x_old,self.old_state_robot))
                     self.u_old = np.vstack((self.u_old, np.array(self.old_control).reshape(2,)))
                     self.y_meas = np.vstack((self.y_meas, self.state_robot[1:])) 
+            
             self.old_control = torques
             
             
             self.iteration += 1
             print("iteration: ", self.iteration)
             print("control time: ", time.time()-start_time)
+
+            # compare error
+            next_state = self.controller.twip.forward_dynamics(self.old_state_robot, np.array(self.old_control).reshape(2,))
+            qdd = next_state[3:6]
+            state_nom = euler_integration.euler_integration(self.old_state_robot, qdd, self.dt)
+            error = self.state_robot - state_nom
+            pred = self.controller.best_param.T@self.old_state_robot[1:]
+
+            print("error", error[1:])
+            print("pred", pred)
+            print("error with pred", error[1:] - pred)
 
             self.publish_command(torques)
 
