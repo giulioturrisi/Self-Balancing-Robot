@@ -28,6 +28,7 @@ class Base_Controller(Node):
         self.y_world = 0
 
         self.state_robot = np.zeros(6)
+        self.old_state_robot = np.zeros(6)
         self.state_d = np.zeros(6)
 
         
@@ -104,6 +105,8 @@ class Base_Controller(Node):
         y_d_world = (msg.transforms[0].transform.translation.y - self.y_world)/self.dt
         self.x_world = msg.transforms[0].transform.translation.x
         self.y_world = msg.transforms[0].transform.translation.y
+
+        self.old_state_robot = copy.deepcopy(self.state_robot)
 
         self.state_robot[3] = math.cos(euler[2])*x_d_world + math.sin(euler[2])*y_d_world
         self.state_robot[4] = (euler[1] - self.state_robot[1])/self.dt #derivative pitch
