@@ -47,18 +47,18 @@ class Controller(Base_Controller):
             '''if(self.iteration > 100 ):
                 self.controller.recursive_least_square(self.old_state_robot, np.array(self.old_control).reshape(2,), self.state_robot[1:])
                 self.old_control = torques'''
-            if(self.iteration == 20 ):
+            if(self.iteration == 200):
                 self.controller.full_least_square(self.x_old, self.u_old, self.y_meas)
             
             elif (self.iteration > 1 and self.iteration < 200):
                 if(self.x_old.size == 0):
-                    self.x_old = self.old_state_robot
-                    self.u_old = np.array(self.old_control).reshape(2,)
-                    self.y_meas = self.state_robot[1:]
+                    self.x_old = self.old_state_robot.reshape(1,6)
+                    self.u_old = np.array(self.old_control).reshape(1,2)
+                    self.y_meas = self.state_robot[1:].reshape(1,5)
                 else:
-                    self.x_old = np.vstack((self.x_old,self.old_state_robot))
-                    self.u_old = np.vstack((self.u_old, np.array(self.old_control).reshape(2,)))
-                    self.y_meas = np.vstack((self.y_meas, self.state_robot[1:])) 
+                    self.x_old = np.vstack((self.x_old,self.old_state_robot.reshape(1,6)))
+                    self.u_old = np.vstack((self.u_old, np.array(self.old_control).reshape(1,2)))
+                    self.y_meas = np.vstack((self.y_meas, self.state_robot[1:].reshape(1,5))) 
             
             self.old_control = torques
             
@@ -72,11 +72,12 @@ class Controller(Base_Controller):
             qdd = next_state[3:6]
             state_nom = euler_integration.euler_integration(self.old_state_robot, qdd, self.dt)
             error = self.state_robot - state_nom
-            pred = self.controller.best_param.T@self.old_state_robot[1:]
-
+            lift_state = self.controller.lift_space(self.old_state_robot)
+            #pred = self.controller.best_param.T@self.old_state_robot[1:]
+            pred = self.controller.best_param.T@lift_state.reshape(self.controller.basis, 1)
             print("error", error[1:])
-            print("pred", pred)
-            print("error with pred", error[1:] - pred)
+            #print("pred", pred)
+            print("error with pred", error[1:] - pred.T)
 
             self.publish_command(torques)
 

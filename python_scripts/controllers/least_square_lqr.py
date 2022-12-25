@@ -37,7 +37,7 @@ class LS_LQR:
         
         self.Q[1,1] = 5.0 #pitch
         self.Q[4,4] = 1.0 #pitch_d
-        self.Q[5,5] = 0.2 #yawd
+        self.Q[5,5] = 1 #yawd
 
         self.R = np.identity(2)*10
 
@@ -48,7 +48,8 @@ class LS_LQR:
 
         self.phi_vec = np.array([])
         self.error_vec = np.array([])
-        self.best_param = np.zeros((5,5))
+        self.basis = 9
+        self.best_param = np.zeros((self.basis, 5))
 
 
         self.P_least_square = np.array([])
@@ -82,8 +83,8 @@ class LS_LQR:
         #B_ls[0:6,:] = B
 
         
-        A_correction = np.zeros((6,6))
-        A_correction[1:,1:] = self.best_param.T
+        #A_correction = np.zeros((6,6))
+        #A_correction[1:,1:] = self.best_param.T
  
 
         A_discrete = A*self.dt + np.identity(6)
@@ -92,20 +93,18 @@ class LS_LQR:
         #print("A_discrete", A_discrete)
         #print("A_correction", A_correction)
 
-        A_discrete += A_correction
+        #A_discrete += A_correction
 
         #print("A_discrete corrected", A_discrete)
 
 
         for i in range(0, horizon):
             Q_uu = self.R + B_discrete.T@self.P_next@B_discrete
-
             temp = (-np.linalg.pinv(Q_uu)@B_discrete.T@self.P_next@A_discrete)
             self.P_next = self.Q + A_discrete.T@self.P_next@A_discrete - temp.T@Q_uu@temp
             
-            self.K = (np.linalg.pinv(self.R + B_discrete.T@self.P_next@B_discrete)@B_discrete.T@self.P_next@A_discrete)
+        self.K = (np.linalg.pinv(self.R + B_discrete.T@self.P_next@B_discrete)@B_discrete.T@self.P_next@A_discrete)
 
-    
         return self.K
 
 
@@ -119,7 +118,7 @@ class LS_LQR:
         Returns:
             (np.array): nonlinear state
         """
-        return np.array([1, state[1]*state[1], state[2]*state[2], state[3]*state[3], state[4]*state[4], state[5]*state[5]])
+        return np.array([np.cos(state[1]), np.sin(state[2]), state[1]*state[1], 1, state[3]*state[3], state[4]*state[4], state[5]*state[5], np.cos(state[4]*state[4]), np.sin(state[4]*state[4])])
 
 
 
@@ -134,23 +133,23 @@ class LS_LQR:
         Returns:
             (np.array, np.array): nonlinear state, error signal
         """
-
+        print("control", control)
+        print("previous_state", previous_state)
         next_state = self.twip.forward_dynamics(previous_state, control)
         qdd = next_state[3:6]
         state_pred = euler_integration.euler_integration(previous_state, qdd, self.dt)
         
         # should be 1 x num_features
-        #state_pred_lift = self.lift_space(state_pred)
-        #state_pred_lift = state_pred_lift.reshape(1,6)    
-
-       # should be n_datapoints x num_features
+        state_pred_lift = self.lift_space(state_pred)
+        
+        #should be n_datapoints x num_features
         error = state_meas - state_pred[1:]
         error = error.reshape(1,5)  
 
 
 
-        #return state_pred_lift, error
-        return state_pred[1:].reshape(1,5), error
+        return state_pred_lift.reshape(1,self.basis), error
+        #return state_pred[1:].reshape(1,5), error
 
 
     
@@ -188,8 +187,7 @@ class LS_LQR:
         """
         for i in range(0, previous_state.shape[0]):
             state_pred_lift, error = self.compute_error_and_lift(previous_state[i], control[i], state_meas[i])
-            print("state_pred_lift", state_pred_lift)
-            print("error", error)
+
             if(not np.any(self.phi_vec)):
                 self.phi_vec = state_pred_lift
             else:
@@ -200,13 +198,9 @@ class LS_LQR:
             else:
                 self.error_vec = np.append(self.error_vec, error, axis=0)
 
-        print("error vec", self.error_vec)
-        self.P_least_square = np.linalg.inv(self.phi_vec.T@self.phi_vec)
-        self.best_param = self.P_least_square@self.phi_vec.T@self.error_vec
 
-        print("self.phi_vec", self.phi_vec.shape)
-        pred = self.best_param.T@self.phi_vec[0,:].T
-        print("pred", pred)
+        self.P_least_square = np.linalg.pinv(self.phi_vec.T@self.phi_vec + 0.4*np.identity(self.phi_vec.shape[1]))
+        self.best_param = self.P_least_square@self.phi_vec.T@self.error_vec
 
 
 
@@ -221,6 +215,7 @@ class LS_LQR:
             (np.array): optimized control inputs
 
         """
+        
         state_des[1] = self.twip.compute_angle_from_vel(state_des[3])
         u_ff = self.twip.compute_feed_forward(state_des[1], state_des[3])
         u_ff = np.ones(2)*u_ff
@@ -251,13 +246,21 @@ if __name__=="__main__":
     y2_meas = np.array([0, 0, 0, 1.9, 0])
 
 
-    x3 = np.array([2, 0, 0, 0, 0.95, 0.])
+    x3 = np.array([2, 2, 0, 0, 0.95, 0.])
     u3 = np.array([0.1, 0.1])
     y3_meas = np.array([2, 0, 0, 1.9, 0])
 
     x = np.vstack((x1,x2))
     u = np.vstack((u1,u2))
     y_meas = np.vstack((y1_meas,y2_meas))
+
+    x = np.vstack((x,x3))
+    u = np.vstack((u,u3))
+    y_meas = np.vstack((y_meas,y3_meas))
+
+    print("x.shape", x.shape)
+    print("u.shape", u.shape)
+    print("y_meas.shape", y_meas.shape)
 
     control.full_least_square(x, u, y_meas)
 
