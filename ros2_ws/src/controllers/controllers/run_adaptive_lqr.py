@@ -41,7 +41,7 @@ class Controller(Base_Controller):
             #print("old robot: ", self.old_state_robot)
 
             start_time = time.time()
-            self.state_d[5] = 0
+            self.state_d[3] = 1
             self.controller.compute_adaptive_gains(self.old_state_robot, self.state_d, self.state_robot)
             torques = self.controller.compute_control(self.state_robot, self.state_d)
 

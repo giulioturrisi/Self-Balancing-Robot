@@ -48,7 +48,7 @@ class Adaptive_LQR:
         self.K = self.calculate_discrete_LQR_gain(self.lin_state, self.lin_tau, self.horizon)
 
         # adaptive law parameters -----------------------------------------------------
-        self.gamma = 0.001
+        self.gamma = 0.005
         self.adaptive_gains = np.array([[0, 0., 0, 0]])
 
 
@@ -108,8 +108,8 @@ class Adaptive_LQR:
         control = self.K@(state_des - previous_state) # to add adaptive gain
         error = state_des - previous_state
         
-        control[0] = adaptive_gains[0][0]*error[1]*0 + adaptive_gains[1][0]*error[3] + adaptive_gains[2][0]*error[4] + adaptive_gains[3][0]*error[5]
-        control[1] = adaptive_gains[0][0]*error[1]*0 + adaptive_gains[1][0]*error[3] + adaptive_gains[2][0]*error[4] + adaptive_gains[3][0]*error[5]
+        control[0] += adaptive_gains[0][0]*error[1]*0 + adaptive_gains[1][0]*error[3] + adaptive_gains[2][0]*error[4]*0.01 + adaptive_gains[3][0]*error[5]
+        control[1] += adaptive_gains[0][0]*error[1]*0 + adaptive_gains[1][0]*error[3] + adaptive_gains[2][0]*error[4]*0.01 + adaptive_gains[3][0]*error[5]
         #control[0] += adaptive_gains[1][0]*error[1]
         cs.reshape(control, 2, 1)
         
@@ -120,6 +120,8 @@ class Adaptive_LQR:
           
         #should be n_datapoints x num_features
         error_prediction = state_meas[1:] - state_pred[1:]
+        #error_prediction = state_pred[1:] - state_meas[1:]
+        #error_prediction = state_des[1:] - state_pred[1:] 
 
         return cs.reshape(error_prediction,1,5)
         #return cs.reshape(next_state[1:],1,5)
