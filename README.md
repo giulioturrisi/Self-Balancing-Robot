@@ -71,7 +71,7 @@ ros2 launch teleop_twist_joy teleop-launch.py joy_config:='xbox'
 2. Linear Quadratic Regulator
 3. Linear Quadratic Integral Regulator
 4. Least Square Linear Quadratic Regulator
-5. Adaptive Linear Quadratic Integral (MIT rule)
+5. Adaptive Linear Quadratic Regulator (MIT rule)
 6. Sliding Mode
 7. RL policy via IsaacGym
 8. Nonlinear MPC via Acados
