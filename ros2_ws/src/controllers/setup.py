@@ -20,7 +20,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': ['run_lqr = controllers.run_lqr:main',
-                            'run_lqr_least_square = controllers.run_lqr_least_square:main',
+                            'run_least_square_lqr = controllers.run_least_square_lqr:main',
+                            'run_adaptive_lqr = controllers.run_adaptive_lqr:main',
                             'run_ilqr = controllers.run_ilqr:main',
                             'run_lqi = controllers.run_lqi:main',
                             'run_sliding_mode = controllers.run_sliding_mode:main',

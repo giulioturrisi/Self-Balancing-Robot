@@ -64,6 +64,7 @@ class Twip_dynamics:
         tau_l = tau[0]    
         tau_r = tau[1]
 
+
         a11 = self.m_b + 2*self.m_w + 2*self.I_w1/(self.r*self.r)
         a12 = self.m_b*self.l*cs.np.cos(pitch)
         a21 = a12
@@ -88,8 +89,10 @@ class Twip_dynamics:
         D = cs.np.matrix([[d11, d12, 0], [d21, d22, 0], [0, 0, d33]])
 
         tau = cs.np.array([[tau_l, tau_r]]).T
+        tau = cs.np.reshape(tau, (2,1))
         qd = cs.np.array([[x_d, pitch_d, yaw_d]]).T
         qdd = cs.inv(M)@(-C@qd - G - D@qd + B@tau) 
+
 
         return cs.vertcat(qd,qdd)
 

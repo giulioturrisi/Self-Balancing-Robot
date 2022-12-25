@@ -18,8 +18,6 @@ np.set_printoptions(threshold=sys.maxsize)
 class Base_Controller(Node):
     def __init__(self, name):
         super().__init__(name)
-        self.ref_x_d = 0
-        self.ref_yaw_d = 0
 
         self.state_arrived = False
         self.dt = 0.01
@@ -30,6 +28,7 @@ class Base_Controller(Node):
         self.state_robot = np.zeros(6)
         self.old_state_robot = np.zeros(6)
         self.state_d = np.zeros(6)
+        
 
         
         #self.subscription_tf = self.create_subscription(Float64MultiArray,'state',self.state_callback,1)
@@ -60,7 +59,7 @@ class Base_Controller(Node):
 
     def publish_command(self, torques):
 
-        print("torques", torques)
+        #print("torques", torques)
             
 
         tau_l = torques[0]
