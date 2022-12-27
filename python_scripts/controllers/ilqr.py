@@ -76,7 +76,6 @@ class iLQR:
 
     def compute_discrete_LQR_P(self,lin_state, lin_tau):
         """Calculate by backward iterations the optimal LQR gains
-
         Args:
             lin_state (np.array): linearization state
             lin_tau (np.array): linearization control inputs
@@ -108,7 +107,6 @@ class iLQR:
 
     def compute_backward_pass(self, state_des):
         """Calculate ILQR backward pass
-
         Args:
             state_des (np.array): desired state
         """
@@ -127,13 +125,6 @@ class iLQR:
             A_step = A_step*self.dt + np.identity(self.state_dim)
             B_step = B_step*self.dt
 
-            #temp = np.linalg.pinv((np.identity(self.state_dim) - A_step*self.dt/2.0))
-            #A_step = (np.identity(self.state_dim) + A_step*self.dt/2.0)@temp
-            #B_step = temp@B_step*np.sqrt(self.dt)
-
-            #temp = np.linalg.pinv(np.identity(self.state_dim) - A_step*self.dt)
-            #A_step = temp@(B_step*self.dt)
-            #B_step = temp
             self.A_vec[self.horizon - step - 1] = A_step
             self.B_vec[self.horizon - step - 1] = B_step
 
@@ -176,7 +167,6 @@ class iLQR:
 
     def compute_forward_pass(self,initial_state):
         """Calculate ILQR forward pass
-
         Args:
             initial_state (np.array): actual state of the robot
         """
@@ -187,7 +177,6 @@ class iLQR:
 
             start_time = time.time()
             
-            #error = (self.state_vec[step] - state_forward[step])
             error = (self.state_vec[step] - state_forward[step])
 
             # taking value from backward pass
@@ -195,13 +184,10 @@ class iLQR:
             Q_ux = self.Q_ux_vec[step]
             Q_u = self.Q_u_vec[step]
 
-
             # new control update
             k = -pinv_Q_uu@Q_u
             K = -pinv_Q_uu@Q_ux
 
-
-            
             self.control_vec[step,0] += k[0]*1 + K[0]@(error)
             self.control_vec[step,1] += k[1]*1 + K[1]@(error)
             
@@ -226,21 +212,14 @@ class iLQR:
 
 
             # integration
-            #print("state forward", state)
             self.state_vec[step+1] = euler_integration.euler_integration(state, qdd, self.dt).reshape(self.state_dim,1)
 
-            
-            
-            '''#cost
-            cost_temp = cost_temp + error'*Q*error + [u_l(1,step);u_r(1,step)]'*R*[u_l(1,step);u_r(1,step)];'''
 
-        #print("evolution forward pass", self.state_vec)
 
 
 
     def compute_forward_simulation(self,initial_state):
         """Calculate first ILQR rollout
-
         Args:
             initial_state (np.array): actual state of the robot
         """
@@ -264,14 +243,11 @@ class iLQR:
 
     def compute_control(self, state, state_des):
         """Compute ILQR control inputs
-
         Args:
             state (np.array): actual robot state
             state_des (np.array): desired robot state
-
         Returns:
             (np.array): optimized control inputs
-
         """
         state_des[1] = self.twip.compute_angle_from_vel(state_des[3])
         state_des = state_des.reshape(self.state_dim,1)

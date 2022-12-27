@@ -68,7 +68,6 @@ class Adaptive_LQR:
         Args:
             lin_state (np.array): linearization state
             lin_tau (np.array): linearization control inputs
-
         Returns:
              K (np.array): optimal gains
         """
@@ -156,7 +155,6 @@ class Adaptive_LQR:
             previous_state (np.array): state at timestep K-1
             control (np.array): control at timestep K-1
             state_meas (np.array): state measured at time K  
-
         """
         for i in range(0, previous_state.shape[0]):
             state_pred_lift, error = self.compute_error(previous_state[i], control[i], state_meas[i])
@@ -174,10 +172,8 @@ class Adaptive_LQR:
         Args:
             state (np.array): actual robot state
             state_des (np.array): desired robot state
-
         Returns:
             (np.array): optimized control inputs
-
         """
         
         state_des[1] = self.twip.compute_angle_from_vel(state_des[3])

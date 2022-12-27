@@ -30,11 +30,9 @@ class Sliding_Mode:
 
     def calculate_sliding_surface(self,state, state_des):
         """Compute sliding surface
-
         Args:
             state (np.array): actual state of the robot
             state_des (np.array): desired state
-
         Returns:
             (np.array): sliding surface for pitch, yaw, and linear velocity 
         """
@@ -48,14 +46,11 @@ class Sliding_Mode:
 
     def compute_control(self, state, state_des):
         """Compute SLiding Mode control inputs
-
         Args:
             state (np.array): actual robot state
             state_des (np.array): desired robot state
-
         Returns:
             (np.array): control inputs
-
         """
 
         state_des[1] = self.twip.compute_angle_from_vel(state_des[3])
@@ -63,11 +58,12 @@ class Sliding_Mode:
         u_ff = self.twip.compute_feed_forward(state_des[1], state_des[3])
 
         s = self.calculate_sliding_surface(state, state_des)
-        #calculate equivalent control
+        
+        # TO DO: calculate equivalent control ------------------------------
+        
         #gen_forces = -self.k_s*np.sign(s)
         gen_forces = self.k_s*np.tanh(s) 
         control_matrix = self.twip.inv_control_matrix()
-
         
         torque = control_matrix@gen_forces
 

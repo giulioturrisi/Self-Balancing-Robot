@@ -58,15 +58,13 @@ class LS_LQR:
 
     def calculate_discrete_LQR_gain(self,lin_state, lin_tau, horizon):
         """Calculate by backward iterations the optimal LQR gains
-
         Args:
             lin_state (np.array): linearization state
             lin_tau (np.array): linearization control inputs
-
         Returns:
              K (np.array): optimal gains
         """
-        #self.P_next = np.identity(6)
+        
 
         A = self.twip.A_f(lin_state, lin_tau)
         B = self.twip.B_f(lin_state, lin_tau)
@@ -111,10 +109,8 @@ class LS_LQR:
 
     def lift_space(self, state):
         """Nonlinear features for least square
-
         Args:
             state (np.array): state to lift 
-
         Returns:
             (np.array): nonlinear state
         """
@@ -124,12 +120,10 @@ class LS_LQR:
 
     def compute_error_and_lift(self, previous_state, control, state_meas):
         """Compute error signal and lift the state
-
         Args:
             previous_state (np.array): state at timestep K-1
             control (np.array): control at timestep K-1
             state_meas (np.array): state measured at time K  
-
         Returns:
             (np.array, np.array): nonlinear state, error signal
         """
@@ -155,7 +149,6 @@ class LS_LQR:
     
     def recursive_least_square(self, previous_state, control, state_meas):
         """Compute a recursive least square update
-
         Args:
             previous_state (np.array): state at timestep K-1
             control (np.array): control at timestep K-1
@@ -178,12 +171,10 @@ class LS_LQR:
     
     def full_least_square(self, previous_state, control, state_meas):
         """Compute a full least square update
-
         Args:
             previous_state (np.array): state at timestep K-1
             control (np.array): control at timestep K-1
             state_meas (np.array): state measured at time K  
-
         """
         for i in range(0, previous_state.shape[0]):
             state_pred_lift, error = self.compute_error_and_lift(previous_state[i], control[i], state_meas[i])
@@ -206,14 +197,11 @@ class LS_LQR:
 
     def compute_control(self, state, state_des):
         """Compute feedforward and LQR control inputs
-
         Args:
             state (np.array): actual robot state
             state_des (np.array): desired robot state
-
         Returns:
             (np.array): optimized control inputs
-
         """
         
         state_des[1] = self.twip.compute_angle_from_vel(state_des[3])

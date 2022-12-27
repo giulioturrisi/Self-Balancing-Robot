@@ -34,7 +34,6 @@ class PID:
 
     def calculate_errors(self,state, state_des):
         """Compute PID errors signal
-
         Args:
             state (np.array): actual state of the robot
             state_des (np.array): desired state
@@ -57,14 +56,12 @@ class PID:
 
     def compute_control(self, state, state_des):
         """Compute PID control inputs
-
         Args:
             state (np.array): actual robot state
             state_des (np.array): desired robot state
 
         Returns:
             (np.array): control inputs
-
         """
         gen_forces = self.calculate_errors(state, state_des)
 

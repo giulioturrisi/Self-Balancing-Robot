@@ -41,11 +41,9 @@ class LQR:
 
     def calculate_discrete_LQR_gain(self,lin_state, lin_tau):
         """Calculate by backward iterations the optimal LQR gains
-
         Args:
             lin_state (np.array): linearization state
             lin_tau (np.array): linearization control inputs
-
         Returns:
              K (np.array): optimal gains
         """
@@ -74,14 +72,12 @@ class LQR:
 
     def compute_control(self, state, state_des):
         """Compute feedforward and LQR control inputs
-
         Args:
             state (np.array): actual robot state
             state_des (np.array): desired robot state
 
         Returns:
             (np.array): optimized control inputs
-
         """
         state_des[1] = self.twip.compute_angle_from_vel(state_des[3])
         u_ff = self.twip.compute_feed_forward(state_des[1], state_des[3])
@@ -91,4 +87,7 @@ class LQR:
 
 
 if __name__=="__main__":
-    LQR()
+    controller = LQR(dt = 0.001)
+    x = np.array([1, 0.1, 0.1, 0.1, 0.1, 0.1])
+    x_des = np.array([0, 0, 0, 0, 0., 0.])
+    print("control", controller.compute_control(x, x_des))

@@ -34,7 +34,6 @@ class Sampling_MPC:
         self.control_dim = 2
 
         self.twip_jax = Twip_dynamics_jax()
-        self.twip = Twip_dynamics()
 
         self.Q = jnp.identity(self.state_dim)
         self.Q.at[0,0].set(0.0)
@@ -45,10 +44,12 @@ class Sampling_MPC:
         self.Q.at[5,5].set(0.2)
         self.R = jnp.identity(self.control_dim)*10
 
-
-
+        # lqr control law used as baseline to analyze performance ---------------------------W----------------
+        self.twip = Twip_dynamics()
         self.lqr = LQR(dt = self.dt/10.)
 
+
+        # the first call of jax is very slow, hence we should do this since the beginning! ------------------
         if(init_jax):
             vectorized_forward_sim = jax.vmap(self.compute_forward_simulations, in_axes=(0,0,0), out_axes=0)
             self.jit_vectorized_forward_sim = jax.jit(vectorized_forward_sim)
@@ -65,10 +66,13 @@ class Sampling_MPC:
 
 
     def compute_forward_simulations_baseline(self, initial_state, state_des, parameters):
-        """Calculate rollout
-
+        """Calculate cost of a rollout of the dynamics given an LQR control law
         Args:
             initial_state (np.array): actual state of the robot
+            state_des (np.array): desired state of the robot
+            parameters (np.array): parameters for the controllers
+        Returns:
+            (float): cost of the rollout
         """
 
         state = initial_state
@@ -95,10 +99,13 @@ class Sampling_MPC:
     
 
     def compute_forward_simulations(self, initial_state, state_des, parameters):
-        """Calculate rollout
-
+        """Calculate cost of a rollout of the dynamics given random parameters
         Args:
             initial_state (np.array): actual state of the robot
+            state_des (np.array): desired state of the robot
+            parameters (np.array): parameters for the controllers
+        Returns:
+            (float): cost of the rollout
         """
 
         state = initial_state
@@ -132,14 +139,11 @@ class Sampling_MPC:
     
     def compute_control(self, state, state_des):
         """Compute control inputs
-
         Args:
             state (np.array): actual robot state
             state_des (np.array): desired robot state
-
         Returns:
             (np.array): optimized control inputs
-
         """
         state_vec = jnp.tile(state, (self.num_computation,1))
         state_des_vec = jnp.tile(state_des, (self.num_computation,1))
