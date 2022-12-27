@@ -26,6 +26,7 @@ RUN pip install pgm_reader
 RUN pip install casadi
 RUN pip install numba
 RUN pip install control
+RUN pip install --upgrade "jax[cpu]"
 
 #PIGPIO
 RUN apt install -y python-setuptools python3-setuptools
