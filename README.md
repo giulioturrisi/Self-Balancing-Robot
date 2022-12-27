@@ -77,6 +77,7 @@ ros2 launch teleop_twist_joy teleop-launch.py joy_config:='xbox'
 8. Nonlinear MPC via Acados
 9. Iterative Linear Quadratic Regulator
 10. Iterative Linear Quadratic Regulator via Crocoddyl
+11. Predictive Sampling 
 
 ## List of available state estimators
 1. Extended Kalman Filter

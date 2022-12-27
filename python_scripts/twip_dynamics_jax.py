@@ -109,11 +109,11 @@ class Twip_dynamics_jax:
         #x = x + x_dot*dt
 
         pitch = pitch + pitch_dot*dt
-        pitch_dot = pitch_dot + qdd[0][1]*dt
+        pitch_dot = pitch_dot + qdd[1][0]*dt
         #pitch = pitch + pitch_dot*dt
 
         yaw = yaw + yaw_dot*dt
-        yaw_dot = yaw_dot + qdd[0][2]*dt
+        yaw_dot = yaw_dot + qdd[2][0]*dt
         #yaw = yaw + yaw_dot*dt
 
         state = jnp.array([x, pitch, yaw, x_dot, pitch_dot, yaw_dot])

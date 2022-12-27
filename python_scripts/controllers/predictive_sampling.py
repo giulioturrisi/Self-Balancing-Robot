@@ -5,18 +5,24 @@ from jax import random
 
 import numpy as np
 import time
+
 import sys
 sys.path.append('/home/python_scripts/')
-
 from twip_dynamics_jax import Twip_dynamics_jax
 
+sys.path.append('/home/python_scripts/controllers')
+from lqr import LQR 
 
+import euler_integration
+from twip_dynamics import Twip_dynamics
+
+#TO DO: for loops are too slow to compile!
 
 class Sampling_MPC:
     """This is a small class that implements a sampling based control law"""
 
 
-    def __init__(self, horizon = None, dt = None):
+    def __init__(self, horizon = 200, dt = 0.1, num_computation = 100, init_jax = True):
         """
         Args:
             horizon (int): how much to look into the future for optimizing the gains 
@@ -27,74 +33,99 @@ class Sampling_MPC:
         self.state_dim = 6
         self.control_dim = 2
 
-        self.twip = Twip_dynamics_jax()
+        self.twip_jax = Twip_dynamics_jax()
+        self.twip = Twip_dynamics()
 
-        self.Q = jnp.identity(6)
-
+        self.Q = jnp.identity(self.state_dim)
         self.Q.at[0,0].set(0.0)
         self.Q.at[1,1].set(5.0)
         self.Q.at[2,2].set(0.0)
         self.Q.at[3,3].set(2.0)
         self.Q.at[4,4].set(1.0)
         self.Q.at[5,5].set(0.2)
+        self.R = jnp.identity(self.control_dim)*10
 
-        self.R = jnp.identity(2)*10
 
-        self.state_vec = jnp.zeros(((self.horizon+1), self.state_dim, 1));
-        self.control_vec = jnp.zeros(((self.horizon), self.control_dim, 1));
 
-        
-    
+        self.lqr = LQR(dt = self.dt/10.)
 
-    def compute_forward_simulation(self, initial_state, state_des, parameters):
+        if(init_jax):
+            vectorized_forward_sim = jax.vmap(self.compute_forward_simulations, in_axes=(0,0,0), out_axes=0)
+            self.jit_vectorized_forward_sim = jax.jit(vectorized_forward_sim)
+            
+            threads = num_computation
+            
+            xs_des = jnp.zeros((6*threads,)).reshape(threads,6)
+            xs = jnp.zeros((6*threads,)).reshape(threads,6)
+            key = random.PRNGKey(42)
+            parameters_map = random.randint(key,(4*threads,), minval=-40, maxval=40 )/20.0
+            self.parameters_map = parameters_map.reshape(threads,4)
+            
+            self.jit_vectorized_forward_sim(xs, xs_des, self.parameters_map)
+
+
+    def compute_forward_simulations_baseline(self, initial_state, state_des, parameters):
         """Calculate rollout
 
         Args:
             initial_state (np.array): actual state of the robot
         """
 
-        '''print("######### init")
-        print("initial_state", initial_state)
-        print("state_des", state_des)
-        print("parameters prima", parameters)'''
-        #parameters = parameters[0]
-        #print("parameters dopo", parameters)
+        state = initial_state
+        cost = 0
+        
+        for step in range(0,self.horizon):
+            # simulate system
+            error = state_des - state
 
+            control_lqr = self.lqr.K@error
+            control = jnp.array([control_lqr[0].__float__(), control_lqr[1].__float__()])
+
+
+            qdd = self.twip.forward_dynamics(state.reshape(self.state_dim,), control); 
+            qdd = qdd[3:6]
+            
+            
+            # integration
+            state = euler_integration.euler_integration(state, qdd, self.dt).reshape(self.state_dim,)
+            
+            cost += (state.reshape(self.state_dim,1) - state_des.reshape(self.state_dim,1)).T@self.Q@(state.reshape(self.state_dim,1) - state_des.reshape(self.state_dim,1))
+        return cost[0][0] 
         
-        
+    
+
+    def compute_forward_simulations(self, initial_state, state_des, parameters):
+        """Calculate rollout
+
+        Args:
+            initial_state (np.array): actual state of the robot
+        """
 
         state = initial_state
         cost = 0
-        cost = cost+1
         
         for step in range(0,self.horizon):
 
             # simulate system
+            error = state_des - state
 
-            
-            u_0 = jax.numpy.interp(step, jnp.array([self.horizon - 17, self.horizon - 10, self.horizon - 5, self.horizon]), jnp.array([parameters[0], parameters[1], parameters[2], parameters[3]]))
-            u_1 = jax.numpy.interp(step, jnp.array([self.horizon - 17, self.horizon - 10, self.horizon - 5, self.horizon]), jnp.array([parameters[4], parameters[5], parameters[6], parameters[7]]))
-            
-
+            #u_0 = -1.78144*error[1] - 0.300708*error[3]  -0.369117*error[4] -0.100764*error[5]
+            #u_1 = -1.78144*error[1] - 0.300708*error[3]  -0.369117*error[4] +0.100764*error[5]
+            u_0 = parameters[0]*error[1] + parameters[1]*error[3] + parameters[2]*error[4] - parameters[3]*error[5]
+            u_1 = parameters[0]*error[1] + parameters[1]*error[3] + parameters[2]*error[4] + parameters[3]*error[5]
             control = jnp.array([u_0, u_1])
             control = jax.numpy.where(control > 0.5, 0.5, control)
             control = jax.numpy.where(control < -0.5, -0.5, control)
-            
-            #print("control", control)
-            #qdd = self.twip.forward_dynamics(state,control);
-            qdd = self.twip.forward_dynamics(state.reshape(self.state_dim,),jnp.array([u_0, u_1])); 
-            qdd = qdd[3:6]
 
-            #print("state pre int", state)
+            
+            qdd = self.twip_jax.forward_dynamics(state.reshape(self.state_dim,), control);
+            qdd = qdd[3:6]
             
             # integration
-            #self.state_vec.at[step+1].set(self.twip.euler_integration(state, qdd, self.dt).reshape(self.state_dim,1))
-            state = self.twip.euler_integration(state, qdd, self.dt).reshape(self.state_dim,1)
+            state = self.twip_jax.euler_integration(state, qdd, self.dt).reshape(self.state_dim,)
             
-            #print("state", state)
-            cost += (state - state_des.reshape(self.state_dim,1)).T@self.Q@(state - state_des.reshape(self.state_dim,1))
-        #print("cost", cost)
-        return cost
+            cost += (state.reshape(self.state_dim,1) - state_des.reshape(self.state_dim,1)).T@self.Q@(state.reshape(self.state_dim,1) - state_des.reshape(self.state_dim,1))
+        return cost[0][0]
     
     
     
@@ -110,79 +141,104 @@ class Sampling_MPC:
             (np.array): optimized control inputs
 
         """
+        state_vec = jnp.tile(state, (self.num_computation,1))
+        state_des_vec = jnp.tile(state_des, (self.num_computation,1))
+        
+        cost = self.jit_vectorized_forward_sim(state_vec, state_des_vec, self.parameters_map)
+        best_index = np.nanargmin(cost)
+        best_parameters = self.parameters_map[best_index]
+        
+        error = state_des - state
+        u_0 = best_parameters[0]*error[1] + best_parameters[1]*error[3] + best_parameters[2]*error[4] - best_parameters[3]*error[5]
+        u_1 = best_parameters[0]*error[1] + best_parameters[1]*error[3] + best_parameters[2]*error[4] + best_parameters[3]*error[5]
+        control = np.array([u_0, u_1])
 
-        return [0,0]
+        return control
 
-def sum_vector(x: np.ndarray) -> np.ndarray:
-    """Assumes `x` is a vector"""
-    print("x", x)
-    return np.sum(x)
 
 
 
 if __name__=="__main__":
-    control = Sampling_MPC(dt=0.01, horizon=50)
-    threads = 1000
+    control = Sampling_MPC(dt=0.01, horizon=20, init_jax = False)
+
+    # single computation test ------------------------------------
     
-    x = jnp.array([0, 0, 0, 0, 1., 0.])
-    x_des = jnp.array([0, 0, 0, 0, 1., 0.])
+    x = jnp.array([0.1, 0.1, 0.1, 0.1, 0.1, 0.1])
+    x_des = jnp.array([0, 0, 0, 0, 0., 0.])
     key = random.PRNGKey(42)
-    parameters = random.uniform(key,(10,)).reshape(-1,10)
+    parameters = random.uniform(key,(4,), minval=-1, maxval=1)*3.0
+    parameters= parameters.reshape(-1,4)
+    print("parameters: ", parameters)
+    print("K lqr: ", control.lqr.K)
     
     start_time = time.time()
-    control.compute_forward_simulation(x, x_des, parameters[0])
-    print("no compiled jax: ", time.time()-start_time)
-
+    cost = control.compute_forward_simulations_baseline(x, x_des, parameters[0])
+    print("baseline computation time: ", time.time()-start_time)
+    print("cost: ", cost)
 
 
     start_time = time.time()
-    jit_fd = jax.jit(control.compute_forward_simulation)
-    print("compilation jax: ", time.time()-start_time)
+    cost = control.compute_forward_simulations(x, x_des, parameters[0])
+    print("non compiled jax time: ", time.time()-start_time)
+    print("cost: ", cost)
+
     start_time = time.time()
-    jit_fd(x, x_des, parameters[0])
+    jit_fd = jax.jit(control.compute_forward_simulations)
+    #print("compilation jax: ", time.time()-start_time)
+    
+    '''start_time = time.time() 
+    cost = jit_fd(x, x_des, parameters[0])
     print("compiled jax: ", time.time()-start_time)
-
-    start_time = time.time()
-    jit_fd(x, x_des, parameters[0])
-    print("compiled2 jax: ", time.time()-start_time)
-
-
-    a = np.arange(20).reshape((4, 5))
-    print("a", a)
-    jax.vmap(sum_vector)(a)
-
-    print("\n")
-
-    threads = 3000
-    xs = jnp.zeros((6*threads,)).reshape(threads,6)
-    xs_des = jnp.zeros((6*threads,)).reshape(threads,6)# + x_des.reshape(threads,6)
+    #print("cost: ", cost)
     
+    start_time = time.time()
+    cost = jit_fd(x, x_des, parameters[0])
+    print("compiled2 jax: ", time.time()-start_time)'''
+    #print("cost: ", cost)
+
+
+    # parallel computation test ------------------------------------
+
+    threads = 10
+    xs = jnp.tile(x, (threads,1)).reshape(threads,6)
+    xs_des = jnp.tile(x_des, (threads,1)).reshape(threads,6)
+
+    
+    #print("xs", xs)
 
     key = random.PRNGKey(42)
-    parameters_map = random.uniform(key,(10*threads,)).reshape(threads,10)
+    parameters_map = random.randint(key,(4*threads,), minval=-40, maxval=40 )/20.0
+    parameters_map = parameters_map.reshape(threads,4)
 
-    print("xs", xs.shape)
-    print("xs_des", xs_des.shape)
-    print("parameters_map", parameters_map.shape)    
+    #print("parameters", parameters_map)
 
-    start_time = time.time()
-    v_fd = jax.vmap(control.compute_forward_simulation, in_axes=(0,0,0), out_axes=0)
-    print("costs_out", v_fd(xs, xs_des, parameters_map))
-    print("VMAP jax: ", time.time()-start_time)
     
-    
+    v_fd = jax.vmap(control.compute_forward_simulations, in_axes=(0,0,0), out_axes=0)
     start_time = time.time()
+    cost = v_fd(xs, xs_des, parameters_map)
+    print("non compiled VMAP jax: ", time.time()-start_time)
+    print("costs_out", cost)
+    print("minimum cost", np.nanmin(cost))
+    min_cost_index = np.nanargmin(cost)
+    print("minimum cost index", min_cost_index)
+    print("best parameters", parameters_map[min_cost_index])
+    
+    '''start_time = time.time()
     jit_v_fd = jax.jit(v_fd)
-    print("parallel compilation jax: ", time.time()-start_time)
-
-    start_time = time.time()
-    jit_v_fd(xs, xs_des, parameters_map)
-    print("parallel compiled jax: ", time.time()-start_time)
+    #print("parallel compilation jax: ", time.time()-start_time)
 
     start_time = time.time()
     costs = jit_v_fd(xs, xs_des, parameters_map)
-    print("parallel compiled2 jax: ", time.time()-start_time)
-    print("costs", costs)
+    print("parallel compiled jax: ", time.time()-start_time)
+    #print("costs", costs)
+
+    start_time = time.time()
+    costs = jit_v_fd(xs, xs_des, parameters_map)
+    print("costs_out", costs)
+    print("minimum cost", np.nanmin(cost))
+    print("parallel compiled2 jax with min cost: ", time.time()-start_time)'''
+
+    
     
     
  
