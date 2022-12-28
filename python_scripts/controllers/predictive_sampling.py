@@ -2,6 +2,10 @@ import jax
 import jax.numpy as jnp
 from jax import jit
 from jax import random
+import os
+#os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"  # add this
+os.environ["XLA_PYTHON_CLIENT_ALLOCATOR"] = "platform"
+#jax.config.update('jax_platform_name', 'cpu')
 
 import numpy as np
 import time
@@ -203,7 +207,7 @@ if __name__=="__main__":
 
     # parallel computation test ------------------------------------
 
-    threads = 10
+    threads = 100000
     xs = jnp.tile(x, (threads,1)).reshape(threads,6)
     xs_des = jnp.tile(x_des, (threads,1)).reshape(threads,6)
 
@@ -227,7 +231,7 @@ if __name__=="__main__":
     print("minimum cost index", min_cost_index)
     print("best parameters", parameters_map[min_cost_index])
     
-    '''start_time = time.time()
+    start_time = time.time()
     jit_v_fd = jax.jit(v_fd)
     #print("parallel compilation jax: ", time.time()-start_time)
 
@@ -240,8 +244,7 @@ if __name__=="__main__":
     costs = jit_v_fd(xs, xs_des, parameters_map)
     print("costs_out", costs)
     print("minimum cost", np.nanmin(cost))
-    print("parallel compiled2 jax with min cost: ", time.time()-start_time)'''
-
+    print("parallel compiled2 jax with min cost: ", time.time()-start_time)
     
     
     
