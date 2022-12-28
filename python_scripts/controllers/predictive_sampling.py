@@ -4,7 +4,7 @@ from jax import jit
 from jax import random
 import os
 #os.environ["XLA_PYTHON_CLIENT_ALLOCATOR"] = "platform"
-os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".5"
+os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".85"
 #jax.config.update('jax_platform_name', 'cpu')
 
 import numpy as np
@@ -253,7 +253,15 @@ if __name__=="__main__":
     #print("minimum cost", np.nanmin(cost))
     print("parallel VMAP jax: ", time.time()-start_time)
     
-    
+    x = jnp.array([0, 0.2, 0.4, 1.2, 0.1, 0.])
+    x_des = jnp.array([0, 0.2, 0, 0.2, 0.2, 0.])
+    xs = jnp.tile(x, (threads,1)).reshape(threads,6)    
+    xs_des = jnp.tile(x_des, (threads,1)).reshape(threads,6)
+    start_time = time.time()
+    costs = jit_v_fd(xs, xs_des, parameters_map)
+    #print("costs_out", costs)
+    #print("minimum cost", np.nanmin(cost))
+    print("parallel VMAP2 jax: ", time.time()-start_time)
     
  
     '''start_time = time.time()
