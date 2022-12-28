@@ -118,6 +118,9 @@ RUN echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/acados/lib"' >> /root/.bashr
 RUN echo 'export ACADOS_SOURCE_DIR="/acados"' >> /root/.bashrc
 
 
+#JAX
+RUN pip install --upgrade "jax[cuda]" -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+
 
 
 

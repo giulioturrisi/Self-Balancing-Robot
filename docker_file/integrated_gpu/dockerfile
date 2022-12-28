@@ -111,6 +111,10 @@ RUN echo 'export CMAKE_PREFIX_PATH=/opt/openrobots:$CMAKE_PREFIX_PATH' >> /root/
 #RUN echo 'export PYTHONPATH=/opt/openrobots/lib/python3.10/site-packages:$PYTHONPATH' >> /root/.bashrc
 
 
+#JAX
+RUN pip install --upgrade "jax[cpu]"
+
+
 
 #SHELL COLOR
 SHELL ["/bin/bash", "-c"]

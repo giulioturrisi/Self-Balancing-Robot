@@ -3,8 +3,8 @@ import jax.numpy as jnp
 from jax import jit
 from jax import random
 import os
-#os.environ["XLA_PYTHON_CLIENT_PREALLOCATE"] = "false"  # add this
-os.environ["XLA_PYTHON_CLIENT_ALLOCATOR"] = "platform"
+#os.environ["XLA_PYTHON_CLIENT_ALLOCATOR"] = "platform"
+os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".5"
 #jax.config.update('jax_platform_name', 'cpu')
 
 import numpy as np
@@ -87,7 +87,7 @@ class Sampling_MPC:
             error = state_des - state
 
             control_lqr = self.lqr.K@error
-            control = jnp.array([control_lqr[0].__float__(), control_lqr[1].__float__()])
+            control = np.array([control_lqr[0].__float__(), control_lqr[1].__float__()])
 
 
             qdd = self.twip.forward_dynamics(state.reshape(self.state_dim,), control); 
@@ -176,32 +176,39 @@ if __name__=="__main__":
     key = random.PRNGKey(42)
     parameters = random.uniform(key,(4,), minval=-1, maxval=1)*3.0
     parameters= parameters.reshape(-1,4)
-    print("parameters: ", parameters)
-    print("K lqr: ", control.lqr.K)
+    #print("parameters: ", parameters)
+    #print("K lqr: ", control.lqr.K)
     
     start_time = time.time()
     cost = control.compute_forward_simulations_baseline(x, x_des, parameters[0])
-    print("baseline computation time: ", time.time()-start_time)
-    print("cost: ", cost)
+    print("baseline computation: ", time.time()-start_time)
+    #print("cost: ", cost)
+
+    start_time = time.time()
+    cost = control.compute_forward_simulations_baseline(x, x_des, parameters[0])
+    print("baseline computation: ", time.time()-start_time)
+    #print("cost: ", cost)
+
+    
 
 
     start_time = time.time()
     cost = control.compute_forward_simulations(x, x_des, parameters[0])
-    print("non compiled jax time: ", time.time()-start_time)
-    print("cost: ", cost)
+    print("non compiled jax single: ", time.time()-start_time)
+    #print("cost: ", cost)
 
     start_time = time.time()
     jit_fd = jax.jit(control.compute_forward_simulations)
     #print("compilation jax: ", time.time()-start_time)
     
-    '''start_time = time.time() 
+    start_time = time.time() 
     cost = jit_fd(x, x_des, parameters[0])
-    print("compiled jax: ", time.time()-start_time)
+    #print("compiled jax: ", time.time()-start_time)
     #print("cost: ", cost)
     
     start_time = time.time()
     cost = jit_fd(x, x_des, parameters[0])
-    print("compiled2 jax: ", time.time()-start_time)'''
+    print("compiled jax single: ", time.time()-start_time)
     #print("cost: ", cost)
 
 
@@ -225,11 +232,11 @@ if __name__=="__main__":
     start_time = time.time()
     cost = v_fd(xs, xs_des, parameters_map)
     print("non compiled VMAP jax: ", time.time()-start_time)
-    print("costs_out", cost)
-    print("minimum cost", np.nanmin(cost))
+    #print("costs_out", cost)
+    #print("minimum cost", np.nanmin(cost))
     min_cost_index = np.nanargmin(cost)
-    print("minimum cost index", min_cost_index)
-    print("best parameters", parameters_map[min_cost_index])
+    #print("minimum cost index", min_cost_index)
+    #print("best parameters", parameters_map[min_cost_index])
     
     start_time = time.time()
     jit_v_fd = jax.jit(v_fd)
@@ -237,14 +244,14 @@ if __name__=="__main__":
 
     start_time = time.time()
     costs = jit_v_fd(xs, xs_des, parameters_map)
-    print("parallel compiled jax: ", time.time()-start_time)
+    #print("parallel compiled jax: ", time.time()-start_time)
     #print("costs", costs)
 
     start_time = time.time()
     costs = jit_v_fd(xs, xs_des, parameters_map)
-    print("costs_out", costs)
-    print("minimum cost", np.nanmin(cost))
-    print("parallel compiled2 jax with min cost: ", time.time()-start_time)
+    #print("costs_out", costs)
+    #print("minimum cost", np.nanmin(cost))
+    print("parallel VMAP jax: ", time.time()-start_time)
     
     
     
