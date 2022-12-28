@@ -4,7 +4,7 @@ from jax import jit
 from jax import random
 import os
 #os.environ["XLA_PYTHON_CLIENT_ALLOCATOR"] = "platform"
-os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".85"
+os.environ["XLA_PYTHON_CLIENT_MEM_FRACTION"] = ".75"
 #jax.config.update('jax_platform_name', 'cpu')
 
 import numpy as np
@@ -214,7 +214,7 @@ if __name__=="__main__":
 
     # parallel computation test ------------------------------------
 
-    threads = 100000
+    threads = 10000
     xs = jnp.tile(x, (threads,1)).reshape(threads,6)
     xs_des = jnp.tile(x_des, (threads,1)).reshape(threads,6)
 
