@@ -7,7 +7,7 @@ from twip_dynamics import Twip_dynamics
 
 
 
-class Extended_Kalman:
+class Extended_Kalman_Filter:
     """This is a small class that computes an EKF for state estimation"""
 
 
@@ -84,7 +84,7 @@ class Extended_Kalman:
 
 
 
-    def filter(self, state, control, measurements):
+    def compute_filter(self, state, control, measurements):
         """Compute prediction and correction step of the EKF filter
 
         Args:

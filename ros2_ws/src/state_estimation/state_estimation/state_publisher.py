@@ -9,7 +9,12 @@ from tf2_ros import TransformBroadcaster, TransformStamped
 from geometry_msgs.msg import PoseStamped, Twist, Vector3 # type: ignore
 from geometry_msgs.msg import TwistStamped
 
-import math
+
+import sys
+sys.path.append('/home/python_scripts/state_estimators')
+from extended_kalman_filter import Extended_Kalman_Filter 
+
+import numpy as np
 
 class StatePublisher(Node):
 
@@ -36,7 +41,16 @@ class StatePublisher(Node):
         self.pitch = 0.0
         self.yaw = 0.0
 
+        self.EKF = Extended_Kalman_Filter(V = 1, W = 1, P = 1)
+        self.state_robot_filtered = np.array(6)
+
+
     def tf_callback(self):
+        
+        #measurements = [0.0, self.pitch, self.yaw, 0.0, 0.0, 0.0] 
+        #controls = [self.tau_l, self.tau_r]
+        #self.state_robot_filtered = self.EKF.compute_filter(self.state_robot_filtered, controls, measurements)
+
         # message declarations
         odom_trans = TransformStamped()
         odom_trans.header.frame_id = 'odom'
@@ -50,9 +64,9 @@ class StatePublisher(Node):
 
         # update transform
         odom_trans.header.stamp = now.to_msg()
-        odom_trans.transform.translation.x = 0.0 #self.odom_x
-        odom_trans.transform.translation.y = 0.0 #self.odom_y
-        odom_trans.transform.translation.z = math.sin(math.pi/2. - self.pitch)*0.25
+        odom_trans.transform.translation.x = 0.0 
+        odom_trans.transform.translation.y = 0.0 
+        odom_trans.transform.translation.z = sin(pi/2. - self.pitch)*0.25
         odom_trans.transform.rotation = \
             euler_to_quaternion(self.roll, self.pitch, self.yaw) # roll,pitch,yaw #self.odom_theta
 
