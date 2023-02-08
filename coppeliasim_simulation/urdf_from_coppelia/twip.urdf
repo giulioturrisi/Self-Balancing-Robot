@@ -1,5 +1,11 @@
 <?xml version="1.0"?>
 <robot name="body__32__">
+    <material name="grey_light">
+        <color rgba="0.5 0.5 0.5 1.0"/>
+    </material>
+    <material name="grey">
+        <color rgba="0.2 0.2 0.2 1.0"/>
+    </material>
     <link name="body__32__">
         <inertial>
             <origin rpy="-3.141593 3.141593 -3.141593" xyz="0.000000 0.000000 0.000000" />
@@ -12,7 +18,17 @@
                 <box size="0.100000 0.200000 0.500000" />
             </geometry>
         </collision>
+        <visual>
+            <origin rpy="-3.141593 3.141593 -3.141593" xyz="0.000000 0.000000 0.000000" />
+            <geometry>
+                <box size="0.100000 0.200000 0.500000" />
+            </geometry>
+            <material name="grey_light"/>
+        </visual>
     </link>
+    
+    
+    
     <link name="Wheel1__34__">
         <inertial>
             <origin rpy="-3.141593 3.141593 -3.141593" xyz="0.000000 -0.000000 0.000000" />
@@ -25,6 +41,13 @@
                 <cylinder length="0.029999999329448" radius="0.10000000149012" />
             </geometry>
         </collision>
+        <visual>
+            <origin rpy="-3.141593 3.141593 -3.141593" xyz="0.000000 0.000000 0.000000" />
+            <geometry>
+                <cylinder length="0.029999999329448" radius="0.10000000149012" />
+            </geometry>
+            <material name="grey"/>
+        </visual>
     </link>
     <joint name="Revolute_joint1__33__" type="continuous">
         <axis xyz="0 0 1" />
@@ -32,6 +55,9 @@
         <child link="Wheel1__34__" />
         <origin rpy="-1.570770 3.141593 -3.141593" xyz="0.000000 -0.180000 -0.250000" />
     </joint>
+    
+    
+    
     <link name="Wheel2__36__">
         <inertial>
             <origin rpy="-3.141593 3.141593 -3.141593" xyz="0.000000 -0.000000 0.000000" />
@@ -44,6 +70,13 @@
                 <cylinder length="0.029999999329448" radius="0.10000001639128" />
             </geometry>
         </collision>
+        <visual>
+            <origin rpy="-3.141593 3.141593 -3.141593" xyz="0.000000 0.000000 0.000000" />
+            <geometry>
+                <cylinder length="0.029999999329448" radius="0.10000000149012" />
+            </geometry>
+            <material name="grey"/>
+        </visual>
     </link>
     <joint name="Revolute_joint2__35__" type="continuous">
         <axis xyz="0 0 1" />
