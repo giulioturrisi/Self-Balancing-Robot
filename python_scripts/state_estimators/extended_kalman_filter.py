@@ -11,7 +11,7 @@ class Extended_Kalman_Filter:
     """This is a small class that computes an EKF for state estimation"""
 
 
-    def __init__(self, V, W, P):
+    def __init__(self, V, W, P, dt):
         """
         Args:
             V (float): process noise
@@ -21,6 +21,7 @@ class Extended_Kalman_Filter:
 
         self.state_dim = 6
         self.control_dim = 2
+        self.dt = dt
 
         # process noise
         self.V = np.eye(self.state_dim)*V
@@ -32,6 +33,8 @@ class Extended_Kalman_Filter:
 
         # observation matrix
         self.C = np.eye(self.state_dim)
+
+        self.twip = Twip_dynamics()
 
 
 
@@ -76,9 +79,10 @@ class Extended_Kalman_Filter:
         """
         R = self.P@self.C.T@np.linalg.pinv(self.C@self.P@self.C.T + self.W)
         v = measurements - predicted_state
-        state_new = predicted_state.T + self.R*v
+        
+        state_new = predicted_state.T + R@v
 
-        self.P = self.P - self.R@self.C@self.P
+        self.P = self.P - R@self.C@self.P
 
         return state_new
 
@@ -95,7 +99,19 @@ class Extended_Kalman_Filter:
         Returns:
             (np.array): filtered state at time K
         """
+        
+
         predicted_state = self.compute_prediction(state, control)
+        predicted_state = predicted_state.T
+        predicted_state = predicted_state[0]
+        
         return self.compute_correction(predicted_state, measurements)
 
+    
+if __name__=="__main__":
+    EKF = Extended_Kalman_Filter(V = 1, W = 1, P = 1, dt = 0.005)
+    state_robot =  np.array([0, 0, 0, 0, 1., 0.])
+    
+    state_robot_filtered = EKF.compute_filter(state_robot, [0,0], state_robot)
+    
     

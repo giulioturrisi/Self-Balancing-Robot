@@ -30,7 +30,9 @@ class StatePublisher(Node):
 
         self.subscription_imu = self.create_subscription(Vector3, 'imu', self.imu_callback,1)
         self.subscription_control = self.create_subscription(Vector3, 'torques', self.control_callback,1)
-        self.create_timer(0.005, self.tf_callback)
+        
+        dt = 0.005
+        self.create_timer(dt, self.tf_callback)
 
         self.last_time = 0.0
 
@@ -41,15 +43,21 @@ class StatePublisher(Node):
         self.pitch = 0.0
         self.yaw = 0.0
 
-        self.EKF = Extended_Kalman_Filter(V = 1, W = 1, P = 1)
-        self.state_robot_filtered = np.array(6)
+        self.EKF = Extended_Kalman_Filter(V = 1, W = 1, P = 1, dt = dt)
+        self.state_robot_filtered = np.array([0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
 
 
     def tf_callback(self):
         
-        #measurements = [0.0, self.pitch, self.yaw, 0.0, 0.0, 0.0] 
-        #controls = [self.tau_l, self.tau_r]
-        #self.state_robot_filtered = self.EKF.compute_filter(self.state_robot_filtered, controls, measurements)
+        measurements = [0.0, self.pitch, self.yaw, 0.0, 0.0, 0.0] 
+        controls = [self.tau_l, self.tau_r]
+        self.state_robot_filtered = self.EKF.compute_filter(self.state_robot_filtered, controls, measurements)
+
+        print("ground truth pitch: ", self.pitch)
+        print("filtered pitch: ", self.state_robot_filtered[1])
+        print("ground truth yaw: ", self.yaw)
+        print("filtered yaw: ", self.state_robot_filtered[2])
+        print("##########")
 
         # message declarations
         odom_trans = TransformStamped()
@@ -69,6 +77,7 @@ class StatePublisher(Node):
         odom_trans.transform.translation.z = sin(pi/2. - self.pitch)*0.25
         odom_trans.transform.rotation = \
             euler_to_quaternion(self.roll, self.pitch, self.yaw) # roll,pitch,yaw #self.odom_theta
+
 
         # send the joint state and transform
         self.joint_pub.publish(joint_state)
