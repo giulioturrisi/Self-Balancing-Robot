@@ -2,7 +2,7 @@ import numpy as np
 
 import sys
 sys.path.append('/home/python_scripts/')
-from twip_dynamics import Twip_dynamics
+from robot_model import Robot_Model
 
 import matplotlib.pyplot as plt # type: ignore
 import time
@@ -27,7 +27,7 @@ class iLQR:
         self.iteration = 3
         self.dt = dt
 
-        self.twip = Twip_dynamics()
+        self.twip = Robot_Model()
 
         self.state_dim = 6
         self.control_dim = 2
@@ -276,7 +276,7 @@ if __name__=="__main__":
 
     state = np.array([1, 0.1, 0.1, 0.1, 0.1, 0.1])
     state_des = np.array([0, 0, 0, 0, 0., 0.])
-    robot = Twip_dynamics()
+    robot = Robot_Model()
 
     for j in range(0, 1000):
         control = controller.compute_control(state, state_des)

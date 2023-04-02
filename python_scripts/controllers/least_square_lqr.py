@@ -2,7 +2,7 @@ import numpy as np
 
 import sys
 sys.path.append('/home/python_scripts/')
-from twip_dynamics import Twip_dynamics
+from robot_model import Robot_Model
 
 
 
@@ -26,7 +26,7 @@ class LS_LQR:
             self.horizon = horizon
         self.dt = dt
 
-        self.twip = Twip_dynamics()
+        self.twip = Robot_Model()
 
         self.Q = np.zeros((6, 6))
         

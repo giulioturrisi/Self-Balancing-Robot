@@ -98,7 +98,7 @@ if __name__=="__main__":
     dt = 0.01
     controller = LQR(dt=dt)
 
-    state = np.array([1, 0.1, 0.1, 0.1, 0.1, 0.1])
+    state = np.array([0, 0.1, 0, 0.1, 0.1, 0])
     state_des = np.array([0, 0, 0, 0, 0., 0.])
     state_evolution = [copy.copy(state)]
 

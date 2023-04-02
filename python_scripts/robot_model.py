@@ -305,6 +305,6 @@ class Robot_Model:
 
 
 if __name__=="__main__":
-    Twip_dynamics()
+    Robot_Model()
 
     

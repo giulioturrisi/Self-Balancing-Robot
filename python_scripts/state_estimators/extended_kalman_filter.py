@@ -2,7 +2,6 @@ import numpy as np
 
 import sys
 sys.path.append('/home/python_scripts/')
-import euler_integration
 from robot_model import Robot_Model
 
 
