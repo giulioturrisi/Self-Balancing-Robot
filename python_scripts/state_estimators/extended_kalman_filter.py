@@ -3,7 +3,7 @@ import numpy as np
 import sys
 sys.path.append('/home/python_scripts/')
 import euler_integration
-from twip_dynamics import Twip_dynamics
+from robot_model import Robot_Model
 
 
 
@@ -34,7 +34,7 @@ class Extended_Kalman_Filter:
         # observation matrix
         self.C = np.eye(self.state_dim)
 
-        self.twip = Twip_dynamics()
+        self.twip = Robot_Model()
 
 
 

@@ -3,7 +3,7 @@ from casadi import SX, vertcat
 
 import sys
 sys.path.append('/home/python_scripts/')
-from twip_dynamics import Twip_dynamics
+from robot_model import Robot_Model
 
 # Reference for model equations:
 # http://users.isr.ist.utl.pt/~jag/publications/08-JETC-RCarona-vcontrol.pdf
@@ -45,7 +45,7 @@ def export_robot_model() -> AcadosModel:
 
     # dynamics
     #f_expl = vertcat(v * cos(theta), v * sin(theta), F, theta_d, T)
-    twip = Twip_dynamics()
+    twip = Robot_Model()
     f_expl = twip.fd(x, u)
 
     print("f_expl", f_expl)

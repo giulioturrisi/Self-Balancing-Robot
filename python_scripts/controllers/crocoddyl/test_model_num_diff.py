@@ -4,7 +4,7 @@ import crocoddyl
 
 import sys
 sys.path.append('/home/python_scripts/')
-from twip_dynamics import Twip_dynamics
+from robot_model import Robot_Model
 
 import time
 
@@ -14,7 +14,7 @@ class DifferentialActionModelTwip(crocoddyl.DifferentialActionModelAbstract):
         crocoddyl.DifferentialActionModelAbstract.__init__(self, crocoddyl.StateVector(6), 2, 8)  # nu = 1; nr = 6
         self.unone = np.zeros(self.nu)
 
-        self.twip = Twip_dynamics()
+        self.twip = Robot_Model()
         self.costWeights = [0., 1., 0, 1, 2, 1., 10, 10]  # x, pitch, yaw, xdot, pitch_dot, yaw_dot, u_l, u_l
 
     def calc(self, data, x, u=None):

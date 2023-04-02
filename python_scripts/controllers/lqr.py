@@ -2,7 +2,11 @@ import numpy as np
 
 import sys
 sys.path.append('/home/python_scripts/')
-from twip_dynamics import Twip_dynamics
+from robot_model import Robot_Model
+
+import matplotlib.pyplot as plt
+import copy
+
 
 class LQR:
     """This is a small class that computes a simple LQR control law"""
@@ -21,7 +25,10 @@ class LQR:
         self.horizon = 2000
         self.dt = dt
 
-        self.twip = Twip_dynamics()
+        self.state_dim = 6
+        self.control_dim = 2
+
+        self.twip = Robot_Model()
 
         self.Q = np.identity(6)
         
@@ -87,7 +94,36 @@ class LQR:
 
 
 if __name__=="__main__":
-    controller = LQR(dt = 0.001)
-    x = np.array([1, 0.1, 0.1, 0.1, 0.1, 0.1])
-    x_des = np.array([0, 0, 0, 0, 0., 0.])
-    print("control", controller.compute_control(x, x_des))
+
+    dt = 0.01
+    controller = LQR(dt=dt)
+
+    state = np.array([1, 0.1, 0.1, 0.1, 0.1, 0.1])
+    state_des = np.array([0, 0, 0, 0, 0., 0.])
+    state_evolution = [copy.copy(state)]
+
+    robot = Robot_Model()
+
+    for j in range(0, 2000):
+        control = controller.compute_control(state, state_des)
+        tau = np.array([control[0], control[1]]).reshape(controller.control_dim,)
+
+        
+        qdd = robot.forward_dynamics(state.reshape(controller.state_dim,), tau)
+        qdd = qdd[3:6]
+        state = robot.euler_integration(state, qdd, dt).reshape(controller.state_dim,)
+        state_evolution = np.append(state_evolution, [copy.copy(state)], axis=0)
+            
+
+    # Plotting ---------------------------------------
+    fig, axs = plt.subplots(2, 2)
+    axs[0, 0].plot(state_evolution[:,1])
+    axs[0, 0].set_title('pitch')
+    axs[0, 1].plot(state_evolution[:,4])
+    axs[0, 1].set_title('pitch_d')
+    axs[1, 0].plot(state_evolution[:,3])
+    axs[1, 0].set_title('x_d')
+    axs[1, 1].plot(state_evolution[:,5])
+    axs[1, 1].set_title('yaw_d')
+    plt.show()
+

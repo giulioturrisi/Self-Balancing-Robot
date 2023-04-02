@@ -7,15 +7,14 @@ import time
 
 import sys
 sys.path.append('/home/python_scripts/')
-import euler_integration
-from twip_dynamics import Twip_dynamics
+from robot_model import Robot_Model
 
 X0 = np.array([0.0, 1, 0.0, 0.0, 0.0, 0.3])  # Intitalize the states 
 N_horizon = 50  # Define the number of discretization steps
 T_horizon = 1.0  # Define the prediction horizon
 dt = 1.0/50
 
-twip = Twip_dynamics()
+twip = Robot_Model()
 
 
 

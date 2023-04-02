@@ -4,8 +4,7 @@ import crocoddyl
 
 import sys
 sys.path.append('/home/python_scripts/')
-from twip_dynamics import Twip_dynamics
-import euler_integration
+from robot_model import Robot_Model
 
 import time
 
@@ -17,7 +16,7 @@ class TwipModelDerived(crocoddyl.ActionModelAbstract):
 
         self.dt = 0.01
 
-        self.twip = Twip_dynamics()
+        self.twip = Robot_Model()
         self.costWeights = [0., 1., 0, 1, 2, 1., 10, 10]  # x, pitch, yaw, xdot, pitch_dot, yaw_dot, u_l, u_l
 
     def calc(self, data, x, u=None):
@@ -28,7 +27,7 @@ class TwipModelDerived(crocoddyl.ActionModelAbstract):
         next_state = self.twip.fd(x, u)
         qdd = next_state[3:6]
 
-        data.xnext = euler_integration.euler_integration(x, qdd, self.dt).reshape(self.state.nx,1)
+        data.xnext = self.twip.euler_integration(x, qdd, self.dt).reshape(self.state.nx,1)
         
 
         # Computing the cost residual and value

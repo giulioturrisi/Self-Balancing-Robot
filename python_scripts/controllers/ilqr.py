@@ -2,15 +2,11 @@ import numpy as np
 
 import sys
 sys.path.append('/home/python_scripts/')
-import euler_integration
 from twip_dynamics import Twip_dynamics
 
 import matplotlib.pyplot as plt # type: ignore
-
 import time
-
 import copy
-
 import casadi as cs
 
 class iLQR:
@@ -212,7 +208,7 @@ class iLQR:
 
 
             # integration
-            self.state_vec[step+1] = euler_integration.euler_integration(state, qdd, self.dt).reshape(self.state_dim,1)
+            self.state_vec[step+1] = self.twip.euler_integration(state, qdd, self.dt).reshape(self.state_dim,1)
 
 
 
@@ -237,7 +233,7 @@ class iLQR:
             qdd = qdd[3:6]
 
             # integration
-            self.state_vec[step+1] = euler_integration.euler_integration(state, qdd, self.dt).reshape(self.state_dim,1)
+            self.state_vec[step+1] = self.twip.euler_integration(state, qdd, self.dt).reshape(self.state_dim,1)
             
 
 
@@ -275,14 +271,22 @@ class iLQR:
 
 
 if __name__=="__main__":
-    controller=iLQR(dt = 0.01)
-    state = np.zeros(6)
-    state[1] = 0.1 
-    state_des = np.zeros(6)
-    tau = np.zeros(2)
-    start_time = time.time()
-    controller.compute_control(state, state_des=state_des)
-    print("Control time: ", time.time()-start_time)
+    dt = 0.01
+    controller = iLQR(dt=dt)
 
-    plt.plot(controller.state_vec[:,1])
-    plt.show()
+    state = np.array([1, 0.1, 0.1, 0.1, 0.1, 0.1])
+    state_des = np.array([0, 0, 0, 0, 0., 0.])
+    robot = Twip_dynamics()
+
+    for j in range(0, 1000):
+        control = controller.compute_control(state, state_des)
+        tau = np.array([control[0][0], control[1][0]])
+
+        print("\n########")
+        print("pitch:", state[1], "x_d:", state[3], "pitch_d", state[4], "yaw_d", state[5])
+        print("tau", tau)
+        
+        qdd = robot.forward_dynamics(state.reshape(controller.state_dim,), tau)
+        qdd = qdd[3:6]
+        state = robot.euler_integration(state, qdd, dt).reshape(controller.state_dim,)
+                   

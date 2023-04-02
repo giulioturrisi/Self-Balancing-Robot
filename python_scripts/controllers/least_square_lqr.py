@@ -2,7 +2,6 @@ import numpy as np
 
 import sys
 sys.path.append('/home/python_scripts/')
-import euler_integration
 from twip_dynamics import Twip_dynamics
 
 
@@ -131,7 +130,7 @@ class LS_LQR:
         print("previous_state", previous_state)
         next_state = self.twip.forward_dynamics(previous_state, control)
         qdd = next_state[3:6]
-        state_pred = euler_integration.euler_integration(previous_state, qdd, self.dt)
+        state_pred = self.twip.euler_integration(previous_state, qdd, self.dt)
         
         # should be 1 x num_features
         state_pred_lift = self.lift_space(state_pred)

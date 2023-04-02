@@ -3,7 +3,7 @@ import math
 
 import sys
 sys.path.append('/home/python_scripts/')
-from twip_dynamics import Twip_dynamics
+from robot_model import Robot_Model
 
 class Sliding_Mode:
     """This is a small class that computes a Sliding Mode control law - very brutal!"""
@@ -24,7 +24,7 @@ class Sliding_Mode:
         self.k_pitch_d = k_pitch_d
         self.k_yaw_d = k_yaw_d
 
-        self.twip = Twip_dynamics()
+        self.twip = Robot_Model()
 
 
 

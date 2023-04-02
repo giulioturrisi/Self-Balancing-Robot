@@ -2,7 +2,6 @@ import numpy as np
 
 import sys
 sys.path.append('/home/python_scripts/')
-import euler_integration
 from twip_dynamics import Twip_dynamics
 
 import casadi as cs
@@ -114,7 +113,7 @@ class Adaptive_LQR:
         
         next_state = self.twip.forward_dynamics(previous_state, control)
         qdd = next_state[3:6]
-        state_pred = euler_integration.euler_integration_cs(previous_state, qdd, self.dt)
+        state_pred = self.twip.euler_integration_cs(previous_state, qdd, self.dt)
 
           
         #should be n_datapoints x num_features

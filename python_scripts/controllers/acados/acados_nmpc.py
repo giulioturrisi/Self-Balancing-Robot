@@ -7,8 +7,7 @@ import time
 
 import sys
 sys.path.append('/home/python_scripts/')
-import euler_integration
-from twip_dynamics import Twip_dynamics
+from robot_model import Robot_Model
 
 
 class NMPC:
@@ -18,7 +17,7 @@ class NMPC:
 
         self.T_horizon = self.horizon*self.dt
 
-        self.twip = Twip_dynamics()
+        self.twip = Robot_Model()
 
         self.ocp = self.create_ocp_solver_description()
         self.acados_ocp_solver = AcadosOcpSolver(

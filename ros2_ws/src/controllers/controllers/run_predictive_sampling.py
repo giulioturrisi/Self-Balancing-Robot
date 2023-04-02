@@ -18,7 +18,7 @@ class Controller(Base_Controller):
 
         self.lin_state = np.zeros(7)
         self.lin_state[1] = 0.0
-        self.controller = Sampling_MPC()
+        self.controller = Sampling_MPC(num_computations = 1000, horizon = 20)
 
         self.create_timer(self.dt, self.controller_callback)
 

@@ -3,7 +3,7 @@ import math
 
 import sys
 sys.path.append('/home/python_scripts/')
-from twip_dynamics import Twip_dynamics
+from robot_model import Robot_Model
 
 
 
@@ -28,7 +28,7 @@ class PID:
 
         self.integral_e_pitch = 0
 
-        self.twip = Twip_dynamics()
+        self.twip = Robot_Model()
 
 
 
