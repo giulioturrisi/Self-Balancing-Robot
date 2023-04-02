@@ -35,6 +35,8 @@ class Sampling_MPC:
         self.state_dim = 6
         self.control_dim = 2
         self.num_computations = num_computations
+        self.max_input = 0.5
+
         if(linear == True):
             self.spline_fun = self.compute_linear_spline
         else:
@@ -144,11 +146,11 @@ class Sampling_MPC:
             #v, w = self.compute_linear_spline(parameters, n)
             #v, w = self.compute_cubic_spline(parameters, n)
 
-            tau_l = jax.numpy.where(tau_l > 2.0, 2.0, tau_l)
-            tau_l = jax.numpy.where(tau_l < -2.0, -2.0, tau_l)
+            tau_l = jax.numpy.where(tau_l > self.max_input, self.max_input, tau_l)
+            tau_l = jax.numpy.where(tau_l < -self.max_input, -self.max_input, tau_l)
             
-            tau_r = jax.numpy.where(tau_r > 2.0, 2.0, tau_r)
-            tau_r = jax.numpy.where(tau_r < -2.0, -2.0, tau_r)
+            tau_r = jax.numpy.where(tau_r > self.max_input, self.max_input, tau_r)
+            tau_r = jax.numpy.where(tau_r < -self.max_input, -self.max_input, tau_r)
 
             control = jnp.array([tau_l, tau_r])
             qdd = self.robot.forward_dynamics(state.reshape(self.state_dim,), control);
@@ -158,7 +160,7 @@ class Sampling_MPC:
             error = state_next.reshape(self.state_dim, 1) - state_des[n].reshape(self.state_dim, 1)
             
             #x, pitch, yaw, xd, pitch_d, yaw_d
-            cost_next = error[1]*2.0*error[1] + error[1]*0.1*error[1] + error[3]*0.1*error[3] + error[4]*0.1*error[4] + error[5]*0.1*error[5]
+            cost_next = error[1]*2.0*error[1] + error[4]*0.1*error[4] + error[5]*0.1*error[5]
             cost_next = [cost_next]
 
             return (cost_next[0][0] + cost, state_next, state_des)
@@ -198,24 +200,44 @@ class Sampling_MPC:
 
 
 if __name__=="__main__":
-    dt=0.01
-    controller = Sampling_MPC(dt=dt, horizon=20, init_jax = True, num_computations = 1000)
+    dt = 0.01
+    controller = Sampling_MPC(dt = dt, horizon = 20, init_jax = True, 
+                              num_computations = 1000, linear = False)
 
     state = np.array([1, 0.1, 0.1, 0.1, 0.1, 0.1])
     state_des = np.array([0, 0, 0, 0, 0., 0.])
+    state_evolution = [copy.copy(state)]
+
     robot = Robot_Model()
 
+    
     for j in range(0, 1000):
         control = controller.compute_control(state, state_des)
-        tau = np.array([control[0], control[1]])
+        tau = np.array([control[0], control[1]]).reshape(controller.control_dim,)
 
-        print("\n########")
-        print("pitch:", state[1], "x_d:", state[3], "pitch_d", state[4], "yaw_d", state[5])
-        print("tau", tau)
-        
         qdd = robot.forward_dynamics(state.reshape(controller.state_dim,), tau)
         qdd = qdd[3:6]
         state = robot.euler_integration(state, qdd, dt).reshape(controller.state_dim,)
-                   
+        state_evolution = np.append(state_evolution, [copy.copy(state)], axis=0)
+            
+
+    # Plotting ---------------------------------------
+    fig, axs = plt.subplots(2, 2)
+    fig.set_figheight(8)
+    fig.set_figwidth(10)
+    # Defining custom 'xlim' and 'ylim' values.
+    custom_xlim = (0, 100)
+    custom_ylim = (-2, 2)
+    # Setting the values for all axes.
+    plt.setp(axs, xlim=custom_xlim, ylim=custom_ylim)
+    axs[0, 0].plot(state_evolution[:,1])
+    axs[0, 0].set_title('pitch')
+    axs[0, 1].plot(state_evolution[:,4])
+    axs[0, 1].set_title('pitch_d')
+    axs[1, 0].plot(state_evolution[:,3])
+    axs[1, 0].set_title('x_d')
+    axs[1, 1].plot(state_evolution[:,5])
+    axs[1, 1].set_title('yaw_d')
+    plt.show()
 
 

@@ -19,12 +19,12 @@ class Controller(Base_Controller):
         self.create_timer(self.dt, self.controller_callback)
         
         self.k_x_d = 0        
-        self.k_roll = 500
-        self.k_roll_d = 25
+        self.k_pitch = 500
+        self.k_pitch_d = 25
         self.k_yaw_d = 0.5
         self.k_i = 0.01
 
-        self.controller = PID(self.k_x_d, self.k_roll, self.k_roll_d, self.k_yaw_d, self.k_i)
+        self.controller = PID(self.k_x_d, self.k_pitch, self.k_pitch_d, self.k_yaw_d, self.k_i)
 
 
 

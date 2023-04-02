@@ -6,7 +6,8 @@ from robot_model import Robot_Model
 
 import casadi as cs
 
-
+import matplotlib.pyplot as plt
+import copy
 
 class Adaptive_LQR:
     """This is a small class that computes an LQR control law based on a least square update"""
@@ -29,6 +30,9 @@ class Adaptive_LQR:
         self.dt = dt
 
         self.twip = Robot_Model()
+        self.state_dim = 6
+        self.control_dim = 2
+        
 
         self.Q = np.zeros((6, 6))
         self.Q[0,0] = 0.0 #x
@@ -179,9 +183,8 @@ class Adaptive_LQR:
         u_ff = self.twip.compute_feed_forward(state_des[1], state_des[3])
         u_ff = np.ones(2)*u_ff
 
-        print("control gain", self.K)
-        print("adaptive gain", self.adaptive_gains)
-
+        
+        
         control = u_ff + self.K@(state_des - state)
         error = state_des - state
         control[0] += self.adaptive_gains[0][0]*error[1]*0 + self.adaptive_gains[1][0]*error[3] + self.adaptive_gains[2][0]*error[4] - self.adaptive_gains[3][0]*error[5]
@@ -194,20 +197,46 @@ class Adaptive_LQR:
 
 
 if __name__=="__main__":
-    control = Adaptive_LQR(dt=0.01, horizon=2000)
-    
-    x1 = np.array([0, 0, 0, 0, 1., 0.])
-    x1_des = np.array([0, 1, 1, 0, 1.5, 0.])
-    u1 = np.array([0.1, 0.1])
-    y1_meas = np.array([0, 0, 0, 0.95, 0, 0])
+    dt = 0.01
+    controller = Adaptive_LQR(dt=dt)
 
-    x2 = np.array([0, 0, 0, 0, 0.95, 0.])
-    u2 = np.array([0.1, 0.1])
-    y2_meas = np.array([0, 0, 0, 1.9, 0])
+    state = np.array([0, 0.1, 0, 0.1, 0.1, 0])
+    old_state_robot = state
+    state_des = np.array([0, 0, 0, 0, 0., 0.])
+    state_evolution = [copy.copy(state)]
+
+    robot = Robot_Model()
+
+    for j in range(0, 2000):
+        controller.compute_adaptive_gains(old_state_robot, state_des, state)
+        control = controller.compute_control(state, state_des)
+        tau = np.array([control[0], control[1]]).reshape(controller.control_dim,)
+
+        old_state_robot = state
+        qdd = robot.forward_dynamics(state.reshape(controller.state_dim,), tau)
+        qdd = qdd[3:6]
+        state = robot.euler_integration(state, qdd, dt).reshape(controller.state_dim,)
+        state_evolution = np.append(state_evolution, [copy.copy(state)], axis=0)
+            
+
+    # Plotting ---------------------------------------
+    fig, axs = plt.subplots(2, 2)
+    fig.set_figheight(8)
+    fig.set_figwidth(10)
+    # Defining custom 'xlim' and 'ylim' values.
+    custom_xlim = (0, 100)
+    custom_ylim = (-2, 2)
+    # Setting the values for all axes.
+    plt.setp(axs, xlim=custom_xlim, ylim=custom_ylim)
+    axs[0, 0].plot(state_evolution[:,1])
+    axs[0, 0].set_title('pitch')
+    axs[0, 1].plot(state_evolution[:,4])
+    axs[0, 1].set_title('pitch_d')
+    axs[1, 0].plot(state_evolution[:,3])
+    axs[1, 0].set_title('x_d')
+    axs[1, 1].plot(state_evolution[:,5])
+    axs[1, 1].set_title('yaw_d')
+    plt.show()
 
 
-    control.compute_adaptive_gains(x1, x1_des, y1_meas)
-    control.compute_adaptive_gains(x1, x1_des, y1_meas)
-
-    #control.recursive_least_square(x1, u1, y1_meas)
 

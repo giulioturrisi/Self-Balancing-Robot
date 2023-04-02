@@ -271,22 +271,43 @@ class iLQR:
 
 
 if __name__=="__main__":
-    dt = 0.01
-    controller = iLQR(dt=dt)
 
-    state = np.array([1, 0.1, 0.1, 0.1, 0.1, 0.1])
+    dt = 0.01
+    controller = iLQR(dt=dt/10.)
+
+    state = np.array([0, 0.1, 0, 0.1, 0.1, 0])
     state_des = np.array([0, 0, 0, 0, 0., 0.])
+    state_evolution = [copy.copy(state)]
+
     robot = Robot_Model()
 
-    for j in range(0, 1000):
+    for j in range(0, 2000):
         control = controller.compute_control(state, state_des)
-        tau = np.array([control[0][0], control[1][0]])
+        tau = np.array([control[0], control[1]]).reshape(controller.control_dim,)
 
-        print("\n########")
-        print("pitch:", state[1], "x_d:", state[3], "pitch_d", state[4], "yaw_d", state[5])
-        print("tau", tau)
         
         qdd = robot.forward_dynamics(state.reshape(controller.state_dim,), tau)
         qdd = qdd[3:6]
         state = robot.euler_integration(state, qdd, dt).reshape(controller.state_dim,)
-                   
+        state_evolution = np.append(state_evolution, [copy.copy(state)], axis=0)
+            
+
+    # Plotting ---------------------------------------
+    fig, axs = plt.subplots(2, 2)
+    fig.set_figheight(8)
+    fig.set_figwidth(10)
+    # Defining custom 'xlim' and 'ylim' values.
+    custom_xlim = (0, 100)
+    custom_ylim = (-2, 2)
+    # Setting the values for all axes.
+    plt.setp(axs, xlim=custom_xlim, ylim=custom_ylim)
+    axs[0, 0].plot(state_evolution[:,1])
+    axs[0, 0].set_title('pitch')
+    axs[0, 1].plot(state_evolution[:,4])
+    axs[0, 1].set_title('pitch_d')
+    axs[1, 0].plot(state_evolution[:,3])
+    axs[1, 0].set_title('x_d')
+    axs[1, 1].plot(state_evolution[:,5])
+    axs[1, 1].set_title('yaw_d')
+    plt.show()
+

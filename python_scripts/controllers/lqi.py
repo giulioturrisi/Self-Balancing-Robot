@@ -4,6 +4,9 @@ import sys
 sys.path.append('/home/python_scripts/')
 from robot_model import Robot_Model
 
+import matplotlib.pyplot as plt
+import copy
+
 class LQI:
     """This is a small class that computes an LQR control law using integral actions
        for the yaw and pitch angular velocities"""
@@ -104,10 +107,50 @@ class LQI:
         #errors = np.hstack((state_des - state, self.integral_error_x_d))
         errors = np.hstack((state_des - state, self.integral_error_x_d, self.integral_error_yaw_d))
 
-        print("errors", errors)
         
         return u_ff + self.K@(errors) 
 
 
 if __name__=="__main__":
-    LQI()
+    
+    dt = 0.01
+    lin_state = np.zeros(8)
+    
+    controller = LQI(dt=dt, lin_state=lin_state)
+
+    state = np.array([0, 0.1, 0, 0.4, 0.7, 0])
+    state_des = np.array([0, 0, 0, 0, 0., 0.])
+    state_evolution = [copy.copy(state)]
+
+    robot = Robot_Model()
+
+    for j in range(0, 2000):
+        control = controller.compute_control(state, state_des)
+        tau = np.array([control[0], control[1]]).reshape(controller.control_dim,)
+
+        
+        qdd = robot.forward_dynamics(state.reshape(controller.state_dim,), tau)
+        qdd = qdd[3:6]
+        state = robot.euler_integration(state, qdd, dt).reshape(controller.state_dim,)
+        state_evolution = np.append(state_evolution, [copy.copy(state)], axis=0)
+            
+
+    # Plotting ---------------------------------------
+    fig, axs = plt.subplots(2, 2)
+    fig.set_figheight(8)
+    fig.set_figwidth(10)
+    # Setting the values for all axes.
+    custom_xlim = (0, 100)
+    custom_ylim = (-2, 2)
+    plt.setp(axs, xlim=custom_xlim, ylim=custom_ylim)
+    # Data to Plot
+    axs[0, 0].plot(state_evolution[:,1])
+    axs[0, 0].set_title('pitch')
+    axs[0, 1].plot(state_evolution[:,4])
+    axs[0, 1].set_title('pitch_d')
+    axs[1, 0].plot(state_evolution[:,3])
+    axs[1, 0].set_title('x_d')
+    axs[1, 1].plot(state_evolution[:,5])
+    axs[1, 1].set_title('yaw_d')
+    plt.show()
+

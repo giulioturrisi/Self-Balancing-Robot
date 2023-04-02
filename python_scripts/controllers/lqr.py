@@ -117,6 +117,13 @@ if __name__=="__main__":
 
     # Plotting ---------------------------------------
     fig, axs = plt.subplots(2, 2)
+    fig.set_figheight(8)
+    fig.set_figwidth(10)
+    # Defining custom 'xlim' and 'ylim' values.
+    custom_xlim = (0, 100)
+    custom_ylim = (-2, 2)
+    # Setting the values for all axes.
+    plt.setp(axs, xlim=custom_xlim, ylim=custom_ylim)
     axs[0, 0].plot(state_evolution[:,1])
     axs[0, 0].set_title('pitch')
     axs[0, 1].plot(state_evolution[:,4])

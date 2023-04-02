@@ -19,11 +19,11 @@ class Controller(Base_Controller):
         self.create_timer(self.dt, self.controller_callback)
         
         self.k_s = 100
-        self.k_x_d = 0.3
+        self.k_x_dot = 0.3
         self.k_pitch = 100
-        self.k_pitch_d = 15
-        self.k_yaw_d = 0.
-        self.controller = Sliding_Mode(self.k_s, self.k_x_d, self.k_pitch, self.k_pitch_d, self.k_yaw_d)
+        self.k_pitch_dot = 15
+        self.k_yaw_dot = 0.
+        self.controller = Sliding_Mode(self.k_s, self.k_x_dot, self.k_pitch, self.k_pitch_dot, self.k_yaw_dot)
 
 
 
