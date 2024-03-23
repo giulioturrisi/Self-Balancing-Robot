@@ -32,7 +32,7 @@ git submodule update --init --recursive
 4. install [miniforge](https://github.com/conda-forge/miniforge/releases) (x86_64) and follow the instruction [here](https://robostack.github.io/GettingStarted.html) to install ros-humble
 
 
-5. create an environment using the file in the folder [installation/conda](https://github.com/giulioturrisi/Self-Balancing-Robot/tree/main/installation/conda):
+5. create an environment using the file in the folder [installation/conda](https://github.com/giulioturrisi/Self-Balancing-Robot/tree/master/installation/conda):
 
 ```sh
     conda env create -f mamba_environment.yml
@@ -54,6 +54,16 @@ cd your_path_to/Self-Balancing-Robot/ros2_ws
 rosdep install -y -r -q --from-paths src --ignore-src --rosdistro humble
 ulimit -s unlimited
 colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
+```
+
+9. if you need acados, go in and press
+  
+```sh
+mkdir build
+cd build
+cmake -DACADOS_WITH_QPOASES=ON  -DACADOS_WITH_OSQP=ON ..
+make install -j4
+pip install -e ./../interfaces/acados_template
 ```
 
 

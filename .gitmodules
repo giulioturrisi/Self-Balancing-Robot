@@ -7,3 +7,6 @@
 [submodule "ros2_ws/src/external/simROS2"]
 	path = ros2_ws/src/external/simROS2
 	url = https://github.com/CoppeliaRobotics/simROS2.git
+[submodule "ros2_ws/src/controllers/controllers/acados"]
+	path = ros2_ws/src/controllers/controllers/acados
+	url = https://github.com/acados/acados
