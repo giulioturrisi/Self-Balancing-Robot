@@ -17,37 +17,33 @@ This repo contains the code for controlling both a real and a simulated two whee
 
 
 ## Build on Linux
-1. clone the repo
+1. clone the repo recursively
 
 ```sh
 git clone --recurse-submodules https://github.com/giulioturrisi/Self-Balancing-Robot.git
 ```
 
-2. enters inside it, and press
-
-```sh
-git submodule update --init --recursive
-```
-
-4. install [miniforge](https://github.com/conda-forge/miniforge/releases) (x86_64) and follow the instruction [here](https://robostack.github.io/GettingStarted.html) to install ros-humble
 
 
-5. create an environment using the file in the folder [installation/conda](https://github.com/giulioturrisi/Self-Balancing-Robot/tree/master/installation/conda):
+2. install [miniforge](https://github.com/conda-forge/miniforge/releases) (x86_64) and follow the instruction [here](https://robostack.github.io/GettingStarted.html) to install ros-humble
+
+
+3. create an environment using the file in the folder [installation/conda](https://github.com/giulioturrisi/Self-Balancing-Robot/tree/master/installation/conda):
 
 ```sh
     conda env create -f mamba_environment.yml
 ``` 
 
-6. download [CoppeliaSim](https://www.coppeliarobotics.com/) 
+4. download [CoppeliaSim](https://www.coppeliarobotics.com/) 
 
-7. add in your .bashrc
+5. add in your .bashrc
 
 ```sh
 alias twip_env="conda activate twip_env && source your_path_to/Self-Balancing-Robot/ros2_ws/install/setup.bash"
 export COPPELIASIM_ROOT_DIR=your_path_to/CoppeliaSim
 ```
 
-8. start your environment and go in ros2_ws
+6. start your environment and go in ros2_ws
 ```sh
 twip_env
 cd your_path_to/Self-Balancing-Robot/ros2_ws
@@ -56,7 +52,7 @@ ulimit -s unlimited
 colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
 
-9. if you need acados, go inside the [acados](https://github.com/giulioturrisi/Self-Balancing-Robot/tree/master/python_scripts/controllers/acados)/acados folder and press
+7. if you need acados, go inside the [acados](https://github.com/giulioturrisi/Self-Balancing-Robot/tree/master/python_scripts/controllers/acados)/acados folder and press
   
 ```sh
 mkdir build
