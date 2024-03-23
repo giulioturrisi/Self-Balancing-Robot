@@ -56,7 +56,7 @@ ulimit -s unlimited
 colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
 
-9. if you need acados, go inside the [acados](https://github.com/giulioturrisi/Self-Balancing-Robot/tree/master/python_scripts/controllers/acados) folder and press
+9. if you need acados, go inside the [acados](https://github.com/giulioturrisi/Self-Balancing-Robot/tree/master/python_scripts/controllers/acados)/acados folder and press
   
 ```sh
 mkdir build
