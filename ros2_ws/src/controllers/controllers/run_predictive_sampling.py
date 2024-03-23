@@ -5,9 +5,14 @@ import sys
 import numpy as np # type: ignore
 np.set_printoptions(threshold=sys.maxsize)
 
-sys.path.append('/home/python_scripts/controllers')
+
+import os 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+import sys
+sys.path.append(dir_path + '/./../../../../python_scripts/controllers')
+sys.path.append(dir_path)
+
 from predictive_sampling import Sampling_MPC 
-sys.path.append('/home/ros2_ws/src/controllers/controllers')
 from base_controller import Base_Controller
 
 

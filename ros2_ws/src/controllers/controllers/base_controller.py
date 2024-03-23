@@ -70,17 +70,17 @@ class Base_Controller(Node):
         #self.publisher_command.publish(commanded_torques);
 
         '''commanded_torque_left = Float64();
-        commanded_torque_left.data = np.float(tau_l)
+        commanded_torque_left.data = float(tau_l)
         self.publisher_motor_left.publish(commanded_torque_left)
 
 
         commanded_torque_right = Float64();
-        commanded_torque_right.data = np.float(tau_r)
+        commanded_torque_right.data = float(tau_r)
         self.publisher_motor_right.publish(commanded_torque_right)'''
 
         commanded_torques = Vector3()
-        commanded_torques.x = np.float(tau_l)
-        commanded_torques.y = np.float(tau_r)
+        commanded_torques.x = float(tau_l)
+        commanded_torques.y = float(tau_r)
         self.publisher_command.publish(commanded_torques)
 
 

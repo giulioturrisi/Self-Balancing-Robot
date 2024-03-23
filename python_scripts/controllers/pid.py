@@ -1,8 +1,10 @@
 import numpy as np
 import math
 
+import os 
+dir_path = os.path.dirname(os.path.realpath(__file__))
 import sys
-sys.path.append('/home/python_scripts/')
+sys.path.append(dir_path + '/./../')
 from robot_model import Robot_Model
 
 import matplotlib.pyplot as plt

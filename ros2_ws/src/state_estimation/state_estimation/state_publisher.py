@@ -9,9 +9,12 @@ from tf2_ros import TransformBroadcaster, TransformStamped
 from geometry_msgs.msg import PoseStamped, Twist, Vector3 # type: ignore
 from geometry_msgs.msg import TwistStamped
 
-
+import os 
+dir_path = os.path.dirname(os.path.realpath(__file__))
 import sys
-sys.path.append('/home/python_scripts/state_estimators')
+sys.path.append(dir_path + '/./../../../../python_scripts/state_estimators')
+sys.path.append(dir_path)
+
 from extended_kalman_filter import Extended_Kalman_Filter 
 
 import numpy as np

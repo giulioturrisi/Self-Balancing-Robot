@@ -18,31 +18,39 @@ This repo contains the code for controlling both a real and a simulated two whee
 
 ## Build on Linux
 1. clone the repo
+
 ```sh
 git clone --recurse-submodules https://github.com/giulioturrisi/Self-Balancing-Robot.git
 ```
-and extract CoppeliaSim in Self-Balancing-Robot/coppeliasim_simulation
 
-2. build the docker file inside Self-Balancing-Robot/docker_file/integrated_gpu or /nvidia
+2. enters inside it, and press
+
 ```sh
-docker build -t ros2_humble .
+git submodule update --init --recursive
 ```
 
-4. add alias to start the docker
-```sh
-cd 
-gedit .bashrc
-alias twip_humble='xhost + && docker run -it --rm -v /path/to/your_folder/Self-Balancing-Robot:/home/ -v /tmp/.X11-unix:/tmp/.X11-unix:rw --device=/dev/input/ -e DISPLAY=$DISPLAY -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY  -e QT_X11_NO_MITSHM=1 --gpus all --name ddrive_humble ros2_humble'  (if used /nvidia)
-alias twip_humble="xhost + && docker run -it --rm -v /path/to/your_folder/Self-Balancing-Robot:/home/ -v /tmp/.X11-unix:/tmp/.X11-unix --device=/dev/dri --device=/dev/input/ -e DISPLAY=$DISPLAY -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY --name ddrive_humble  ros2_humble" (if used /integrated_gpu)
-alias twip_humble='xhost + && docker run -it --rm -v /path/to/your_folder/Self-Balancing-Robot:/home/ -v /tmp/.X11-unix:/tmp/.X11-unix -v /mnt/wslg:/mnt/wslg -v /usr/lib/wsl:/usr/lib/wsl --device=/dev/dxg -e DISPLAY=$DISPLAY -e WAYLAND_DISPLAY=$WAYLAND_DISPLAY -e XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR -e PULSE_SERVER=$PULSE_SERVER -e LD_LIBRARY_PATH=/usr/lib/wsl/lib --name ddrive_humble ros2_humble' (if Windows Linux Subsystem)
+4. install [miniforge](https://github.com/conda-forge/miniforge/releases) (x86_64) and follow the instruction [here](https://robostack.github.io/GettingStarted.html) to install ros-humble
 
-alias twip='docker exec -it ddrive_humble bash' (to attach a new terminal to the running docker)
+
+5. create an environment using the file in the folder [installation/conda](https://github.com/giulioturrisi/Self-Balancing-Robot/tree/main/installation/conda):
+
+```sh
+    conda env create -f mamba_environment.yml
+``` 
+
+6. download [CoppeliaSim](https://www.coppeliarobotics.com/) 
+
+7. add in your .bashrc
+
+```sh
+alias twip_env="conda activate twip_env && source your_path_to/Self-Balancing-Robot/ros2_ws/install/setup.bash"
+export COPPELIASIM_ROOT_DIR=your_path_to/CoppeliaSim
 ```
 
-5. start docker and build
+8. start your environment and go in ros2_ws
 ```sh
-twip_humble
-cd ros2_ws
+twip_env
+cd your_path_to/Self-Balancing-Robot/ros2_ws
 rosdep install -y -r -q --from-paths src --ignore-src --rosdistro humble
 ulimit -s unlimited
 colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
@@ -52,7 +60,7 @@ colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ## How to run the simulation
 1. Open Coppeliasim and run the scene `self_balancing_robot.ttt` in the folder coppeliasim_simulation 
 ```sh
-./coppeliaSim.sh -s ../self_balancing_robot.ttt 
+./coppeliaSim.sh -f your_path_to/Self-Balancing-Robot/coppeliasim_simulation/self_balancing_robot.ttt 
 ```
 
 2. on a new terminal 

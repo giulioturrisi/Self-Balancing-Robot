@@ -1,9 +1,13 @@
 import numpy as np
 
-import sys
-sys.path.append('/home/python_scripts/')
-from robot_model import Robot_Model
+import os 
+dir_path = os.path.dirname(os.path.realpath(__file__))
 
+import sys
+sys.path.append(dir_path + '/./../')
+
+from robot_model import Robot_Model
+import euler_integration
 
 
 class Extended_Kalman_Filter:

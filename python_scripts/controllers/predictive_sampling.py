@@ -12,11 +12,14 @@ import matplotlib.pyplot as plt #
 import time
 
 import copy 
-import sys
 
-sys.path.append('/home/python_scripts/')
-from robot_model_jax import Robot_Model_Jax
+import os 
+dir_path = os.path.dirname(os.path.realpath(__file__))
+import sys
+sys.path.append(dir_path + '/./../')
 from robot_model import Robot_Model
+from robot_model_jax import Robot_Model_Jax
+
 
 
 
