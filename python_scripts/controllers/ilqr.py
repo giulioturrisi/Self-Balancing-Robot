@@ -88,8 +88,7 @@ class iLQR:
 
         A = self.twip.A_f(lin_state, lin_tau)
         B = self.twip.B_f(lin_state, lin_tau)
-import sys
-sys.path.append('/home/python_scripts/')
+
         A_discrete = A*dt + np.identity(self.state_dim)
         B_discrete = B*dt
 
