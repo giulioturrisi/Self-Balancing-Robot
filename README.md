@@ -65,7 +65,7 @@ cmake -DACADOS_WITH_QPOASES=ON  -DACADOS_WITH_OSQP=ON ..
 make install -j4
 pip install -e ./../interfaces/acados_template
 ```
-then in your .bashrc, add
+  then in your .bashrc, add
 ```sh
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/your_path_to/Self-Balancing-Robot/python_scripts/controllers/acados/lib"
 export ACADOS_SOURCE_DIR="/your_path_to/Self-Balancing-Robot/python_scripts/controllers/acados"
