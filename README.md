@@ -56,7 +56,7 @@ ulimit -s unlimited
 colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
 
-9. if you need acados, go in and press
+9. if you need acados, go inside the [acados](https://github.com/giulioturrisi/Self-Balancing-Robot/tree/master/python_scripts/controllers/acados) folder and press
   
 ```sh
 mkdir build
@@ -65,6 +65,12 @@ cmake -DACADOS_WITH_QPOASES=ON  -DACADOS_WITH_OSQP=ON ..
 make install -j4
 pip install -e ./../interfaces/acados_template
 ```
+then in your .bashrc, add
+```sh
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:"/your_path_to/Self-Balancing-Robot/python_scripts/controllers/acados/lib"
+export ACADOS_SOURCE_DIR="/your_path_to/Self-Balancing-Robot/python_scripts/controllers/acados"
+```
+
 
 
 ## How to run the simulation
