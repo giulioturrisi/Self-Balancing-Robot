@@ -1,5 +1,25 @@
 ## Overview
-This repo contains the code for controlling both a real and a simulated two wheeled inverted pendulum robot via ROS2. It includes the following folders and subfolders:
+This repo contains the code for controlling both a real and a simulated two wheeled inverted pendulum robot via ROS2.
+
+## List of available controllers
+1. PID
+2. Linear Quadratic Regulator
+3. Linear Quadratic Integral Regulator
+4. Least Square Linear Quadratic Regulator
+5. Adaptive Linear Quadratic Regulator (MIT rule)
+6. Sliding Mode
+7. RL policy via IsaacGym
+8. Nonlinear MPC via Acados
+9. Iterative Linear Quadratic Regulator
+10. Iterative Linear Quadratic Regulator via Crocoddyl
+11. Predictive Sampling 
+
+## List of available state estimators
+1. Extended Kalman Filter
+
+
+## Repository structure
+It includes the following folders and subfolders:
 
 1. ```python_scripts```: most of the ROS2 nodes call some classes here
  
@@ -86,21 +106,6 @@ where in <control_node> you can choose the type of controller you want.
 ros2 launch teleop_twist_joy teleop-launch.py joy_config:='xbox'
 ```
 
-## List of available controllers
-1. PID
-2. Linear Quadratic Regulator
-3. Linear Quadratic Integral Regulator
-4. Least Square Linear Quadratic Regulator
-5. Adaptive Linear Quadratic Regulator (MIT rule)
-6. Sliding Mode
-7. RL policy via IsaacGym
-8. Nonlinear MPC via Acados
-9. Iterative Linear Quadratic Regulator
-10. Iterative Linear Quadratic Regulator via Crocoddyl
-11. Predictive Sampling 
-
-## List of available state estimators
-1. Extended Kalman Filter
 
 
 ## Status
