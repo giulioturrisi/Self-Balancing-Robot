@@ -44,8 +44,7 @@ git clone --recurse-submodules https://github.com/giulioturrisi/Self-Balancing-R
 ```
 
 
-
-2. install [miniforge](https://github.com/conda-forge/miniforge/releases) (x86_64) and follow the instruction [here](https://robostack.github.io/GettingStarted.html) to install ros-humble
+2. install [miniforge](https://github.com/conda-forge/miniforge/releases) (x86_64) 
 
 
 3. create an environment using the file in the folder [installation/conda](https://github.com/giulioturrisi/Self-Balancing-Robot/tree/master/installation/conda):
@@ -54,16 +53,19 @@ git clone --recurse-submodules https://github.com/giulioturrisi/Self-Balancing-R
     conda env create -f mamba_environment.yml
 ``` 
 
-4. download [CoppeliaSim](https://www.coppeliarobotics.com/) 
+4. follow the instruction [here](https://robostack.github.io/GettingStarted.html) to install ros-humble
 
-5. add in your .bashrc
+
+5. download [CoppeliaSim](https://www.coppeliarobotics.com/) 
+
+6. add in your .bashrc
 
 ```sh
 alias twip_env="conda activate twip_env && source your_path_to/Self-Balancing-Robot/ros2_ws/install/setup.bash"
 export COPPELIASIM_ROOT_DIR=your_path_to/CoppeliaSim
 ```
 
-6. start your environment and go in ros2_ws
+7. start your environment and go in ros2_ws
 ```sh
 twip_env
 cd your_path_to/Self-Balancing-Robot/ros2_ws
@@ -72,7 +74,7 @@ ulimit -s unlimited
 colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 ```
 
-7. if you need acados, go inside the [acados](https://github.com/giulioturrisi/Self-Balancing-Robot/tree/master/python_scripts/controllers/acados)/acados folder and press
+8. if you need acados, go inside the [acados](https://github.com/giulioturrisi/Self-Balancing-Robot/tree/master/python_scripts/controllers/acados)/acados folder and press
   
 ```sh
 mkdir build
