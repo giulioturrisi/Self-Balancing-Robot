@@ -4,8 +4,8 @@ channels:
 - nvidia
 - robostack-staging
 dependencies:
-- python=3.11.8
-- casadi
+- python
+- casadi==3.6.5
 - numpy
 - matplotlib
 - jaxlib=*=*cuda*
@@ -18,8 +18,18 @@ dependencies:
 - meshcat-python 
 - scipy 
 - ipywidgets
+- ros-humble-desktop
+- compilers 
+- cmake 
+- pkg-config 
+- make 
+- ninja 
+- colcon-common-extensions 
+- catkin_tools 
+- rosdep
 - pip:
   - transforms3d
   - xmlschema
+  - mujoco
 
 

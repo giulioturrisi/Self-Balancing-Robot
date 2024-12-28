@@ -1,0 +1,41 @@
+<mujoco model="twip">
+  <compiler angle="radian"/>
+
+
+  <default>
+    <default class="twip">
+      <joint damping="0.02" frictionloss="0"/>  
+    </default>
+    <default class="visual">
+      <geom type="mesh" group="2" contype="0" conaffinity="0"/>
+    </default>
+    <default class="collision">
+      <geom type="cylinder" group="3" mass="0" density="0"/>
+    </default>
+  </default>
+
+  <worldbody>
+    <body name="base" pos="0. 0 0.35" childclass="twip">
+      <freejoint/>
+      <geom size="0.05 0.1 0.25" quat="1 -1.73205e-07 -1.73205e-07 -1.73205e-07" type="box"/>
+      <body name="Wheel1__34__" pos="0 -0.18 -0.25" quat="0.707097 0.707116 -2.44949e-07 3.22436e-12">
+        <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.235619" diaginertia="0.0011781 0.00060672 0.00060672"/>
+        <joint name="Revolute_joint1__33__" axis="0 0 1"/>
+        <geom size="0.1 0.015" quat="1 -1.73205e-07 -1.73205e-07 -1.73205e-07" type="cylinder"/>
+      </body>
+      <body name="Wheel2__36__" pos="0 0.18 -0.25" quat="-0.707098 -0.707116 -3.10189e-12 -2.44949e-07">
+        <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.235619" diaginertia="0.0011781 0.00060672 0.00060672"/>
+        <joint name="Revolute_joint2__35__" axis="0 0 1"/>
+        <geom size="0.1 0.015" quat="1 -1.73205e-07 -1.73205e-07 -1.73205e-07" type="cylinder"/>
+      </body>
+    
+    </body>
+  </worldbody>
+
+
+  <actuator>
+    <motor name="left_wheel" joint="Revolute_joint1__33__" ctrlrange="-10 10"/>
+    <motor name="right_wheel" joint="Revolute_joint2__35__" ctrlrange="-10 10"/>
+  </actuator>
+
+</mujoco>

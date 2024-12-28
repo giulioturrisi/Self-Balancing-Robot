@@ -31,7 +31,7 @@ class Base_Controller(Node):
         
 
         
-        #self.subscription_tf = self.create_subscription(Float64MultiArray,'state',self.state_callback,1)
+        self.subscription_tf = self.create_subscription(Float64MultiArray,'state',self.state_callback,1)
         self.subscription_tf = self.create_subscription(TFMessage,'tf',self.tf_callback,1)
         self.subscription_cmd_vel = self.create_subscription(Twist,"cmd_vel", self.getVel_callback, 1);
 
@@ -86,12 +86,13 @@ class Base_Controller(Node):
 
 
     def state_callback(self, msg):
-        self.state_robot[0] = msg.x
+        """self.state_robot[0] = msg.x
         self.state_robot[1] = msg.x_d
         self.state_robot[2] = msg.pitch
         self.state_robot[3] = msg.pitch_d
         self.state_robot[4] = msg.yaw
-        self.state_robot[5] = msg.yaw_d
+        self.state_robot[5] = msg.yaw_d"""
+        self.state_robot = np.array(msg.data)
 
         self.state_arrived = True
 
