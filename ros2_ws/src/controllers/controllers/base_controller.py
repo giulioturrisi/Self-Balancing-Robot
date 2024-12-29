@@ -29,7 +29,6 @@ class Base_Controller(Node):
         self.old_state_robot = np.zeros(6)
         self.state_d = np.zeros(6)
         
-
         
         self.subscription_tf = self.create_subscription(Float64MultiArray,'state',self.state_callback,1)
         self.subscription_tf = self.create_subscription(TFMessage,'tf',self.tf_callback,1)
@@ -42,16 +41,16 @@ class Base_Controller(Node):
 
 
  
-        # Sincronization with simulation ---------------------------------------
-        self.enableSyncMode = Bool();
-        self.enableSyncMode.data = True;
-        self.publisher_enableSyncMode =self.create_publisher(Bool,"enableSyncMode", 1);
+        # Sincronization with CoppeliaSim  ---------------------------------------
+        self.enableSyncMode = Bool()
+        self.enableSyncMode.data = False # Put this to True if you want to synchronize with CoppeliaSim
+        self.publisher_enableSyncMode =self.create_publisher(Bool,"enableSyncMode", 1)
         self.publisher_enableSyncMode.publish(self.enableSyncMode)
 
 
-        self.triggerNextStep = Bool();
-        self.triggerNextStep.data = True;
-        self.publisher_triggerNextStep = self.create_publisher(Bool,"triggerNextStep", 1);
+        self.triggerNextStep = Bool()
+        self.triggerNextStep.data = True
+        self.publisher_triggerNextStep = self.create_publisher(Bool,"triggerNextStep", 1)
 
         self.simStep_done = True
         self.subscription_simStep = self.create_subscription(Bool,'simulationStepDone',self.simStep_callback,1)
@@ -59,24 +58,12 @@ class Base_Controller(Node):
 
     def publish_command(self, torques):
 
-        #print("torques", torques)
-            
-
         tau_l = torques[0]
         tau_r = torques[1]
 
         #commanded_torques = Float64MultiArray();
         #commanded_torques.data = [tau_l, tau_r]
         #self.publisher_command.publish(commanded_torques);
-
-        '''commanded_torque_left = Float64();
-        commanded_torque_left.data = float(tau_l)
-        self.publisher_motor_left.publish(commanded_torque_left)
-
-
-        commanded_torque_right = Float64();
-        commanded_torque_right.data = float(tau_r)
-        self.publisher_motor_right.publish(commanded_torque_right)'''
 
         commanded_torques = Vector3()
         commanded_torques.x = float(tau_l)
@@ -86,15 +73,12 @@ class Base_Controller(Node):
 
 
     def state_callback(self, msg):
-        """self.state_robot[0] = msg.x
-        self.state_robot[1] = msg.x_d
-        self.state_robot[2] = msg.pitch
-        self.state_robot[3] = msg.pitch_d
-        self.state_robot[4] = msg.yaw
-        self.state_robot[5] = msg.yaw_d"""
         self.state_robot = np.array(msg.data)
 
         self.state_arrived = True
+        self.simStep_done = True
+
+
 
     def tf_callback(self, msg):
         quaternion = [float(msg.transforms[0].transform.rotation.x), float(msg.transforms[0].transform.rotation.y), 

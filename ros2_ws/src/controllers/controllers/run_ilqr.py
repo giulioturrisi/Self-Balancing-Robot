@@ -29,7 +29,7 @@ class Controller(Base_Controller):
 
 
     def controller_callback(self):
-        if(self.simStep_done):
+        if(self.enableSyncMode.data == False or self.simStep_done):
             print("###############")
             print("state robot: ", self.state_robot)
             start_time = time.time()

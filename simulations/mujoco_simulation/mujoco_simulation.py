@@ -45,7 +45,8 @@ class MujocoSimulation:
         x_dot = base_linear_vel_horizontal_frame[0]
 
 
-        obs = np.array([0.0, x_dot, pitch, pitch_dot, yaw, yaw_dot])
+        # The order is [state, state_dot]
+        obs = np.array([0.0, pitch, yaw, x_dot, pitch_dot, yaw_dot])
 
         return obs
         
